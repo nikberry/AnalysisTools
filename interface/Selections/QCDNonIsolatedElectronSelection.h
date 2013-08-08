@@ -19,6 +19,7 @@ public:
 	virtual ~QCDNonIsolatedElectronSelection();
 
 	virtual bool hasExactlyOneIsolatedLepton(const EventPtr event) const;
+	
 
 };
 typedef boost::shared_ptr<QCDNonIsolatedElectronSelection> QCDNonIsolatedElectronSelectionPointer;

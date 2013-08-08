@@ -38,13 +38,16 @@
 #include "../interface/Analysers/MCAnalyser.h"
 #include "../interface/Analysers/METAnalyser.h"
 #include "../interface/Analysers/MTtbarAnalyser.h"
-#include "../interface/Analysers/MuonAnalyser.h"
+//#include "../interface/Analysers/MuonAnalyser.h"
 #include "../interface/Analysers/MVAnalyser.h"
 #include "../interface/Analysers/NeutrinoReconstructionAnalyser.h"
 #include "../interface/Analysers/TTbar_plus_X_analyser.h"
 #include "../interface/Analysers/VertexAnalyser.h"
 #include "../interface/Analysers/DiffVariablesAnalyser.h"
 #include "../interface/Analysers/BinningAnalyser.h"
+#include "../interface/Analysers/PhotonAnalyser.h"
+#include "../interface/Analysers/MuonAnalyser2.h"
+#include "../interface/Analysers/METAnalyser2.h"
 
 //typedef boost::array<unsigned long, BAT::TTbarEPlusJetsSelection::NUMBER_OF_SELECTION_STEPS> ePlusJetscutarray;
 //typedef boost::array<unsigned long, BAT::TTbarMuPlusJetsSelection::NUMBER_OF_SELECTION_STEPS> muPlusJetscutarray;
@@ -80,13 +83,16 @@ private:
     boost::scoped_ptr<BAT::MCAnalyser> mcAnalyser;
     boost::scoped_ptr<BAT::METAnalyser> metAnalyser;
     boost::scoped_ptr<BAT::MTtbarAnalyser> mttbarAnalyser;
-    boost::scoped_ptr<BAT::MuonAnalyser> muonAnalyser;
+ //   boost::scoped_ptr<BAT::MuonAnalyser> muonAnalyser;
     BAT::MVAnalyserPtr mvAnalyser;
     BAT::NeutrinoRecoAnalyserLocalPtr neutrinoRecoAnalyser;
     BAT::TTbar_plus_X_analyser_local_ptr ttbar_plus_X_analyser_;
     boost::scoped_ptr<BAT::VertexAnalyser> vertexAnalyser;
     boost::scoped_ptr<BAT::DiffVariablesAnalyser> diffVariablesAnalyser;
     boost::scoped_ptr<BAT::BinningAnalyser> binningAnalyser;
+    boost::scoped_ptr<BAT::PhotonAnalyser> photonAnalyser;
+    boost::scoped_ptr<BAT::MuonAnalyser2> muonAnalyser2;
+    boost::scoped_ptr<BAT::METAnalyser2> metAnalyser2;   
 
 public:
 //    static float luminosity;

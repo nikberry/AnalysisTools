@@ -30,6 +30,7 @@ public:
 	virtual unsigned int prescale(const EventPtr event) const;
 	virtual const JetCollection cleanedJets(const EventPtr event) const;
 	virtual const JetCollection cleanedBJets(const EventPtr event) const;
+
 };
 
 typedef boost::shared_ptr<QCDNoIsoNoIDSelection> QCDNoIsoNoIDSelectionPointer;

@@ -53,4 +53,5 @@ const JetCollection QCDNoIsoNoIDSelection::cleanedBJets(const EventPtr event) co
 	return QCDPFRelIsoEPlusJetsSelection::cleanedBJets(event);
 }
 
+
 } /* namespace BAT */

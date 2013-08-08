@@ -22,4 +22,5 @@ bool QCDConversionsSelection::passesConversionVeto(const EventPtr event) const{
 	return !TopPairEPlusJetsReferenceSelection::passesConversionVeto(event);
 }
 
+
 } /* namespace BAT */

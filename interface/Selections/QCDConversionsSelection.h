@@ -18,7 +18,7 @@ public:
 			TTbarEPlusJetsReferenceSelection::NUMBER_OF_SELECTION_STEPS);
 	virtual ~QCDConversionsSelection();
 
-	virtual bool passesConversionVeto(const EventPtr event) const;
+	virtual bool passesConversionVeto(const EventPtr event) const;	
 };
 typedef boost::shared_ptr<QCDConversionsSelection> QCDConversionsSelectionPointer;
 } /* namespace BAT */

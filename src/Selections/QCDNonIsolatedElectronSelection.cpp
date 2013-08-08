@@ -36,4 +36,6 @@ bool QCDNonIsolatedElectronSelection::hasExactlyOneIsolatedLepton(const EventPtr
 	//no electrons below 0.2 in PFRelIso and at least one electron with PFIso > 0.2
 	return nGoodNonIsolatedElectrons > 0 && nGoodIsolatedElectrons == 0;
 }
+
+
 } /* namespace BAT */
