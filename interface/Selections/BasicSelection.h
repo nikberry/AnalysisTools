@@ -50,10 +50,8 @@ public:
 
 
 	virtual const PhotonCollection signalPhotons(const EventPtr event) const = 0;
-// 	virtual const MuonCollection signalDiMuons(const EventPtr event) const = 0;
-//	virtual const ElectronCollection signalDiElectrons(const EventPtr event) const = 0;	
-// 	virtual const MuonCollection signalMuons(const EventPtr event) const = 0;
-// 	virtual const ElectronCollection signalElectrons(const EventPtr event) const = 0;
+ 	virtual const MuonCollection signalMuons(const EventPtr event) const = 0;
+ 	virtual const ElectronCollection signalElectrons(const EventPtr event) const = 0;
 	virtual const LeptonPointer signalLepton(const EventPtr event) const = 0;
 	virtual const JetCollection cleanedJets(const EventPtr event) const = 0;
 	virtual const JetCollection cleanedBJets(const EventPtr event) const = 0;

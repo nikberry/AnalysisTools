@@ -34,7 +34,7 @@ void METAnalyser::analyse(const EventPtr event) {
 			histMan_->H2D_BJetBinned("RecoMET_vs_GenMET")->Fill(event->GenMET()->et(), met->et(), weight_);
 		}
 		//do not fill other histograms for met systematics
-		if ((index > METAlgorithm::patType1p2CorrectedPFMet) && (index != METAlgorithm::recoMetPFlow))
+		if ((index > METAlgorithm::patType1CorrectedPFMet))
 			continue;
 		histMan_->H1D_BJetBinned("MET_phi")->Fill(met->phi(), weight_);
 		histMan_->H1D_BJetBinned("METsignificance")->Fill(met->significance(), weight_);
@@ -59,7 +59,7 @@ void METAnalyser::analyseTransverseMass(const EventPtr event, const ParticlePoin
 		histMan_->setCurrentHistogramFolder(histogramFolder_ + "/" + prefix);
 
 		//do not fill histograms for met systematics
-		if (index > METAlgorithm::patType1p2CorrectedPFMet)
+		if (index > METAlgorithm::patType1CorrectedPFMet)
 			continue;
 
 		double MT = Event::MT(particle, met);
@@ -89,7 +89,7 @@ void METAnalyser::createHistograms() {
 		}
 
 		//do not create other histograms for met systematics
-		if ((index > METAlgorithm::patType1p2CorrectedPFMet) && (index != METAlgorithm::recoMetPFlow))
+		if ((index > METAlgorithm::patType1CorrectedPFMet))
 			continue;
 		histMan_->addH1D_BJetBinned("MET_phi", "#phi(Missing transverse energy);#phi(#slash{E}_{T});Events/0.1", 80, -4,
 				4);

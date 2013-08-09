@@ -17,7 +17,7 @@ void MuonAnalyser2::analyse(const EventPtr event) {
 
 void MuonAnalyser2::analyseAllMuons(const EventPtr event) {
 
-	if (topMuMuRefSelection_->passesSelectionUpToStep(event, TTbarMuMuReferenceSelection::JustOneGoodPhoton)) {
+	if (topMuMuRefSelection_->passesSelectionUpToStep(event, TTbarMuMuReferenceSelection::MetCut)) {
 	
 	histMan_->setCurrentHistogramFolder(histogramFolder_ + "/Muons/AllMuons");
 	weight_ = event->weight() * prescale_ * scale_;

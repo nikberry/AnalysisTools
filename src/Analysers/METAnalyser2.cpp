@@ -18,7 +18,7 @@ void METAnalyser2::analyse(const EventPtr event) {
 
 void METAnalyser2::analyseMET(const EventPtr event) {
 
-	if (topMuMuRefSelection_->passesSelectionUpToStep(event, TTbarMuMuReferenceSelection::AtLeastOneBtag)) {
+	if (topMuMuRefSelection_->passesSelectionUpToStep(event, TTbarMuMuReferenceSelection::MetCut)) {
 
 	histMan_->setCurrentHistogramFolder(histogramFolder_ + "/MET");
 	weight_ = event->weight() * prescale_ * scale_;
@@ -47,7 +47,7 @@ void METAnalyser2::analyseMET(const EventPtr event) {
 		
 		//do not fill other histograms for met systematics
 		
-		if ((index > METAlgorithm::patType1p2CorrectedPFMet) && (index != METAlgorithm::recoMetPFlow))
+		if ((index > METAlgorithm::patType1CorrectedPFMet))
 			continue;
 			
 		histMan_->H1D_BJetBinned("MET_phi")->Fill(met->phi(), weight_);
@@ -110,7 +110,7 @@ void METAnalyser2::createHistograms() {
 		}
 
 		//do not create other histograms for met systematics
-		if ((index > METAlgorithm::patType1p2CorrectedPFMet) && (index != METAlgorithm::recoMetPFlow))
+		if ((index > METAlgorithm::patType1CorrectedPFMet))
 			continue;
 			
 		histMan_->addH1D_BJetBinned("MET_phi", "#phi(Missing transverse energy);#phi(#slash{E}_{T});Events/0.1", 80, -4,

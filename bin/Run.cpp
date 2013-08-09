@@ -117,5 +117,5 @@ void setConfiguration(ConfigFile config) {
 	//muons
 	Globals::muonAlgorithm = MuonAlgorithm::ParticleFlow;
 	//mets
-	Globals::metAlgorithm = METAlgorithm::patMETsPFlow;
+	Globals::metAlgorithm = METAlgorithm::patType1CorrectedPFMet;
 }

@@ -199,7 +199,7 @@ bool TopPairMuMuReferenceSelection::isIsolated(const LeptonPointer lepton) const
 }
 
 bool TopPairMuMuReferenceSelection::passesDiMuonSelection(const EventPtr event) const {
-	const MuonCollection muons(signalDiMuons(event));
+	const MuonCollection muons(signalMuons(event));
 
 	double mass = 0;
 
@@ -217,7 +217,7 @@ bool TopPairMuMuReferenceSelection::passesDiMuonSelection(const EventPtr event) 
 }
 
 bool TopPairMuMuReferenceSelection::passesZmassVeto(const EventPtr event) const {
-	const MuonCollection muons(signalDiMuons(event));
+	const MuonCollection muons(signalMuons(event));
 
 	double mass = 0;
 
@@ -271,7 +271,22 @@ bool TopPairMuMuReferenceSelection::hasJustOneGoodPhoton(const EventPtr event) c
 	return signalPhotons(event).size() == 1;
 }
 
-const MuonCollection TopPairMuMuReferenceSelection::goodLeptons(const EventPtr event) const {
+const ElectronCollection TopPairMuMuReferenceSelection::goodElectrons(const EventPtr event) const {
+
+	const ElectronCollection allElectrons(event->Electrons());
+	ElectronCollection goodIsolatedElectrons;
+	for (unsigned int index = 0; index < allElectrons.size(); ++index) {
+		const ElectronPointer electron(allElectrons.at(index));
+		if (isGoodElectron(electron)) {
+			goodIsolatedElectrons.push_back(electron);
+		}
+	}
+
+	return goodIsolatedElectrons;
+
+}
+
+const MuonCollection TopPairMuMuReferenceSelection::goodMuons(const EventPtr event) const {
 
 	const MuonCollection allMuons(event->Muons());
 	MuonCollection goodIsolatedMuons;
@@ -286,10 +301,10 @@ const MuonCollection TopPairMuMuReferenceSelection::goodLeptons(const EventPtr e
 
 }
 
-const MuonCollection TopPairMuMuReferenceSelection::signalDiMuons(const EventPtr event) const {
+const MuonCollection TopPairMuMuReferenceSelection::signalMuons(const EventPtr event) const {
 
-	const MuonCollection muons(goodLeptons(event));
-	MuonCollection signalDiMuons;
+	const MuonCollection muons(goodMuons(event));
+	MuonCollection signalMuons;
 
 	double ptMax = 0;
 	int storeIndexA = -1;
@@ -307,14 +322,46 @@ const MuonCollection TopPairMuMuReferenceSelection::signalDiMuons(const EventPtr
 				}
 
 		if(storeIndexA != storeIndexB){
-			signalDiMuons.push_back(muons.at(storeIndexA));
-			signalDiMuons.push_back(muons.at(storeIndexB));
+			signalMuons.push_back(muons.at(storeIndexA));
+			signalMuons.push_back(muons.at(storeIndexB));
 		}
 
 		}
 	}
 
-	return signalDiMuons;
+	return signalMuons;
+
+}
+
+const ElectronCollection TopPairMuMuReferenceSelection::signalElectrons(const EventPtr event) const {
+
+	const ElectronCollection electrons(goodElectrons(event));
+	ElectronCollection signalElectrons;
+
+	double ptMax = 0;
+	int storeIndexA = -1;
+	int storeIndexB = -1;
+	if(electrons.size() >= 2){
+		for (unsigned int indexA = 0; indexA < electrons.size(); ++indexA) {
+		const ElectronPointer electron(electrons.at(indexA));
+				for (unsigned int indexB = 0; indexB < electrons.size(); ++indexB) {
+					const ElectronPointer electron2(electrons.at(indexB));
+					if((electron2->charge() == -electron->charge()) && ((electron->pt()+electron2->pt())>ptMax)){
+						ptMax = electron->pt()+electron2->pt();
+						storeIndexA = indexA;
+						storeIndexB = indexB;
+					}
+				}
+
+		if(storeIndexA != storeIndexB){
+			signalElectrons.push_back(electrons.at(storeIndexA));
+			signalElectrons.push_back(electrons.at(storeIndexB));
+		}
+
+		}
+	}
+
+	return signalElectrons;
 
 }
 

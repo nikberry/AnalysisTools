@@ -94,19 +94,13 @@ void Analysis::analyse() {
 		//			hitfitAnalyser->analyse(currentEvent);
 		//		}
 
-		//complex analysers use their own reweighting
-		//		hltriggerAnalyser->analyse(currentEvent);
-		//		hltriggerQCDAnalyserInclusive_->analyse(currentEvent);
-		//		hltriggerQCDAnalyserExclusive_->analyse(currentEvent);
 		eventcountAnalyser->analyse(currentEvent);
 //		mttbarAnalyser->analyse(currentEvent);
-//		ttbar_plus_X_analyser_->analyse(currentEvent);
-//		diffVariablesAnalyser->analyse(currentEvent);
-//		binningAnalyser->analyse(currentEvent);
-
 		photonAnalyser->analyse(currentEvent);
 		muonAnalyser2->analyse(currentEvent);
 		metAnalyser2->analyse(currentEvent);
+		ttbardileptonAnalyser->analyse(currentEvent);
+
 	}
 }
 
@@ -206,23 +200,6 @@ void Analysis::createHistograms() {
 //	cout << "Number of histograms added by hitfitAnalyser: " << numberOfHistograms - lastNumberOfHistograms << endl;
 //	lastNumberOfHistograms = numberOfHistograms;
 
-//	hltriggerAnalyser->createHistograms();
-//	numberOfHistograms = histMan->size();
-//	cout << "Number of histograms added by hltriggerAnalyser: " << numberOfHistograms - lastNumberOfHistograms << endl;
-//	lastNumberOfHistograms = numberOfHistograms;
-
-//	hltriggerQCDAnalyserInclusive_->createHistograms();
-//	numberOfHistograms = histMan->size();
-//	cout << "Number of histograms added by hltriggerQCDAnalyserInclusive_: "
-//			<< numberOfHistograms - lastNumberOfHistograms << endl;
-//	lastNumberOfHistograms = numberOfHistograms;
-//
-//	hltriggerQCDAnalyserExclusive_->createHistograms();
-//	numberOfHistograms = histMan->size();
-//	cout << "Number of histograms added by hltriggerQCDAnalyserExclusive_: "
-//			<< numberOfHistograms - lastNumberOfHistograms << endl;
-//	lastNumberOfHistograms = numberOfHistograms;
-
 //	jetAnalyser->createHistograms();
 //	numberOfHistograms = histMan->size();
 //	cout << "Number of histograms added by jetAnalyser: " << numberOfHistograms - lastNumberOfHistograms << endl;
@@ -258,26 +235,9 @@ void Analysis::createHistograms() {
 //	cout << "Number of histograms added by neutrinoRecoAnalyser: " << numberOfHistograms - lastNumberOfHistograms << endl;
 //	lastNumberOfHistograms = numberOfHistograms;
 
-
-//	ttbar_plus_X_analyser_->createHistograms();
-//	numberOfHistograms = histMan->size();
-//	cout << "Number of histograms added by ttbar_plus_X_analyser: " << numberOfHistograms - lastNumberOfHistograms
-//			<< endl;
-//	lastNumberOfHistograms = numberOfHistograms;
-//
 //	vertexAnalyser->createHistograms();
 //	numberOfHistograms = histMan->size();
 //	cout << "Number of histograms added by vertexAnalyser: " << numberOfHistograms - lastNumberOfHistograms << endl;
-//	lastNumberOfHistograms = numberOfHistograms;
-//
-//	diffVariablesAnalyser->createHistograms();
-//	numberOfHistograms = histMan->size();
-//	cout << "Number of histograms added by diffVariablesAnalyser: " << numberOfHistograms - lastNumberOfHistograms << endl;
-//	lastNumberOfHistograms = numberOfHistograms;
-//
-//	binningAnalyser->createHistograms();
-//	numberOfHistograms = histMan->size();
-//	cout << "Number of histograms added by binningAnalyser: " << numberOfHistograms - lastNumberOfHistograms << endl;
 //	lastNumberOfHistograms = numberOfHistograms;
 
 	photonAnalyser->createHistograms();
@@ -295,6 +255,10 @@ void Analysis::createHistograms() {
         cout << "Number of histograms added by METAnalyser2: " << numberOfHistograms - lastNumberOfHistograms << endl;
         lastNumberOfHistograms = numberOfHistograms;
 
+    ttbardileptonAnalyser->createHistograms();
+        numberOfHistograms = histMan->size();
+        cout << "Number of histograms added by ttbardileptonAnalyser: " << numberOfHistograms - lastNumberOfHistograms << endl;
+        lastNumberOfHistograms = numberOfHistograms;
 
 	cout << "Total number of histograms: " << histMan->size() << endl;
 }
@@ -303,54 +267,32 @@ Analysis::Analysis(std::string datasetInfoFile) : //
 		eventReader(new NTupleEventReader()), //
 		currentEvent(), //
 		histMan(new BAT::HistogramManager()), //
-//		ePlusJetsCutflow(), //
-//		ePlusJetsSingleCuts(), //
-//		ePlusJetsCutflowPerFile(), //
-//		ePlusJetsSingleCutsPerFile(), //
-//		muPlusJetsCutFlow(), //
-//		muPlusJetsSingleCuts(), //
+
 		interestingEvents(), //
 		brokenEvents(), //
 		eventCheck(), //
 		weights(new EventWeightProvider(datasetInfoFile)), //
 		weight(0), //
 		pileUpWeight(1), //
-//		ePlusJetsCutflowPerSample(DataType::NUMBER_OF_DATA_TYPES, TTbarEPlusJetsSelection::NUMBER_OF_SELECTION_STEPS,
-//				JetBin::NUMBER_OF_JET_BINS), //
-//		muPlusJetsCutflowPerSample(DataType::NUMBER_OF_DATA_TYPES, TTbarMuPlusJetsSelection::NUMBER_OF_SELECTION_STEPS,
-//				JetBin::NUMBER_OF_JET_BINS), //
-		abcdMethodAnalyser_(new ABCDMethodAnalyser(histMan)), //
+
 		bjetAnalyser(new BJetAnalyser(histMan)), //
 		diElectronAnalyser(new DiElectronAnalyser(histMan)), //
 		electronAnalyser(new ElectronAnalyser(histMan)), //
 		eventcountAnalyser(new EventCountAnalyser(histMan)), //
 //		hitfitAnalyser(new HitFitAnalyser(histMan)), //
-		hltriggerAnalyser(new HLTriggerTurnOnAnalyser(histMan)), //
-		hltriggerQCDAnalyserInclusive_(new HLTriggerQCDAnalyser(histMan, "HLTQCDAnalyser_inclusive", false)), //
-		hltriggerQCDAnalyserExclusive_(new HLTriggerQCDAnalyser(histMan, "HLTQCDAnalyser_exclusive", true)), //
 		jetAnalyser(new JetAnalyser(histMan)), //
 		mcAnalyser(new MCAnalyser(histMan)), //
 		metAnalyser(new METAnalyser(histMan)), //
-		mttbarAnalyser(new MTtbarAnalyser(histMan)), //
-	//	muonAnalyser(new MuonAnalyser(histMan)), //
+//  	muonAnalyser(new MuonAnalyser(histMan)), //
 		mvAnalyser(new MVAnalyser(histMan)), //
 		neutrinoRecoAnalyser(new NeutrinoReconstructionAnalyser(histMan)), //
-		ttbar_plus_X_analyser_(new TTbar_plus_X_analyser(histMan)), //
 		vertexAnalyser(new VertexAnalyser(histMan)),
-		diffVariablesAnalyser(new DiffVariablesAnalyser(histMan)),
-		binningAnalyser(new BinningAnalyser(histMan)),//
 		photonAnalyser(new PhotonAnalyser(histMan)),
 		muonAnalyser2(new MuonAnalyser2(histMan)),
-		metAnalyser2(new METAnalyser2(histMan)){
-//	for (unsigned int cut = 0; cut < TTbarEPlusJetsSelection::NUMBER_OF_SELECTION_STEPS; ++cut) {
-//		ePlusJetsCutflow[cut] = 0;
-//		ePlusJetsSingleCuts[cut] = 0;
-//	}
-//
-//	for (unsigned int cut = 0; cut < TTbarMuPlusJetsSelection::NUMBER_OF_SELECTION_STEPS; ++cut) {
-//		muPlusJetsCutFlow[cut] = 0;
-//		muPlusJetsSingleCuts[cut] = 0;
-//	}
+		metAnalyser2(new METAnalyser2(histMan)),
+		ttbardileptonAnalyser(new TTbarDiLeptonAnalyser(histMan)){
+
+
 	histMan->enableDebugMode(true);
 }
 
