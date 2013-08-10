@@ -19,25 +19,16 @@ public:
 	/**
 	 * Analyses all photons in an event
 	 */
+	void analyse(const EventPtr, PhotonCollection signalPhotons);
 	void analyse(const EventPtr);
-	void analyseMuMu(const EventPtr);
-	void analyseMuMu_signalphotons(const EventPtr);
-	void analyseEE(const EventPtr);
-	void analyseEE_signalphotons(const EventPtr);
-	void analyseEMu(const EventPtr);
-	void analyseEMu_signalphotons(const EventPtr);
-	/**
-	 * Analyses a single photon
-	 */
-	void analysePhoton(const EventPtr);
+	void analyse_signalPhotons(const EventPtr, PhotonCollection signalPhotons);
+
 	void createHistograms();
-	void useTTbarPlusMETSetup(bool use);
 	
 private:
 	SelectionPointer topMuMuRefSelection_;
 	SelectionPointer topEERefSelection_;
 	SelectionPointer topEMuRefSelection_;
-	bool ttbarPlusMETAnalysisSetup_;
 	
 };
 typedef boost::scoped_ptr<PhotonAnalyser> PhotonAnalyserLocalPtr;

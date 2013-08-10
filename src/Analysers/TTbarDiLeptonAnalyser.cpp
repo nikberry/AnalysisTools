@@ -39,6 +39,7 @@ void TTbarDiLeptonAnalyser::muMuSignalAnalysis(const EventPtr event) {
 			histMan_->setCurrentBJetBin(numberOfBjets);
 			const LeptonPointer signalLepton = topMuMuRefSelection_->signalLepton(event);
 			const ElectronPointer signalElectron(boost::static_pointer_cast<Electron>(signalLepton));
+			const PhotonCollection photons = topMuMuRefSelection_->signalPhotons(event);
 
 			    //get dilepton collection
 				const MuonCollection muons = topMuMuRefSelection_->signalMuons(event);
@@ -60,6 +61,10 @@ void TTbarDiLeptonAnalyser::muMuSignalAnalysis(const EventPtr event) {
 				//DiMuon
 				diMuonAnalyserMuMuRefSelection_->setScale(bjetWeight);
 				diMuonAnalyserMuMuRefSelection_->analyse(event, muons);
+
+			    //photons
+			    photonAnalyserEERefSelection_->setScale(bjetWeight);
+			    photonAnalyserEERefSelection_->analyse(event, photons);
 
 			}
 	}
@@ -91,6 +96,7 @@ void TTbarDiLeptonAnalyser::eESignalAnalysis(const EventPtr event) {
 			//this is for HT in the MET analyser but needs changing
 			const LeptonPointer signalLepton = topEERefSelection_->signalLepton(event);
 			const ElectronPointer signalElectron(boost::static_pointer_cast<Electron>(signalLepton));
+			const PhotonCollection photons = topEERefSelection_->signalPhotons(event);
 
 			//get dilepton collection
 			const ElectronCollection electrons = topEERefSelection_->signalElectrons(event);
@@ -111,6 +117,10 @@ void TTbarDiLeptonAnalyser::eESignalAnalysis(const EventPtr event) {
 				//DiElectron
 				diElectronAnalyserEERefSelection_->setScale(bjetWeight);
 			    diElectronAnalyserEERefSelection_->analyse(event, electrons);
+
+			    //photons
+			    photonAnalyserEERefSelection_->setScale(bjetWeight);
+			    photonAnalyserEERefSelection_->analyse(event, photons);
 
 			}
 	}
@@ -142,6 +152,7 @@ void TTbarDiLeptonAnalyser::eMuSignalAnalysis(const EventPtr event) {
 			//get dilepton collection
 			const ElectronCollection electrons = topEMuRefSelection_->signalElectrons(event);
 			const MuonCollection muons = topEMuRefSelection_->signalMuons(event);
+			const PhotonCollection photons = topEMuRefSelection_->signalPhotons(event);
 
 			for (unsigned int weightIndex = 0; weightIndex < bjetWeights.size(); ++weightIndex) {
 
@@ -160,6 +171,10 @@ void TTbarDiLeptonAnalyser::eMuSignalAnalysis(const EventPtr event) {
 				//DiLepton
 				eMuAnalyserEMuRefSelection_->setScale(bjetWeight);
 			    eMuAnalyserEMuRefSelection_->analyse(event, electrons, muons);
+
+			    //photon
+			    photonAnalyserEMuRefSelection_->setScale(bjetWeight);
+			    photonAnalyserEMuRefSelection_->analyse(event, photons);
 
 			}
 	}
@@ -181,7 +196,12 @@ TTbarDiLeptonAnalyser::TTbarDiLeptonAnalyser(HistogramManagerPtr histMan, std::s
 		//signal regions di electron
 		diElectronAnalyserEERefSelection_(new DiElectronAnalyser(histMan, histogramFolder + "/EE/Ref selection/DiElectron")), //
 		diMuonAnalyserMuMuRefSelection_(new DiMuonAnalyser(histMan, histogramFolder + "/MuMu/Ref selection/DiMuon")), //
-		eMuAnalyserEMuRefSelection_(new EMuAnalyser(histMan, histogramFolder + "/EMu/Ref selection/DiLepton")) //
+		eMuAnalyserEMuRefSelection_(new EMuAnalyser(histMan, histogramFolder + "/EMu/Ref selection/DiLepton")), //
+		//signal regions Photons
+		photonAnalyserMuMuRefSelection_(new PhotonAnalyser(histMan, histogramFolder + "/MuMu/Ref selection/Photons")), //
+		photonAnalyserEERefSelection_(new PhotonAnalyser(histMan, histogramFolder + "/EE/Ref selection/Photons")), //
+		photonAnalyserEMuRefSelection_(new PhotonAnalyser(histMan, histogramFolder + "/EMu/Ref selection/Photons"))//
+
 		{
 
 }
@@ -203,6 +223,10 @@ void TTbarDiLeptonAnalyser::createHistograms() {
 	diElectronAnalyserEERefSelection_->createHistograms();
 	diMuonAnalyserMuMuRefSelection_->createHistograms();
 	eMuAnalyserEMuRefSelection_->createHistograms();
+	//signal photons
+	photonAnalyserEERefSelection_->createHistograms();
+	photonAnalyserMuMuRefSelection_->createHistograms();
+	photonAnalyserEMuRefSelection_->createHistograms();
 
 }
 

@@ -15,6 +15,7 @@
 #include "EMuAnalyser.h"
 #include "ElectronAnalyser.h"
 #include "MuonAnalyser.h"
+#include "PhotonAnalyser.h"
 #include "VertexAnalyser.h"
 #include "JetAnalyser.h"
 #include "../Selections/BasicSelection.h"
@@ -45,6 +46,9 @@ private:
 	DiElectronAnalyserLocalPtr diElectronAnalyserEERefSelection_;
 	DiMuonAnalyserLocalPtr diMuonAnalyserMuMuRefSelection_;
 	EMuAnalyserLocalPtr eMuAnalyserEMuRefSelection_;
+
+	//photon anlyser
+	PhotonAnalyserLocalPtr photonAnalyserMuMuRefSelection_, photonAnalyserEERefSelection_, photonAnalyserEMuRefSelection_;
 
 
 };
