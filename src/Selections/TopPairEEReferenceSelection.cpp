@@ -300,13 +300,13 @@ const MuonCollection TopPairEEReferenceSelection::signalMuons(const EventPtr eve
 						storeIndexB = indexB;
 					}
 				}
+		}
 
 		if(storeIndexA != storeIndexB){
 			signalMuons.push_back(muons.at(storeIndexA));
 			signalMuons.push_back(muons.at(storeIndexB));
 		}
 
-		}
 	}
 
 	return signalMuons;
@@ -332,13 +332,11 @@ const ElectronCollection TopPairEEReferenceSelection::signalElectrons(const Even
 						storeIndexB = indexB;
 					}
 				}
-
-		if(storeIndexA != storeIndexB){
-			signalElectrons.push_back(electrons.at(storeIndexA));
-			signalElectrons.push_back(electrons.at(storeIndexB));
 		}
 
-		}
+		signalElectrons.push_back(electrons.at(storeIndexA));
+		signalElectrons.push_back(electrons.at(storeIndexB));
+
 	}
 
 	return signalElectrons;

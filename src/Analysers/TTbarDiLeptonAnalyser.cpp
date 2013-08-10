@@ -40,14 +40,26 @@ void TTbarDiLeptonAnalyser::muMuSignalAnalysis(const EventPtr event) {
 			const LeptonPointer signalLepton = topMuMuRefSelection_->signalLepton(event);
 			const ElectronPointer signalElectron(boost::static_pointer_cast<Electron>(signalLepton));
 
-			for (unsigned int weightIndex = 0; weightIndex < bjetWeights.size(); ++weightIndex) {
+			    //get dilepton collection
+				const MuonCollection muons = topMuMuRefSelection_->signalMuons(event);
+
+				for (unsigned int weightIndex = 0; weightIndex < bjetWeights.size(); ++weightIndex) {
 
 				double bjetWeight = bjetWeights.at(weightIndex);
 				histMan_->setCurrentBJetBin(weightIndex);
 				histMan_->setCurrentHistogramFolder(histogramFolder_ + "/MuMu/Ref selection");
 
+				//met
 				metAnalyserMuMuRefSelection_->setScale(bjetWeight);
 				metAnalyserMuMuRefSelection_->analyse(event, signalLepton);
+
+				//jets
+				jetAnalyserMuMuRefSelection_->setScale(bjetWeight);
+				jetAnalyserMuMuRefSelection_->analyse(event);
+
+				//DiMuon
+				diMuonAnalyserMuMuRefSelection_->setScale(bjetWeight);
+				diMuonAnalyserMuMuRefSelection_->analyse(event, muons);
 
 			}
 	}
@@ -57,6 +69,9 @@ void TTbarDiLeptonAnalyser::muMuSignalAnalysis(const EventPtr event) {
 void TTbarDiLeptonAnalyser::eESignalAnalysis(const EventPtr event) {
 
 	if (topEERefSelection_->passesSelectionUpToStep(event, TTbarEEReferenceSelection::MetCut)) {
+
+		cout << "ee anal" << endl;
+
 			const JetCollection jets(topEERefSelection_->cleanedJets(event));
 			const JetCollection bJets(topEERefSelection_->cleanedBJets(event));
 			unsigned int numberOfBjets(bJets.size());
@@ -88,10 +103,15 @@ void TTbarDiLeptonAnalyser::eESignalAnalysis(const EventPtr event) {
 				//MET
 				metAnalyserEERefSelection_->setScale(bjetWeight);
 				metAnalyserEERefSelection_->analyse(event, signalLepton);
+
+				//jets
+				jetAnalyserEERefSelection_->setScale(bjetWeight);
+				jetAnalyserEERefSelection_->analyse(event);
+
 				//DiElectron
 				diElectronAnalyserEERefSelection_->setScale(bjetWeight);
-			    //diElectronAnalyserEERefSelection_->analyse(event, electrons);
-				diElectronAnalyserEERefSelection_->analyse(event);
+			    diElectronAnalyserEERefSelection_->analyse(event, electrons);
+
 			}
 	}
 }
@@ -99,6 +119,7 @@ void TTbarDiLeptonAnalyser::eESignalAnalysis(const EventPtr event) {
 void TTbarDiLeptonAnalyser::eMuSignalAnalysis(const EventPtr event) {
 
 	if (topEMuRefSelection_->passesSelectionUpToStep(event, TTbarEMuReferenceSelection::AtLeastTwoGoodJets)) {
+
 			const JetCollection jets(topEMuRefSelection_->cleanedJets(event));
 			const JetCollection bJets(topEMuRefSelection_->cleanedBJets(event));
 			unsigned int numberOfBjets(bJets.size());
@@ -112,10 +133,15 @@ void TTbarDiLeptonAnalyser::eMuSignalAnalysis(const EventPtr event) {
 				}
 			} else
 				bjetWeights = BjetWeights(jets, numberOfBjets);
+
 			histMan_->setCurrentJetBin(jets.size());
 			histMan_->setCurrentBJetBin(numberOfBjets);
 			const LeptonPointer signalLepton = topEMuRefSelection_->signalLepton(event);
 			const ElectronPointer signalElectron(boost::static_pointer_cast<Electron>(signalLepton));
+
+			//get dilepton collection
+			const ElectronCollection electrons = topEMuRefSelection_->signalElectrons(event);
+			const MuonCollection muons = topEMuRefSelection_->signalMuons(event);
 
 			for (unsigned int weightIndex = 0; weightIndex < bjetWeights.size(); ++weightIndex) {
 
@@ -123,8 +149,17 @@ void TTbarDiLeptonAnalyser::eMuSignalAnalysis(const EventPtr event) {
 				histMan_->setCurrentBJetBin(weightIndex);
 				histMan_->setCurrentHistogramFolder(histogramFolder_ + "/EMu/Ref selection");
 
+				//met
 				metAnalyserEMuRefSelection_->setScale(bjetWeight);
 				metAnalyserEMuRefSelection_->analyse(event, signalLepton);
+
+				//jets
+				jetAnalyserEMuRefSelection_->setScale(bjetWeight);
+				jetAnalyserEMuRefSelection_->analyse(event);
+
+				//DiLepton
+				eMuAnalyserEMuRefSelection_->setScale(bjetWeight);
+			    eMuAnalyserEMuRefSelection_->analyse(event, electrons, muons);
 
 			}
 	}
@@ -139,8 +174,14 @@ TTbarDiLeptonAnalyser::TTbarDiLeptonAnalyser(HistogramManagerPtr histMan, std::s
 		metAnalyserMuMuRefSelection_(new METAnalyser(histMan, histogramFolder + "/MuMu/Ref selection/MET")), //
 		metAnalyserEERefSelection_(new METAnalyser(histMan, histogramFolder + "/EE/Ref selection/MET")), //
 		metAnalyserEMuRefSelection_(new METAnalyser(histMan, histogramFolder + "/EMu/Ref selection/MET")),//
+		//signal regions MET
+		jetAnalyserMuMuRefSelection_(new JetAnalyser(histMan, histogramFolder + "/MuMu/Ref selection/Jets")), //
+		jetAnalyserEERefSelection_(new JetAnalyser(histMan, histogramFolder + "/EE/Ref selection/Jets")), //
+		jetAnalyserEMuRefSelection_(new JetAnalyser(histMan, histogramFolder + "/EMu/Ref selection/Jets")),//
 		//signal regions di electron
-		diElectronAnalyserEERefSelection_(new DiElectronAnalyser(histMan, histogramFolder + "/EE/Ref selection/DiElectron")) //
+		diElectronAnalyserEERefSelection_(new DiElectronAnalyser(histMan, histogramFolder + "/EE/Ref selection/DiElectron")), //
+		diMuonAnalyserMuMuRefSelection_(new DiMuonAnalyser(histMan, histogramFolder + "/MuMu/Ref selection/DiMuon")), //
+		eMuAnalyserEMuRefSelection_(new EMuAnalyser(histMan, histogramFolder + "/EMu/Ref selection/DiLepton")) //
 		{
 
 }
@@ -154,8 +195,14 @@ void TTbarDiLeptonAnalyser::createHistograms() {
 	metAnalyserMuMuRefSelection_->createHistograms();
 	metAnalyserEERefSelection_->createHistograms();
 	metAnalyserEMuRefSelection_->createHistograms();
+	//signal jets
+	jetAnalyserMuMuRefSelection_->createHistograms();
+	jetAnalyserEERefSelection_->createHistograms();
+	jetAnalyserEMuRefSelection_->createHistograms();
 	//signal met di electron
 	diElectronAnalyserEERefSelection_->createHistograms();
+	diMuonAnalyserMuMuRefSelection_->createHistograms();
+	eMuAnalyserEMuRefSelection_->createHistograms();
 
 }
 

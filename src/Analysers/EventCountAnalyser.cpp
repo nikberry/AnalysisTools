@@ -202,6 +202,10 @@ void EventCountAnalyser::topEEReferenceSelectionUnweighted(const EventPtr event)
 	for (unsigned int step = 0; step < TTbarEEReferenceSelection::NUMBER_OF_SELECTION_STEPS; ++step) {
 		bool passesStep = topEERefSelection_->passesSelectionStep(event, step);
 		bool passesStepUpTo = topEERefSelection_->passesSelectionUpToStep(event, step);
+
+		if(passesStepUpTo == true && step == 5)
+			cout << "event count pass" << endl;
+
 		if (passesStepUpTo)
 			histMan_->H1D("TTbarEERefSelectionUnweighted")->Fill(step, weight_);
 		if (passesStep)
@@ -273,9 +277,10 @@ void EventCountAnalyser::topEMuReferenceSelectionUnweighted(const EventPtr event
 
 	for (unsigned int step = 0; step < TTbarEMuReferenceSelection::NUMBER_OF_SELECTION_STEPS; ++step) {
 		bool passesStep = topEMuRefSelection_->passesSelectionStep(event, step);
-		cout << "step: " << step << " , pass: " <<  passesStep << endl;
+//		cout << "step: " << step << " , pass: " <<  passesStep << endl;
 
 		bool passesStepUpTo = topEMuRefSelection_->passesSelectionUpToStep(event, step);
+
 		if (passesStepUpTo)
 			histMan_->H1D("TTbarEMuRefSelectionUnweighted")->Fill(step, weight_);
 		if (passesStep)

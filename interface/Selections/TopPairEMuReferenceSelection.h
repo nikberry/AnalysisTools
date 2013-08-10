@@ -68,7 +68,11 @@ public:
 	virtual bool hasAtLeastOneGoodPhoton(const EventPtr event) const;
 	virtual bool hasJustOneGoodPhoton(const EventPtr event) const;
 
+
+
 	virtual const LeptonPointer signalLepton(const EventPtr event) const;
+	virtual const ElectronCollection goodElectrons(const EventPtr event) const;
+	virtual const MuonCollection goodMuons(const EventPtr event) const;
 	virtual const ElectronCollection signalElectrons(const EventPtr event) const;
 	virtual const MuonCollection signalMuons(const EventPtr event) const;
 //	virtual void signalLeptons(const EventPtr event);

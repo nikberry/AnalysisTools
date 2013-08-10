@@ -11,6 +11,8 @@
 #include "BasicAnalyser.h"
 #include "METAnalyser.h"
 #include "DiElectronAnalyser.h"
+#include "DiMuonAnalyser.h"
+#include "EMuAnalyser.h"
 #include "ElectronAnalyser.h"
 #include "MuonAnalyser.h"
 #include "VertexAnalyser.h"
@@ -37,7 +39,13 @@ private:
 
 	//signal region
 	METAnalyserLocalPtr metAnalyserMuMuRefSelection_, metAnalyserEERefSelection_, metAnalyserEMuRefSelection_;
+
+	JetAnalyserLocalPtr jetAnalyserMuMuRefSelection_, jetAnalyserEERefSelection_, jetAnalyserEMuRefSelection_;
+
 	DiElectronAnalyserLocalPtr diElectronAnalyserEERefSelection_;
+	DiMuonAnalyserLocalPtr diMuonAnalyserMuMuRefSelection_;
+	EMuAnalyserLocalPtr eMuAnalyserEMuRefSelection_;
+
 
 };
 

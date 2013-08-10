@@ -321,12 +321,15 @@ const MuonCollection TopPairMuMuReferenceSelection::signalMuons(const EventPtr e
 					}
 				}
 
-		if(storeIndexA != storeIndexB){
+		}
+
+
+    	if(storeIndexA != storeIndexB){
 			signalMuons.push_back(muons.at(storeIndexA));
 			signalMuons.push_back(muons.at(storeIndexB));
 		}
 
-		}
+
 	}
 
 	return signalMuons;
@@ -353,12 +356,13 @@ const ElectronCollection TopPairMuMuReferenceSelection::signalElectrons(const Ev
 					}
 				}
 
+		}
+
 		if(storeIndexA != storeIndexB){
 			signalElectrons.push_back(electrons.at(storeIndexA));
 			signalElectrons.push_back(electrons.at(storeIndexB));
 		}
 
-		}
 	}
 
 	return signalElectrons;

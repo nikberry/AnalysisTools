@@ -56,7 +56,7 @@ bool TopPairEMuReferenceSelection::isGoodJet(const JetPointer jet) const {
 
 }
 
-const ElectronCollection TopPairEMuReferenceSelection::signalElectrons(const EventPtr event) const {
+const ElectronCollection TopPairEMuReferenceSelection::goodElectrons(const EventPtr event) const {
 
 	const ElectronCollection allElectrons(event->Electrons());
 	ElectronCollection goodIsolatedElectrons;
@@ -70,7 +70,7 @@ const ElectronCollection TopPairEMuReferenceSelection::signalElectrons(const Eve
 	return goodIsolatedElectrons;
 }
 
-const MuonCollection TopPairEMuReferenceSelection::signalMuons(const EventPtr event) const {
+const MuonCollection TopPairEMuReferenceSelection::goodMuons(const EventPtr event) const {
 	
 	const MuonCollection allMuons(event->Muons());
 	MuonCollection goodIsolatedMuons;
@@ -168,7 +168,6 @@ bool TopPairEMuReferenceSelection::passesEventCleaning(const EventPtr event) con
 }
 
 bool TopPairEMuReferenceSelection::passesTriggerSelection(const EventPtr event) const {
-		cout << "trigger: " << (event->HLT(HLTriggers::HLT_Mu17_Ele8_CaloIdT_CaloIsoVL_TrkIdVL_TrkIsoVL) || event->HLT(HLTriggers::HLT_Mu8_Ele17_CaloIdT_CaloIsoVL_TrkIdVL_TrkIsoVL)) << endl;
 		return event->HLT(HLTriggers::HLT_Mu17_Ele8_CaloIdT_CaloIsoVL_TrkIdVL_TrkIsoVL) || event->HLT(HLTriggers::HLT_Mu8_Ele17_CaloIdT_CaloIsoVL_TrkIdVL_TrkIsoVL);
 }
 
@@ -184,22 +183,50 @@ bool TopPairEMuReferenceSelection::isIsolatedElectron(const LeptonPointer lepton
 	return electron->pfRelativeIsolationRhoCorrected() < 0.15;
 }
 
-bool TopPairEMuReferenceSelection::passesDiLeptonSelection(const EventPtr event) const {
-	
+const MuonCollection TopPairEMuReferenceSelection::signalMuons(const EventPtr event) const {
 
-	cout << "collections" << endl;
-	const ElectronCollection electrons(signalElectrons(event));
-	const MuonCollection muons(signalMuons(event));	
+	const MuonCollection muons(goodMuons(event));
+	const ElectronCollection electrons(goodElectrons(event));
+
+	//save these
+	MuonCollection signalMuons;
 
 
-	ElectronCollection electronColl;
-	MuonCollection muonColl;
-	
 	double ptMax = 0;
-	int storeIndexA = -1;
 	int storeIndexB = -1;
 
-	cout << "loop for max pt, muons: " << muons.size() << "electrons: " << electrons.size() << endl;
+//  cout << "loop for max pt, muons: " << muons.size() << "electrons: " << electrons.size() << endl;
+	if(electrons.size() >= 1 && muons.size() >= 1){
+		for (unsigned int indexA = 0; indexA < electrons.size(); ++indexA) {
+		const ElectronPointer electron(electrons.at(indexA));
+				for (unsigned int indexB = 0; indexB < muons.size(); ++indexB) {
+					const MuonPointer muon(muons.at(indexB));
+					if((electron->charge() == -muon->charge()) && ((electron->pt()+muon->pt())>ptMax)){
+						ptMax = electron->pt()+muon->pt();
+						storeIndexB = indexB;
+					}
+				}
+	}
+
+    signalMuons.push_back(muons.at(storeIndexB));
+
+	}
+
+	return signalMuons;
+
+}
+
+const ElectronCollection TopPairEMuReferenceSelection::signalElectrons(const EventPtr event) const {
+
+	const MuonCollection muons(goodMuons(event));
+	const ElectronCollection electrons(goodElectrons(event));
+	ElectronCollection signalElectrons;
+
+
+	double ptMax = 0;
+	int storeIndexA = -1;
+
+//	    cout << "loop for max pt, muons: " << muons.size() << "electrons: " << electrons.size() << endl;
 	if(electrons.size() >= 1 && muons.size() >= 1){
 		for (unsigned int indexA = 0; indexA < electrons.size(); ++indexA) {
 		const ElectronPointer electron(electrons.at(indexA));
@@ -208,30 +235,35 @@ bool TopPairEMuReferenceSelection::passesDiLeptonSelection(const EventPtr event)
 					if((electron->charge() == -muon->charge()) && ((electron->pt()+muon->pt())>ptMax)){
 						ptMax = electron->pt()+muon->pt();
 						storeIndexA = indexA;
-						storeIndexB = indexB;
 					}
 				}
-		}
-		cout << "index: " << storeIndexA << " , " << storeIndexB << endl;
-		electronColl.push_back(electrons.at(storeIndexA));
-		muonColl.push_back(muons.at(storeIndexB));
+	}
+
+    signalElectrons.push_back(electrons.at(storeIndexA));
 
 	}
 
-	cout << "stored e and mu: " << muonColl.size() << "electrons: " << electronColl.size() << endl;
+	return signalElectrons;
+
+}
+
+
+bool TopPairEMuReferenceSelection::passesDiLeptonSelection(const EventPtr event) const {
+	
+	const ElectronCollection electrons(signalElectrons(event));
+	const MuonCollection muons(signalMuons(event));	
+
 
 	double mass = 0;
 	
-	if(electronColl.size() > 0 && muonColl.size() > 0){
-	    ElectronPointer electron = electronColl.front();
-	    MuonPointer muon = muonColl.front();
+	if(electrons.size() > 0 && muons.size() > 0){
+	    ElectronPointer electron = electrons.front();
+	    MuonPointer muon = muons.front();
 	
 		ParticlePointer dilepton;
 		dilepton = ParticlePointer(new Particle(*electron + *muon));
 		mass = dilepton->mass();
 	}
-
-	cout << "mass: " << mass << endl;
 
 	return mass > 20;
 
