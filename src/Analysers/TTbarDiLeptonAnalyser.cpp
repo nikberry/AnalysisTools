@@ -63,8 +63,8 @@ void TTbarDiLeptonAnalyser::muMuSignalAnalysis(const EventPtr event) {
 				diMuonAnalyserMuMuRefSelection_->analyse(event, muons);
 
 			    //photons
-			    photonAnalyserEERefSelection_->setScale(bjetWeight);
-			    photonAnalyserEERefSelection_->analyse(event, photons);
+			    photonAnalyserMuMuRefSelection_->setScale(bjetWeight);
+			    photonAnalyserMuMuRefSelection_->analyse(event, photons);
 
 			}
 	}

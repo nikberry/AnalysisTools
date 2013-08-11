@@ -64,8 +64,8 @@ void TTbarPhotonAnalyser::muMuSignalAnalysis(const EventPtr event) {
 				diMuonAnalyserMuMuPhotonSelection_->analyse(event, muons);
 
 			    //photons
-			    photonAnalyserEEPhotonSelection_->setScale(bjetWeight);
-			    photonAnalyserEEPhotonSelection_->analyse(event, photons);
+			    photonAnalyserMuMuPhotonSelection_->setScale(bjetWeight);
+			    photonAnalyserMuMuPhotonSelection_->analyse(event, photons);
 
 			}
 	}
