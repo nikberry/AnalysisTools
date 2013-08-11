@@ -1,4 +1,4 @@
-toolsFolder = './'
+toolsFolder = 'BristolAnalysis/Tools/'
 import os
 if os.environ.has_key('toolsFolder'):
     toolsFolder = os.environ['toolsFolder']
@@ -50,9 +50,10 @@ produceFitterASCIIoutput = False
 inputFiles = [
 #testntuple 
 #dir + SemiLept 
-# piondir
+ 
+ wizardtest
 #'root://dc2-grid-64.brunel.ac.uk//dpm/brunel.ac.uk/home/cms//store/user/phy6phs/DoubleMu_EcalRecover_11Dec2012-v1_AOD_nTuple_v10_GoldenJSON_diLeptonPlus2Jets_final/*.root' 
-local 
+#local 
             ]
 
 #relative Path from calling BAT to the TopQuarkAnalysis folder

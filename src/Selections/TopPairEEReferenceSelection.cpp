@@ -179,7 +179,8 @@ bool TopPairEEReferenceSelection::isIsolated(const LeptonPointer lepton) const {
 
 
 bool TopPairEEReferenceSelection::passesDiElectronSelection(const EventPtr event) const {
-	const ElectronCollection electrons(signalElectrons(event));
+
+ 	const ElectronCollection electrons(signalElectrons(event));
 
 	double mass = 0;
 
@@ -334,8 +335,10 @@ const ElectronCollection TopPairEEReferenceSelection::signalElectrons(const Even
 				}
 		}
 
+		if(storeIndexA != storeIndexB){
 		signalElectrons.push_back(electrons.at(storeIndexA));
 		signalElectrons.push_back(electrons.at(storeIndexB));
+		}
 
 	}
 
@@ -411,7 +414,7 @@ bool TopPairEEReferenceSelection::isLooseElectron(const ElectronPointer electron
 
 
 bool TopPairEEReferenceSelection::isGoodElectron(const ElectronPointer electron) const {
-	bool passesEtAndEta = electron->et() > 20 && fabs(electron->eta()) < 2.5 && !electron->isInCrack();
+	bool passesEtAndEta = electron->et() > 20 && fabs(electron->eta()) < 2.5;
 	bool passesD0 = fabs(electron->d0()) < 0.04; //cm
 	bool passesID(electron->passesElectronID(ElectronID::MVAIDTrigger));
 	bool passesIsolation  = isIsolated(electron);

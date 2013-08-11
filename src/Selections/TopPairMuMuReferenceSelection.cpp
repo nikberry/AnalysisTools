@@ -327,7 +327,7 @@ const MuonCollection TopPairMuMuReferenceSelection::signalMuons(const EventPtr e
     	if(storeIndexA != storeIndexB){
 			signalMuons.push_back(muons.at(storeIndexA));
 			signalMuons.push_back(muons.at(storeIndexB));
-		}
+	}
 
 
 	}

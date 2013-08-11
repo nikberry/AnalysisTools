@@ -207,8 +207,9 @@ const MuonCollection TopPairEMuReferenceSelection::signalMuons(const EventPtr ev
 					}
 				}
 	}
-
-    signalMuons.push_back(muons.at(storeIndexB));
+	
+	if(storeIndexB != -1)
+    		signalMuons.push_back(muons.at(storeIndexB));
 
 	}
 
@@ -238,8 +239,9 @@ const ElectronCollection TopPairEMuReferenceSelection::signalElectrons(const Eve
 					}
 				}
 	}
-
-    signalElectrons.push_back(electrons.at(storeIndexA));
+	
+	if(storeIndexA != -1)
+    		signalElectrons.push_back(electrons.at(storeIndexA));
 
 	}
 

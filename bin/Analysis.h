@@ -39,8 +39,6 @@
 #include "../interface/Analysers/NeutrinoReconstructionAnalyser.h"
 #include "../interface/Analysers/VertexAnalyser.h"
 #include "../interface/Analysers/PhotonAnalyser.h"
-#include "../interface/Analysers/MuonAnalyser2.h"
-#include "../interface/Analysers/METAnalyser2.h"
 #include "../interface/Analysers/TTbarDiLeptonAnalyser.h"
 
 //typedef boost::array<unsigned long, BAT::TTbarEPlusJetsSelection::NUMBER_OF_SELECTION_STEPS> ePlusJetscutarray;
@@ -79,8 +77,6 @@ private:
     BAT::NeutrinoRecoAnalyserLocalPtr neutrinoRecoAnalyser;
     boost::scoped_ptr<BAT::VertexAnalyser> vertexAnalyser;
     boost::scoped_ptr<BAT::PhotonAnalyser> photonAnalyser;
-    boost::scoped_ptr<BAT::MuonAnalyser2> muonAnalyser2;
-    boost::scoped_ptr<BAT::METAnalyser2> metAnalyser2;
     boost::scoped_ptr<BAT::TTbarDiLeptonAnalyser> ttbardileptonAnalyser;
 
 public:
