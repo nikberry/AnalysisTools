@@ -36,8 +36,6 @@ void DiElectronAnalyser::analyse(const EventPtr event) {
 void DiElectronAnalyser::analyse(const EventPtr event, const ElectronCollection electrons) {
 	histMan_->setCurrentHistogramFolder(histogramFolder_);
 
-	cout << "ele size: " << electrons.size() << endl;
-
 	weight_ = event->weight() * prescale_ * scale_;
 	if (electrons.size() == 2) {
 		ElectronPointer leadingElectron = electrons.front();

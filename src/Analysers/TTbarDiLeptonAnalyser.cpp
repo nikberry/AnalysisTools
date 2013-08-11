@@ -1,7 +1,7 @@
 /*
  * TTbarDiLeptonAnalyser.cpp
  *
- *  Created on: 8 Jul 2013
+ *  Created on: 10 Aug 2013
  *      Author: Phil
  */
 #include "../../interface/Analysers/TTbarDiLeptonAnalyser.h"
@@ -74,8 +74,6 @@ void TTbarDiLeptonAnalyser::muMuSignalAnalysis(const EventPtr event) {
 void TTbarDiLeptonAnalyser::eESignalAnalysis(const EventPtr event) {
 
 	if (topEERefSelection_->passesSelectionUpToStep(event, TTbarEEReferenceSelection::MetCut)) {
-
-		cout << "ee anal" << endl;
 
 			const JetCollection jets(topEERefSelection_->cleanedJets(event));
 			const JetCollection bJets(topEERefSelection_->cleanedBJets(event));

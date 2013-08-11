@@ -1,12 +1,12 @@
 /*
  * TTbarDiLeptonAnalyser.h
  *
- *  Created on: 22 Mar 2012
+ *  Created on: 10 Aug 2013
  *      Author: phil
  */
 
-#ifndef TTBARPLUSMETANALYSER_H_
-#define TTBARPLUSMETANALYSER_H_
+#ifndef TTBARDILEPTONANALYSER_H_
+#define TTBARDILEPTONANALYSER_H_
 
 #include "BasicAnalyser.h"
 #include "METAnalyser.h"
@@ -55,4 +55,4 @@ private:
 
 typedef boost::scoped_ptr<BAT::TTbarDiLeptonAnalyser> TTbarDiLeptonAnalyserLocalPtr;
 } /* namespace BAT */
-#endif /* TTBARPLUSMETANALYSER_H_ */
+#endif /* TTBARDILEPTONANALYSER_H_ */

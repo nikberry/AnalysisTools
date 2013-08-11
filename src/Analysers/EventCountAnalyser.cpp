@@ -67,35 +67,36 @@ void EventCountAnalyser::topMuMuReferenceSelection(const EventPtr event) {
 // 	}else{
 // 		scale_ =1;
 // 	}
-// 
-// 	//use bjet weights in histograms for muons
-// 	const JetCollection jets(topMuMuRefSelection_->cleanedJets(event));
-// 	const JetCollection bJets(topMuMuRefSelection_->cleanedBJets(event));
-// 			unsigned int numberOfBjets(bJets.size());
-// 	vector<double> bjetWeights;
-// 	if (event->isRealData()) {
-// 		for (unsigned int index = 0; index <= numberOfBjets; ++index) {
-// 			if (index == numberOfBjets)
-// 				bjetWeights.push_back(1.);
-// 			else
-// 				bjetWeights.push_back(0);
-// 		}
-// 	} else
-// 		bjetWeights = BjetWeights(jets, numberOfBjets);
-// 
-// 	double weight_ge1b = 0.;
-// 	double weight_ge2b = 0.;
-// 	for (unsigned int weightIndex = 0; weightIndex < bjetWeights.size(); ++weightIndex) {
-// 		double b_weight = bjetWeights.at(weightIndex);
-// 
-// 	if(weightIndex>0)
-// 	weight_ge1b += b_weight;
-// 	if(weightIndex>1)
-// 	weight_ge2b += b_weight;
-// 
-// 	}
 
-	weight_ = event->weight() * prescale_ * scale_;
+ 	//use bjet weights in histograms for muons
+ 	const JetCollection jets(topMuMuRefSelection_->cleanedJets(event));
+ 	const JetCollection bJets(topMuMuRefSelection_->cleanedBJets(event));
+ 	unsigned int numberOfBjets(bJets.size());
+ 	vector<double> bjetWeights;
+
+ 	if (event->isRealData()) {
+ 		for (unsigned int index = 0; index <= numberOfBjets; ++index) {
+ 			if (index == numberOfBjets)
+ 				bjetWeights.push_back(1.);
+ 			else
+ 				bjetWeights.push_back(0);
+ 		}
+ 	} else
+ 		bjetWeights = BjetWeights(jets, numberOfBjets);
+
+ 	double weight_ge1b = 0.;
+ 	if(numberOfBjets>0){
+ 	for (unsigned int weightIndex = 0; weightIndex < bjetWeights.size(); ++weightIndex) {
+ 		double b_weight = bjetWeights.at(weightIndex);
+
+ 	if(weightIndex>0)
+ 		weight_ge1b += b_weight;
+ 	}
+ 	}else{
+ 		weight_ge1b = 1.;
+ 	}
+
+	weight_ = event->weight() * prescale_ * scale_ *weight_ge1b;
 
 	histMan_->H1D("TTbarMuMuRefSelection")->Fill(-1, weight_);
 	histMan_->H1D("TTbarMuMuRefSelection_singleCuts")->Fill(-1, weight_);
@@ -131,32 +132,32 @@ void EventCountAnalyser::topMuMuReferenceSelectionUnweighted(const EventPtr even
 void EventCountAnalyser::topEEReferenceSelection(const EventPtr event) {
 	histMan_->setCurrentHistogramFolder(histogramFolder_);
 
-// 	//use bjet weights in histograms for muons
-// 	const JetCollection jets(topEERefSelection_->cleanedJets(event));
-// 	const JetCollection bJets(topEERefSelection_->cleanedBJets(event));
-// 			unsigned int numberOfBjets(bJets.size());
-// 	vector<double> bjetWeights;
-// 	if (event->isRealData()) {
-// 		for (unsigned int index = 0; index <= numberOfBjets; ++index) {
-// 			if (index == numberOfBjets)
-// 				bjetWeights.push_back(1.);
-// 			else
-// 				bjetWeights.push_back(0);
-// 		}
-// 	} else
-// 		bjetWeights = BjetWeights(jets, numberOfBjets);
-// 
-// 	double weight_ge1b = 0.;
-// 	double weight_ge2b = 0.;
-// 	for (unsigned int weightIndex = 0; weightIndex < bjetWeights.size(); ++weightIndex) {
-// 		double b_weight = bjetWeights.at(weightIndex);
-// 
-// 	if(weightIndex>0)
-// 	weight_ge1b += b_weight;
-// 	if(weightIndex>1)
-// 	weight_ge2b += b_weight;
-// 
-// 	}
+ 	//use bjet weights in histograms for muons
+ 	const JetCollection jets(topEERefSelection_->cleanedJets(event));
+ 	const JetCollection bJets(topEERefSelection_->cleanedBJets(event));
+ 			unsigned int numberOfBjets(bJets.size());
+ 	vector<double> bjetWeights;
+ 	if (event->isRealData()) {
+ 		for (unsigned int index = 0; index <= numberOfBjets; ++index) {
+ 			if (index == numberOfBjets)
+ 				bjetWeights.push_back(1.);
+ 			else
+ 				bjetWeights.push_back(0);
+ 		}
+ 	} else
+ 		bjetWeights = BjetWeights(jets, numberOfBjets);
+
+ 	double weight_ge1b = 0.;
+ 	if(numberOfBjets>0){
+ 	for (unsigned int weightIndex = 0; weightIndex < bjetWeights.size(); ++weightIndex) {
+ 		double b_weight = bjetWeights.at(weightIndex);
+
+ 	if(weightIndex>0)
+ 		weight_ge1b += b_weight;
+ 	}
+ 	}else{
+ 		weight_ge1b = 1.;
+ 	}
 
 	weight_ = event->weight() * prescale_ * scale_;
 
@@ -198,32 +199,33 @@ void EventCountAnalyser::topEEReferenceSelectionUnweighted(const EventPtr event)
  void EventCountAnalyser::topEMuReferenceSelection(const EventPtr event) {
 	histMan_->setCurrentHistogramFolder(histogramFolder_);
 
-// 	//use bjet weights in histograms for muons
-// 	const JetCollection jets(topEMuRefSelection_->cleanedJets(event));
-// 	const JetCollection bJets(topEMuRefSelection_->cleanedBJets(event));
-// 			unsigned int numberOfBjets(bJets.size());
-// 	vector<double> bjetWeights;
-// 	if (event->isRealData()) {
-// 		for (unsigned int index = 0; index <= numberOfBjets; ++index) {
-// 			if (index == numberOfBjets)
-// 				bjetWeights.push_back(1.);
-// 			else
-// 				bjetWeights.push_back(0);
-// 		}
-// 	} else
-// 		bjetWeights = BjetWeights(jets, numberOfBjets);
-// 
-// 	double weight_ge1b = 0.;
-// 	double weight_ge2b = 0.;
-// 	for (unsigned int weightIndex = 0; weightIndex < bjetWeights.size(); ++weightIndex) {
-// 		double b_weight = bjetWeights.at(weightIndex);
-// 
-// 	if(weightIndex>0)
-// 	weight_ge1b += b_weight;
-// 	if(weightIndex>1)
-// 	weight_ge2b += b_weight;
-// 
-// 	}
+ 	//use bjet weights in histograms for muons
+ 	const JetCollection jets(topEMuRefSelection_->cleanedJets(event));
+ 	const JetCollection bJets(topEMuRefSelection_->cleanedBJets(event));
+ 			unsigned int numberOfBjets(bJets.size());
+ 	vector<double> bjetWeights;
+ 	if (event->isRealData()) {
+ 		for (unsigned int index = 0; index <= numberOfBjets; ++index) {
+ 			if (index == numberOfBjets)
+ 				bjetWeights.push_back(1.);
+ 			else
+ 				bjetWeights.push_back(0);
+ 		}
+ 	} else
+ 		bjetWeights = BjetWeights(jets, numberOfBjets);
+
+
+ 	double weight_ge1b = 0.;
+ 	if(numberOfBjets>0){
+ 	for (unsigned int weightIndex = 0; weightIndex < bjetWeights.size(); ++weightIndex) {
+ 		double b_weight = bjetWeights.at(weightIndex);
+
+ 	if(weightIndex>0)
+ 		weight_ge1b += b_weight;
+ 	}
+ 	}else{
+ 		weight_ge1b = 1.;
+ 	}
 
 	weight_ = event->weight() * prescale_ * scale_;
 

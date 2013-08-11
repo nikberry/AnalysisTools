@@ -532,7 +532,8 @@ bool TopPairEMuReferenceSelection::isGoodElectron(const ElectronPointer electron
 	bool passesD0 = fabs(electron->d0()) < 0.04; //cm
 	bool passesID(electron->passesElectronID(ElectronID::MVAIDTrigger));
 	bool passesIsolation  = isIsolatedElectron(electron);
-	return passesEtAndEta && passesD0 && passesID && passesIsolation;
+	bool passesConvVeto = electron->passConversionVeto();
+	return passesEtAndEta && passesD0 && passesID && passesIsolation && passesConvVeto;
 }
 
 bool TopPairEMuReferenceSelection::isGoodMuon(const MuonPointer muon) const {

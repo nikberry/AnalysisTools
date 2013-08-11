@@ -418,6 +418,7 @@ bool TopPairEEReferenceSelection::isGoodElectron(const ElectronPointer electron)
 	bool passesD0 = fabs(electron->d0()) < 0.04; //cm
 	bool passesID(electron->passesElectronID(ElectronID::MVAIDTrigger));
 	bool passesIsolation  = isIsolated(electron);
-	return passesEtAndEta && passesD0 && passesID && passesIsolation;
+	bool passesConvVeto = electron->passConversionVeto();
+	return passesEtAndEta && passesD0 && passesID && passesIsolation && passesConvVeto;
 }
 } /* namespace BAT */

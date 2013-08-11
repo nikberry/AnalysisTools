@@ -58,6 +58,7 @@ void Analysis::analyse() {
 
 		eventcountAnalyser->analyse(currentEvent);
 		ttbardileptonAnalyser->analyse(currentEvent);
+		ttbarphotonAnalyser->analyse(currentEvent);
 
 	}
 }
@@ -138,7 +139,13 @@ void Analysis::createHistograms() {
         cout << "Number of histograms added by ttbardileptonAnalyser: " << numberOfHistograms - lastNumberOfHistograms << endl;
         lastNumberOfHistograms = numberOfHistograms;
 
+    ttbarphotonAnalyser->createHistograms();
+        numberOfHistograms = histMan->size();
+        cout << "Number of histograms added by ttbarphotonAnalyser: " << numberOfHistograms - lastNumberOfHistograms << endl;
+        lastNumberOfHistograms = numberOfHistograms;
+
 	cout << "Total number of histograms: " << histMan->size() << endl;
+
 }
 
 Analysis::Analysis(std::string datasetInfoFile) : //
@@ -166,7 +173,8 @@ Analysis::Analysis(std::string datasetInfoFile) : //
 		neutrinoRecoAnalyser(new NeutrinoReconstructionAnalyser(histMan)), //
 		vertexAnalyser(new VertexAnalyser(histMan)),
 		photonAnalyser(new PhotonAnalyser(histMan)),
-		ttbardileptonAnalyser(new TTbarDiLeptonAnalyser(histMan)){
+		ttbardileptonAnalyser(new TTbarDiLeptonAnalyser(histMan)),
+		ttbarphotonAnalyser(new TTbarPhotonAnalyser(histMan)){
 
 
 	histMan->enableDebugMode(true);
