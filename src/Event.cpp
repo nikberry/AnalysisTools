@@ -31,7 +31,7 @@ Event::Event() : //
 		genParticles(), //
 		mets_(), //
 		genMet_(), //
-		dataType(DataType::ElectronHad), //
+		dataType(DataType::DoubleMu), //
 		runNumber(0), //
 		eventNumber(0), //
 		localEventNumber(0), //
@@ -66,8 +66,7 @@ Event::~Event() {
 }
 
 bool Event::isRealData() const {
-	return dataType == DataType::ElectronHad || dataType == DataType::MuHad || dataType == DataType::SingleElectron
-			|| dataType == DataType::SingleMu || dataType == DataType::DoubleMu || dataType == DataType::DoubleElectron || dataType == DataType::MuEG;;
+	return dataType == DataType::DoubleMu || dataType == DataType::DoubleElectron || dataType == DataType::MuEG;
 }
 
 const DataType::value Event::getDataType() const {
