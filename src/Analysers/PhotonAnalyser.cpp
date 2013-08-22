@@ -25,14 +25,14 @@ void PhotonAnalyser::analyse(const EventPtr event){
 
 	histMan_->setCurrentHistogramFolder(histogramFolder_ + "/AllPhotons");
 
-	const ElectronCollection electrons = topEERefSelection_->goodElectrons(event);
-	const MuonCollection muons = topMuMuRefSelection_->goodMuons(event);
+	//const ElectronCollection electrons = topEERefSelection_->goodElectrons(event);
+	//const MuonCollection muons = topMuMuRefSelection_->goodMuons(event);
 
 	weight_ = event->weight() * prescale_ * scale_;
 	const JetCollection jets = event->Jets();
-	//const ElectronCollection electrons = event->Electrons();
+	const ElectronCollection electrons = event->Electrons();
 	const PhotonCollection photons = event->Photons();
-	//const MuonCollection muons = event->Muons();
+	const MuonCollection muons = event->Muons();
 
 	histMan_->H1D_BJetBinned("Number_Of_Photons")->Fill(photons.size(), weight_);
 
@@ -102,13 +102,13 @@ void PhotonAnalyser::analyse_signalPhotons(const EventPtr event, PhotonCollectio
 
 	histMan_->setCurrentHistogramFolder(histogramFolder_ + "/SignalPhotons");
 
-	const ElectronCollection electrons = topMuMuRefSelection_->goodElectrons(event);
-	const MuonCollection muons = topMuMuRefSelection_->goodMuons(event);
+	//const ElectronCollection electrons = topMuMuRefSelection_->goodElectrons(event);
+	//const MuonCollection muons = topMuMuRefSelection_->goodMuons(event);
 
 	weight_ = event->weight() * prescale_ * scale_;
 	const JetCollection jets = event->Jets();
-	//const ElectronCollection electrons = event->Electrons();
-	//const MuonCollection muons = event->Muons();
+	const ElectronCollection electrons = event->Electrons();
+	const MuonCollection muons = event->Muons();
 
 	histMan_->H1D_BJetBinned("Number_Of_Photons")->Fill(signalPhotons.size(), weight_);
 
