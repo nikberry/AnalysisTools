@@ -27,6 +27,7 @@ enum value {
 	W3Jets,
 	W4Jets,
 	Zjets,
+	TTGamma,
 	QCD_Pt_20_30_BCtoE,
 	QCD_Pt_20_30_EMEnriched,
 	QCD_Pt_20_MuEnrichedPt_15,
@@ -114,7 +115,8 @@ const boost::array<std::string, DataType::NUMBER_OF_DATA_TYPES> names = { {
 		"W2Jets", //
 		"W3Jets", //
 		"W4Jets", //
-		"DYJetsToLL", 
+		"DYJetsToLL",
+		"TTGamma",
 		"QCD_Pt_20_30_BCtoE",
 		"QCD_Pt_20_30_EMEnriched",
 		"QCD_Pt_20_MuEnrichedPt_15",

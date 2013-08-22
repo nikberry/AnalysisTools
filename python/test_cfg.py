@@ -50,7 +50,7 @@ useHitFit = False
 produceFitterASCIIoutput = False
 inputFiles = [ 
  
-DoubleMuTest 
+wizardtest 
 #local 
             ]
 
