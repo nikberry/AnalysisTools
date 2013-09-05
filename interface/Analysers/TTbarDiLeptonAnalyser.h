@@ -52,7 +52,7 @@ private:
 	PhotonAnalyserLocalPtr photonAnalyserMuMuRefSelection_, photonAnalyserEERefSelection_, photonAnalyserEMuRefSelection_;
 
 	//ttphoton anlyser
-	SignalPhotonAnalyserLocalPtr ttphotonAnalyserMuMuRefSelection_;
+	SignalPhotonAnalyserLocalPtr ttphotonAnalyserMuMuRefSelection_, ttphotonAnalyserEERefSelection_, ttphotonAnalyserEMuRefSelection_;
 
 };
 
