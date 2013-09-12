@@ -68,6 +68,30 @@ void TTbarDiLeptonAnalyser::muMuSignalAnalysis(const EventPtr event) {
 			    photonAnalyserMuMuRefSelection_->setScale(bjetWeight);
 			    photonAnalyserMuMuRefSelection_->analyse(event, photons, jets, electrons, muons);
 
+			    //n-EtAndEta photons
+			    const PhotonCollection photonsMinusEtAndEta = topMuMuRefSelection_->nMinusOnePhotons(event, "EtAndEta");
+			    photonAnalyserMuMuRefSelection_->analyse_NminusOnePhotons(event, photonsMinusEtAndEta, jets, electrons, muons, "EtAndEta");
+
+			    //n-passesHOverE photons
+			    const PhotonCollection photonsMinusHOverE = topMuMuRefSelection_->nMinusOnePhotons(event, "passesHOverE");
+			    photonAnalyserMuMuRefSelection_->analyse_NminusOnePhotons(event, photonsMinusHOverE, jets, electrons, muons, "passesHOverE");
+
+			    //n-passesShowerShape photons
+			    const PhotonCollection photonsMinuspassesShowerShape = topMuMuRefSelection_->nMinusOnePhotons(event, "passesShowerShape");
+			    photonAnalyserMuMuRefSelection_->analyse_NminusOnePhotons(event, photonsMinuspassesShowerShape, jets, electrons, muons, "passesShowerShape");
+
+			    //n-passesPFChargedIso photons
+			    const PhotonCollection photonsMinuspassesPFChargedIso = topMuMuRefSelection_->nMinusOnePhotons(event, "passesPFChargedIso");
+			    photonAnalyserMuMuRefSelection_->analyse_NminusOnePhotons(event, photonsMinuspassesPFChargedIso, jets, electrons, muons, "passesPFChargedIso");
+
+			    //n-passesPFNeutralIso photons
+			    const PhotonCollection photonsMinuspassesPFNeutralIso = topMuMuRefSelection_->nMinusOnePhotons(event, "passesPFNeutralIso");
+			    photonAnalyserMuMuRefSelection_->analyse_NminusOnePhotons(event, photonsMinuspassesPFNeutralIso, jets, electrons, muons, "passesPFNeutralIso");
+
+			    //n-passesPFPhotonIso photons
+			    const PhotonCollection photonsMinuspassesPFPhotonIso = topMuMuRefSelection_->nMinusOnePhotons(event, "passesPFPhotonIso");
+			    photonAnalyserMuMuRefSelection_->analyse_NminusOnePhotons(event, photonsMinuspassesPFPhotonIso, jets, electrons, muons, "passesPFPhotonIso");
+
 			    if(event->getDataType() == DataType::TTJets){
 			    ttphotonAnalyserMuMuRefSelection_->setScale(bjetWeight);
 			    ttphotonAnalyserMuMuRefSelection_->analyse(event, photons, jets, electrons, muons);
@@ -127,6 +151,31 @@ void TTbarDiLeptonAnalyser::eESignalAnalysis(const EventPtr event) {
 			    photonAnalyserEERefSelection_->setScale(bjetWeight);
 			    photonAnalyserEERefSelection_->analyse(event, photons, jets, electrons, muons);
 
+			    //n-EtAndEta photons
+			    const PhotonCollection photonsMinusEtAndEta = topEERefSelection_->nMinusOnePhotons(event, "EtAndEta");
+			    photonAnalyserEERefSelection_->analyse_NminusOnePhotons(event, photonsMinusEtAndEta, jets, electrons, muons, "EtAndEta");
+
+			    //n-passesHOverE photons
+			    const PhotonCollection photonsMinusHOverE = topEERefSelection_->nMinusOnePhotons(event, "passesHOverE");
+			    photonAnalyserEERefSelection_->analyse_NminusOnePhotons(event, photonsMinusHOverE, jets, electrons, muons, "passesHOverE");
+
+			    //n-passesShowerShape photons
+			    const PhotonCollection photonsMinuspassesShowerShape = topEERefSelection_->nMinusOnePhotons(event, "passesShowerShape");
+			    photonAnalyserEERefSelection_->analyse_NminusOnePhotons(event, photonsMinuspassesShowerShape, jets, electrons, muons, "passesShowerShape");
+
+			    //n-passesPFChargedIso photons
+			    const PhotonCollection photonsMinuspassesPFChargedIso = topEERefSelection_->nMinusOnePhotons(event, "passesPFChargedIso");
+			    photonAnalyserEERefSelection_->analyse_NminusOnePhotons(event, photonsMinuspassesPFChargedIso, jets, electrons, muons, "passesPFChargedIso");
+
+			    //n-passesPFNeutralIso photons
+			    const PhotonCollection photonsMinuspassesPFNeutralIso = topEERefSelection_->nMinusOnePhotons(event, "passesPFNeutralIso");
+			    photonAnalyserEERefSelection_->analyse_NminusOnePhotons(event, photonsMinuspassesPFNeutralIso, jets, electrons, muons, "passesPFNeutralIso");
+
+			    //n-passesPFPhotonIso photons
+			    const PhotonCollection photonsMinuspassesPFPhotonIso = topEERefSelection_->nMinusOnePhotons(event, "passesPFPhotonIso");
+			    photonAnalyserEERefSelection_->analyse_NminusOnePhotons(event, photonsMinuspassesPFPhotonIso, jets, electrons, muons, "passesPFPhotonIso");
+
+
 			    if(event->getDataType() == DataType::TTJets){
 			    ttphotonAnalyserEERefSelection_->setScale(bjetWeight);
 			    ttphotonAnalyserEERefSelection_->analyse(event, photons, jets, electrons, muons);
@@ -185,6 +234,36 @@ void TTbarDiLeptonAnalyser::eMuSignalAnalysis(const EventPtr event) {
 			    //photon
 			    photonAnalyserEMuRefSelection_->setScale(bjetWeight);
 			    photonAnalyserEMuRefSelection_->analyse(event, photons, jets, electrons, muons);
+
+			    //photon
+			    photonAnalyserEMuRefSelection_->setScale(bjetWeight);
+			    photonAnalyserEMuRefSelection_->analyse(event, photons, jets, electrons, muons);
+
+			    //n-EtAndEta photons
+			    const PhotonCollection photonsMinusEtAndEta = topEMuRefSelection_->nMinusOnePhotons(event, "EtAndEta");
+			    photonAnalyserEMuRefSelection_->analyse_NminusOnePhotons(event, photonsMinusEtAndEta, jets, electrons, muons, "EtAndEta");
+
+
+			    //n-passesHOverE photons
+			    const PhotonCollection photonsMinusHOverE = topEMuRefSelection_->nMinusOnePhotons(event, "passesHOverE");
+			    photonAnalyserEMuRefSelection_->analyse_NminusOnePhotons(event, photonsMinusHOverE, jets, electrons, muons, "passesHOverE");
+
+			    //n-passesShowerShape photons
+			    const PhotonCollection photonsMinuspassesShowerShape = topEMuRefSelection_->nMinusOnePhotons(event, "passesShowerShape");
+			    photonAnalyserEMuRefSelection_->analyse_NminusOnePhotons(event, photonsMinuspassesShowerShape, jets, electrons, muons, "passesShowerShape");
+
+			    //n-passesPFChargedIso photons
+			    const PhotonCollection photonsMinuspassesPFChargedIso = topEMuRefSelection_->nMinusOnePhotons(event, "passesPFChargedIso");
+			    photonAnalyserEMuRefSelection_->analyse_NminusOnePhotons(event, photonsMinuspassesPFChargedIso, jets, electrons, muons, "passesPFChargedIso");
+
+			    //n-passesPFNeutralIso photons
+			    const PhotonCollection photonsMinuspassesPFNeutralIso = topEMuRefSelection_->nMinusOnePhotons(event, "passesPFNeutralIso");
+			    photonAnalyserEMuRefSelection_->analyse_NminusOnePhotons(event, photonsMinuspassesPFNeutralIso, jets, electrons, muons, "passesPFNeutralIso");
+
+			    //n-passesPFPhotonIso photons
+			    const PhotonCollection photonsMinuspassesPFPhotonIso = topEMuRefSelection_->nMinusOnePhotons(event, "passesPFPhotonIso");
+			    photonAnalyserEMuRefSelection_->analyse_NminusOnePhotons(event, photonsMinuspassesPFPhotonIso, jets, electrons, muons, "passesPFPhotonIso");
+
 
 			    if(event->getDataType() == DataType::TTJets){
 			    ttphotonAnalyserEMuRefSelection_->setScale(bjetWeight);
