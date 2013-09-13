@@ -117,17 +117,23 @@ bool TopPairEMuReferenceSelection::isGoodPhoton(const PhotonPointer photon, cons
 	 	for (unsigned int index = 0; index < muons.size(); ++index) {
 	 			const MuonPointer muon(muons.at(index));
 	 			passesDeltaRgammaMuons = photon->deltaR(muon) > 0.5;
+				
+				if(photon->deltaR(muon) < 0.5)
+				break;
 	 	}
 
 	 	bool passesDeltaRgammaElectrons = false;
 
 	 	 	for (unsigned int index = 0; index < electrons.size(); ++index) {
-	 	 			const ElectronPointer electron(electrons.at(index));
-	 	 			passesDeltaRgammaElectrons = photon->deltaR(electron) > 0.5;
+	 	 		const ElectronPointer electron(electrons.at(index));
+	 	 		passesDeltaRgammaElectrons = photon->deltaR(electron) > 0.5;
+					
+				if(photon->deltaR(electron) < 0.5)
+				break;	
 	  	}
 
 
-	return passesEtAndEta && passesSafeElectronVeto && passesHOverE && passesShowerShape  &&	passesPFChargedIso && passesPFNeutralIso && passesPFPhotonIso && passesDeltaRgammaMuons && passesDeltaRgammaElectrons;
+	return passesEtAndEta && passesSafeElectronVeto && passesHOverE && passesShowerShape  && passesPFChargedIso && passesPFNeutralIso && passesPFPhotonIso && passesDeltaRgammaMuons && passesDeltaRgammaElectrons;
 }
 
 bool TopPairEMuReferenceSelection::isNminusOnePhoton(const PhotonPointer photon, const EventPtr event, TString cut) const {
@@ -162,13 +168,19 @@ bool TopPairEMuReferenceSelection::isNminusOnePhoton(const PhotonPointer photon,
 	 	for (unsigned int index = 0; index < muons.size(); ++index) {
 	 			const MuonPointer muon(muons.at(index));
 	 			passesDeltaRgammaMuons = photon->deltaR(muon) > 0.5;
+				
+				if(photon->deltaR(muon) < 0.5)
+				break;
 	 	}
 
 	 	bool passesDeltaRgammaElectrons = false;
 
 	 	 	for (unsigned int index = 0; index < electrons.size(); ++index) {
-	 	 			const ElectronPointer electron(electrons.at(index));
-	 	 			passesDeltaRgammaElectrons = photon->deltaR(electron) > 0.5;
+	 	 		const ElectronPointer electron(electrons.at(index));
+	 	 		passesDeltaRgammaElectrons = photon->deltaR(electron) > 0.5;
+					
+				if(photon->deltaR(electron) < 0.5)
+				break;
 	  	}
 
 	//

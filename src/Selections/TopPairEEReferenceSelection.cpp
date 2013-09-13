@@ -101,6 +101,9 @@ bool TopPairEEReferenceSelection::isNminusOnePhoton(const PhotonPointer photon, 
 	 	for (unsigned int index = 0; index < electrons.size(); ++index) {
 	 			const ElectronPointer electron(electrons.at(index));
 	 			passesDeltaRgammaElectrons = photon->deltaR(electron) > 0.5;
+				
+				if(photon->deltaR(electron) < 0.5)
+				break;
 	 	}
 	//
 	// 	bool passesDeltaRgammaJets = false;
@@ -162,6 +165,9 @@ bool TopPairEEReferenceSelection::isGoodPhoton(const PhotonPointer photon, const
 	 	for (unsigned int index = 0; index < electrons.size(); ++index) {
 	 			const ElectronPointer electron(electrons.at(index));
 	 			passesDeltaRgammaElectrons = photon->deltaR(electron) > 0.5;
+				
+				if(photon->deltaR(electron) < 0.5)
+				break;
 	 	}
 	//
 	// 	bool passesDeltaRgammaJets = false;

@@ -104,6 +104,9 @@ bool TopPairMuMuReferenceSelection::isNminusOnePhoton(const PhotonPointer photon
 	 	for (unsigned int index = 0; index < muons.size(); ++index) {
 	 			const MuonPointer muon(muons.at(index));
 	 			passesDeltaRgammaMuons = photon->deltaR(muon) > 0.5;
+				
+				if(photon->deltaR(muon) < 0.5)
+				break;
 	 	}
 
 	// 	bool passesDeltaRgammaJets = false;
@@ -159,14 +162,18 @@ bool TopPairMuMuReferenceSelection::isGoodPhoton(const PhotonPointer photon, con
 		passesPFNeutralIso = photon->RhoCorrectedPFNeutralHadronIso(event->rho()) < 1.5 + 0.04 * photon->pt();
 		passesPFPhotonIso = photon->RhoCorrectedPFPhotonIso(event->rho()) < 1.0 + 0.005 * photon->pt();
 	}
-	
-//  bool passesDeltaRgammaMuons = false;
-// 	
-// 	for (unsigned int index = 0; index < muons.size(); ++index) { 
-// 			const MuonPointer muon(muons.at(index)); 
-// 			passesDeltaRgammaMuons = photon->deltaR(muon) > 0.7;
-// 	}
-// 	
+
+
+	bool passesDeltaRgammaMuons = false;
+
+	 	for (unsigned int index = 0; index < muons.size(); ++index) {
+	 			const MuonPointer muon(muons.at(index));
+	 			passesDeltaRgammaMuons = photon->deltaR(muon) > 0.5;
+				
+				if(photon->deltaR(muon) < 0.5)
+				break;
+	}
+
 // 	bool passesDeltaRgammaJets = false;
 // 	
 // 	for (unsigned int index = 0; index < jets.size(); ++index) { 
@@ -174,7 +181,7 @@ bool TopPairMuMuReferenceSelection::isGoodPhoton(const PhotonPointer photon, con
 // 			passesDeltaRgammaJets = photon->deltaR(jet) > 0.7;
 // 	}
 	
-	return passesEtAndEta && passesSafeElectronVeto && passesHOverE && passesShowerShape && passesPFChargedIso && passesPFNeutralIso && passesPFPhotonIso; // && passesDeltaRgammaMuons && passesDeltaRgammaJets;
+	return passesEtAndEta && passesSafeElectronVeto && passesHOverE && passesShowerShape && passesPFChargedIso && passesPFNeutralIso && passesPFPhotonIso && passesDeltaRgammaMuons; // && passesDeltaRgammaMuons && passesDeltaRgammaJets;
 }
 
 bool TopPairMuMuReferenceSelection::isBJet(const JetPointer jet) const {
