@@ -180,7 +180,7 @@ bool TopPairMuMuReferenceSelection::isGoodPhoton(const PhotonPointer photon, con
 // 			passesDeltaRgammaJets = photon->deltaR(jet) > 0.7;
 // 	}
 	
-	return passesEtAndEta && passesSafeElectronVeto && passesHOverE && passesShowerShape && passesPFChargedIso && passesPFNeutralIso && passesPFPhotonIso && passesDeltaRgammaMuons; // && passesDeltaRgammaMuons && passesDeltaRgammaJets;
+	return passesEtAndEta && passesSafeElectronVeto && passesHOverE && passesShowerShape && passesPFChargedIso && passesPFNeutralIso && passesPFPhotonIso && passesDeltaRgammaMuons; //  passesDeltaRgammaJets;
 }
 
 bool TopPairMuMuReferenceSelection::isBJet(const JetPointer jet) const {

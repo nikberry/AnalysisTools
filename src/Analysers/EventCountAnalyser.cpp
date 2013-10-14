@@ -89,21 +89,27 @@ void EventCountAnalyser::topMuMuReferenceSelection(const EventPtr event) {
  	for (unsigned int weightIndex = 0; weightIndex < bjetWeights.size(); ++weightIndex) {
  		double b_weight = bjetWeights.at(weightIndex);
 
- 	if(weightIndex>0)
- 		weight_ge1b += b_weight;
- 	}
+ 		if(weightIndex>0)
+ 			weight_ge1b += b_weight;
+ 		}
+	
  	}else{
  		weight_ge1b = 1.;
  	}
 
-	weight_ = event->weight() * prescale_ * scale_ *weight_ge1b;
+	weight_ = event->weight() * prescale_ * scale_; //*weight_ge1b;
 
 	histMan_->H1D("TTbarMuMuRefSelection")->Fill(-1, weight_);
 	histMan_->H1D("TTbarMuMuRefSelection_singleCuts")->Fill(-1, weight_);
 
 	for (unsigned int step = 0; step < TTbarMuMuReferenceSelection::NUMBER_OF_SELECTION_STEPS; ++step) {
+	
 		bool passesStep = topMuMuRefSelection_->passesSelectionStep(event, step);
 		bool passesStepUpTo = topMuMuRefSelection_->passesSelectionUpToStep(event, step);
+		
+		if(step >= TTbarMuMuReferenceSelection::AtLeastOneBtag){
+			weight_ *= weight_ge1b;
+			}
 		
 		if (passesStepUpTo)
 			histMan_->H1D("TTbarMuMuRefSelection")->Fill(step, weight_);
@@ -135,8 +141,9 @@ void EventCountAnalyser::topEEReferenceSelection(const EventPtr event) {
  	//use bjet weights in histograms for muons
  	const JetCollection jets(topEERefSelection_->cleanedJets(event));
  	const JetCollection bJets(topEERefSelection_->cleanedBJets(event));
- 			unsigned int numberOfBjets(bJets.size());
+ 	unsigned int numberOfBjets(bJets.size());
  	vector<double> bjetWeights;
+	
  	if (event->isRealData()) {
  		for (unsigned int index = 0; index <= numberOfBjets; ++index) {
  			if (index == numberOfBjets)
@@ -169,8 +176,6 @@ void EventCountAnalyser::topEEReferenceSelection(const EventPtr event) {
 		bool passesStep = topEERefSelection_->passesSelectionStep(event, step);
 		bool passesStepUpTo = topEERefSelection_->passesSelectionUpToStep(event, step);
 
-		
-		
 		if (passesStepUpTo)
 			histMan_->H1D("TTbarEERefSelection")->Fill(step, weight_);
 		if (passesStep)
@@ -202,8 +207,9 @@ void EventCountAnalyser::topEEReferenceSelectionUnweighted(const EventPtr event)
  	//use bjet weights in histograms for muons
  	const JetCollection jets(topEMuRefSelection_->cleanedJets(event));
  	const JetCollection bJets(topEMuRefSelection_->cleanedBJets(event));
- 			unsigned int numberOfBjets(bJets.size());
+ 	unsigned int numberOfBjets(bJets.size());
  	vector<double> bjetWeights;
+	
  	if (event->isRealData()) {
  		for (unsigned int index = 0; index <= numberOfBjets; ++index) {
  			if (index == numberOfBjets)
