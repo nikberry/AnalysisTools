@@ -128,6 +128,8 @@ public:
     bool isPFLepton() const;
     virtual std::string toString() const;
 
+    double getEfficiencyCorrection() const;
+
 private:
     ElectronAlgorithm::value usedAlgorithm_;
     bool robustLooseId, robustTightId;

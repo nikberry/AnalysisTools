@@ -434,4 +434,21 @@ double Electron::mvaNonTrigV0() const {
 	return mvaNonTrigV0_;
 }
 
+double Electron::getEfficiencyCorrection() const {
+	double correction(1.);
+	double eEta(eta());
+
+	if(abs(eEta)<0.9)
+		correction = 0.9984;
+	else if(abs(eEta)>=0.9 && abs(eEta)<1.2)
+		correction = 0.9990;
+	else if(abs(eEta)>=1.2 && abs(eEta)<2.1)
+		correction = 0.9986;
+	else if(abs(eEta)>=2.1 && abs(eEta)<2.4)
+		correction = 1.0000;
+
+	return correction;
+}
+
+
 }

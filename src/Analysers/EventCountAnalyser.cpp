@@ -59,14 +59,20 @@ void EventCountAnalyser::individualCuts(const EventPtr event) {
 void EventCountAnalyser::topMuMuReferenceSelection(const EventPtr event) {
 	histMan_->setCurrentHistogramFolder(histogramFolder_);
 
-// 	if (topMuMuRefSelection_->passesSelectionUpToStep(event, 1)) {
-// 	const LeptonPointer signalLepton = topMuMuRefSelection_->signalLepton(event);
-// 	const MuonPointer signalMuon(boost::static_pointer_cast<Muon>(signalLepton));
-// 	double efficiencyCorrection = event->isRealData() ? 1. : signalMuon->getEfficiencyCorrection(false);
-// 	 	scale_ = efficiencyCorrection;
-// 	}else{
-// 		scale_ =1;
-// 	}
+	if (topMuMuRefSelection_->passesSelectionUpToStep(event, TTbarMuMuReferenceSelection::DiMuonSelection)) {
+
+	const MuonCollection signalMuons = topMuMuRefSelection_->signalMuons(event);
+//	const MuonPointer signalMuon(boost::static_pointer_cast<Muon>(signalMuons));
+	const MuonPointer muon1(signalMuons.at(0));
+	const MuonPointer muon2(signalMuons.at(1));
+
+	double efficiencyCorrection1 = event->isRealData() ? 1. : muon1->getEfficiencyCorrection();
+	double efficiencyCorrection2 = event->isRealData() ? 1. : muon2->getEfficiencyCorrection();
+	
+	 	scale_ = efficiencyCorrection1*efficiencyCorrection2; //(1) Muon 1, (2) Muon 2
+	}else{
+		scale_ =1;
+	}
 
  	//use bjet weights in histograms for muons
  	const JetCollection jets(topMuMuRefSelection_->cleanedJets(event));
@@ -97,7 +103,7 @@ void EventCountAnalyser::topMuMuReferenceSelection(const EventPtr event) {
  		weight_ge1b = 1.;
  	}
 
-	weight_ = event->weight() * prescale_ * scale_; //*weight_ge1b;
+	weight_ = event->weight() * prescale_ * scale_ *0.967; //0.967 == trigger scale factor
 
 	histMan_->H1D("TTbarMuMuRefSelection")->Fill(-1, weight_);
 	histMan_->H1D("TTbarMuMuRefSelection_singleCuts")->Fill(-1, weight_);
@@ -138,6 +144,22 @@ void EventCountAnalyser::topMuMuReferenceSelectionUnweighted(const EventPtr even
 void EventCountAnalyser::topEEReferenceSelection(const EventPtr event) {
 	histMan_->setCurrentHistogramFolder(histogramFolder_);
 
+	if (topEERefSelection_->passesSelectionUpToStep(event, TTbarEEReferenceSelection::DiElectronSelection)) {
+
+	const ElectronCollection signalElectrons = topEERefSelection_->signalElectrons(event);
+//	const ElectronPointer signalMuon(boost::static_pointer_cast<Muon>(signalMuons));
+	const ElectronPointer electron1(signalElectrons.at(0));
+	const ElectronPointer electron2(signalElectrons.at(1));
+
+	double efficiencyCorrection1 = event->isRealData() ? 1. : electron1->getEfficiencyCorrection();
+	double efficiencyCorrection2 = event->isRealData() ? 1. : electron2->getEfficiencyCorrection();
+	
+ 	 	scale_ = efficiencyCorrection1*efficiencyCorrection2;
+ 	}else{
+ 		scale_ =1;
+ 	}
+
+
  	//use bjet weights in histograms for muons
  	const JetCollection jets(topEERefSelection_->cleanedJets(event));
  	const JetCollection bJets(topEERefSelection_->cleanedBJets(event));
@@ -166,7 +188,7 @@ void EventCountAnalyser::topEEReferenceSelection(const EventPtr event) {
  		weight_ge1b = 1.;
  	}
 
-	weight_ = event->weight() * prescale_ * scale_;
+	weight_ = event->weight() * prescale_ * scale_ *0.974;
 
 	histMan_->H1D("TTbarEERefSelection")->Fill(-1, weight_);
 	histMan_->H1D("TTbarEERefSelection_singleCuts")->Fill(-1, weight_);
@@ -175,6 +197,10 @@ void EventCountAnalyser::topEEReferenceSelection(const EventPtr event) {
 
 		bool passesStep = topEERefSelection_->passesSelectionStep(event, step);
 		bool passesStepUpTo = topEERefSelection_->passesSelectionUpToStep(event, step);
+
+		if(step >= TTbarEEReferenceSelection::AtLeastOneBtag){
+			weight_ *= weight_ge1b;
+			}
 
 		if (passesStepUpTo)
 			histMan_->H1D("TTbarEERefSelection")->Fill(step, weight_);
@@ -203,6 +229,22 @@ void EventCountAnalyser::topEEReferenceSelectionUnweighted(const EventPtr event)
 
  void EventCountAnalyser::topEMuReferenceSelection(const EventPtr event) {
 	histMan_->setCurrentHistogramFolder(histogramFolder_);
+
+ 	if (topEMuRefSelection_->passesSelectionUpToStep(event, TTbarEMuReferenceSelection::DiLeptonSelection)) {
+
+	const MuonCollection signalMuons = topEMuRefSelection_->signalMuons(event);
+	const ElectronCollection signalElectrons = topEMuRefSelection_->signalElectrons(event);
+	
+	const ElectronPointer electron(signalElectrons.at(0));
+	const MuonPointer muon(signalMuons.at(0));
+
+	double efficiencyCorrection1 = event->isRealData() ? 1. : muon->getEfficiencyCorrection();
+	double efficiencyCorrection2 = event->isRealData() ? 1. : electron->getEfficiencyCorrection();
+	
+	 	scale_ = efficiencyCorrection1*efficiencyCorrection2;
+	}else{
+		scale_ =1;
+	}
 
  	//use bjet weights in histograms for muons
  	const JetCollection jets(topEMuRefSelection_->cleanedJets(event));
@@ -233,14 +275,20 @@ void EventCountAnalyser::topEEReferenceSelectionUnweighted(const EventPtr event)
  		weight_ge1b = 1.;
  	}
 
-	weight_ = event->weight() * prescale_ * scale_;
+	weight_ = event->weight() * prescale_ * scale_ *0.953;
 
 	histMan_->H1D("TTbarEMuRefSelection")->Fill(-1, weight_);
 	histMan_->H1D("TTbarEMuRefSelection_singleCuts")->Fill(-1, weight_);
 
 	for (unsigned int step = 0; step < TTbarEMuReferenceSelection::NUMBER_OF_SELECTION_STEPS; ++step) {
+	
 		bool passesStep = topEMuRefSelection_->passesSelectionStep(event, step);
 		bool passesStepUpTo = topEMuRefSelection_->passesSelectionUpToStep(event, step);
+		
+		if(step >= TTbarEMuReferenceSelection::AtLeastOneBtag){
+			weight_ *= weight_ge1b;
+			}
+		
 		if (passesStepUpTo)
 			histMan_->H1D("TTbarEMuRefSelection")->Fill(step, weight_);
 		if (passesStep)

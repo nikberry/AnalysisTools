@@ -144,42 +144,18 @@ double Muon::normChi2() const {
 	return normalisedChi2_;
 }
 
-double Muon::getEfficiencyCorrection(bool qcd) const {
+double Muon::getEfficiencyCorrection() const {
 	double correction(1.);
 	double muEta(eta());
 
-	if(Globals::energyInTeV == 7){
-	if (muEta < -1.5)
-		correction = 1.003;
-	else if (muEta >= -1.5 && muEta < -1.2)
-		correction = 0.980;
-	else if (muEta >= -1.2 && muEta < -0.9)
-		correction = 0.941;
-	else if (muEta >= -0.9 && muEta < 0)
-		correction = 0.974;
-	else if (muEta >= 0 && muEta < 0.9)
-		correction = 0.977;
-	else if (muEta >= 0.9 && muEta < 1.2)
-		correction = 0.939;
-	else if (muEta >= 1.2 && muEta < 1.5)
-		correction = 0.967;
-	else if (muEta >= 1.5)
-		correction = 1.023;
-	}else if(qcd == false){ //corrections for ID(A+B), Iso(A+B) and Trigger(A)  respectively
-		if(abs(muEta)<0.9)
-			correction = 0.9941*0.9923*0.9560;
-		else if(abs(muEta)>=0.9 && abs(muEta)<1.2)
-			correction = 0.9917*0.9979*0.9528;
-		else if(abs(muEta)>=1.2)
-			correction = 0.9982*1.0019*0.9809;
-	}else{
-		if(abs(muEta)<0.9)
-			correction = 0.9941*0.9560;
-		else if(abs(muEta)>=0.9 && abs(muEta)<1.2)
-			correction = 0.9917*0.9528;
-		else if(abs(muEta)>=1.2)
-			correction = 0.9982*0.9809;
-	}
+	if(abs(muEta)<0.9)
+		correction = 0.9984;
+	else if(abs(muEta)>=0.9 && abs(muEta)<1.2)
+		correction = 0.9990;
+	else if(abs(muEta)>=1.2 && abs(muEta)<2.1)
+		correction = 0.9986;
+	else if(abs(muEta)>=2.1 && abs(muEta)<2.4)
+		correction = 1.0000;
 
 	return correction;
 }
