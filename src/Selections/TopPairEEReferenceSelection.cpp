@@ -67,6 +67,7 @@ const LeptonPointer TopPairEEReferenceSelection::signalLepton(const EventPtr eve
 		}
 	}
 
+
 	return goodIsolatedElectrons.front();
 
 }
@@ -367,8 +368,18 @@ const MuonCollection TopPairEEReferenceSelection::signalMuons(const EventPtr eve
 		for (unsigned int indexA = 0; indexA < muons.size(); ++indexA) {
 		const MuonPointer muon(muons.at(indexA));
 				for (unsigned int indexB = 0; indexB < muons.size(); ++indexB) {
+				
+					if(indexA == indexB)
+						continue;
+						
 					const MuonPointer muon2(muons.at(indexB));
-					if((muon2->charge() == -muon->charge()) && ((muon->pt()+muon2->pt())>ptMax)){
+					
+					//if((muon2->charge() == -muon->charge()) && ((muon->pt()+muon2->pt())>ptMax)){
+						//ptMax = muon->pt()+muon2->pt();
+						//storeIndexA = indexA;
+						//storeIndexB = indexB;
+					
+					if((muon2->charge()*muon->charge() < 0) && ((muon->pt()+muon2->pt())>ptMax)){
 						ptMax = muon->pt()+muon2->pt();
 						storeIndexA = indexA;
 						storeIndexB = indexB;
@@ -399,8 +410,18 @@ const ElectronCollection TopPairEEReferenceSelection::signalElectrons(const Even
 		for (unsigned int indexA = 0; indexA < electrons.size(); ++indexA) {
 		const ElectronPointer electron(electrons.at(indexA));
 				for (unsigned int indexB = 0; indexB < electrons.size(); ++indexB) {
+					
+					if(indexA == indexB)
+						continue;
+						
 					const ElectronPointer electron2(electrons.at(indexB));
-					if((electron2->charge() == -electron->charge()) && ((electron->pt()+electron2->pt())>ptMax)){
+					
+				//	if((electron2->charge() == -electron->charge()) && ((electron->pt()+electron2->pt())>ptMax)){
+					//	ptMax = electron->pt()+electron2->pt();
+					//	storeIndexA = indexA;
+					//	storeIndexB = indexB;
+						
+					if((electron2->charge()*electron->charge() < 0) && ((electron->pt()+electron2->pt())>ptMax)){
 						ptMax = electron->pt()+electron2->pt();
 						storeIndexA = indexA;
 						storeIndexB = indexB;

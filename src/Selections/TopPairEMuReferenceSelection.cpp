@@ -295,7 +295,7 @@ const MuonCollection TopPairEMuReferenceSelection::signalMuons(const EventPtr ev
 		const ElectronPointer electron(electrons.at(indexA));
 				for (unsigned int indexB = 0; indexB < muons.size(); ++indexB) {
 					const MuonPointer muon(muons.at(indexB));
-					if((electron->charge() == -muon->charge()) && ((electron->pt()+muon->pt())>ptMax)){
+					if((electron->charge()*muon->charge() < 0) && ((electron->pt()+muon->pt())>ptMax)){
 						ptMax = electron->pt()+muon->pt();
 						storeIndexB = indexB;
 					}
@@ -327,7 +327,7 @@ const ElectronCollection TopPairEMuReferenceSelection::signalElectrons(const Eve
 		const ElectronPointer electron(electrons.at(indexA));
 				for (unsigned int indexB = 0; indexB < muons.size(); ++indexB) {
 					const MuonPointer muon(muons.at(indexB));
-					if((electron->charge() == -muon->charge()) && ((electron->pt()+muon->pt())>ptMax)){
+					if((electron->charge()*muon->charge() < 0) && ((electron->pt()+muon->pt())>ptMax)){
 						ptMax = electron->pt()+muon->pt();
 						storeIndexA = indexA;
 					}
