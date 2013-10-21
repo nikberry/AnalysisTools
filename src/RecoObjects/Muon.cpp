@@ -144,18 +144,19 @@ double Muon::normChi2() const {
 	return normalisedChi2_;
 }
 
+//https://indico.cern.ch/getFile.py/access?contribId=1&resId=2&materialId=slides&confId=257630  ID and Iso efficiencies.
 double Muon::getEfficiencyCorrection() const {
 	double correction(1.);
 	double muEta(eta());
 
 	if(abs(muEta)<0.9)
-		correction = 0.9984;
+		correction = 0.9984*0.9990;
 	else if(abs(muEta)>=0.9 && abs(muEta)<1.2)
-		correction = 0.9990;
+		correction = 0.9990*1.0011;
 	else if(abs(muEta)>=1.2 && abs(muEta)<2.1)
-		correction = 0.9986;
+		correction = 0.9986*1.0013;
 	else if(abs(muEta)>=2.1 && abs(muEta)<2.4)
-		correction = 1.0000;
+		correction = 1.0000*1.0242;
 
 	return correction;
 }
