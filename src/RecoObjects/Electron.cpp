@@ -439,11 +439,11 @@ double Electron::getEfficiencyCorrection() const {
 	double eEta(eta());
 
 	if(abs(eEta)<0.9)
-		correction = 0.9984;
+		correction = 1.0000;
 	else if(abs(eEta)>=0.9 && abs(eEta)<1.2)
-		correction = 0.9990;
+		correction = 1.0000;
 	else if(abs(eEta)>=1.2 && abs(eEta)<2.1)
-		correction = 0.9986;
+		correction = 1.0000;
 	else if(abs(eEta)>=2.1 && abs(eEta)<2.4)
 		correction = 1.0000;
 
