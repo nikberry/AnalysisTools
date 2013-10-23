@@ -161,5 +161,21 @@ double Muon::getEfficiencyCorrection() const {
 	return correction;
 }
 
+double Muon::getdiMuonTriggerSF() const {
+
+	double SF = 0.967;
+
+	return SF;
+	
+}
+
+double Muon::getdiLeptonTriggerSF() const {
+
+	double SF = 0.953;
+
+	return SF;
+	
+}
+
 }
 

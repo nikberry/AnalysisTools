@@ -59,7 +59,7 @@ void EventCountAnalyser::individualCuts(const EventPtr event) {
 void EventCountAnalyser::topMuMuReferenceSelection(const EventPtr event) {
 	histMan_->setCurrentHistogramFolder(histogramFolder_);
 
-	if (topMuMuRefSelection_->passesSelectionUpToStep(event, TTbarMuMuReferenceSelection::DiMuonSelection)) {
+	if (topMuMuRefSelection_->passesSelectionUpToStep(event, TTbarMuMuReferenceSelection::DiMuonSelection)) { //ZmassVeto?
 
 	const MuonCollection signalMuons = topMuMuRefSelection_->signalMuons(event);
 //	const MuonPointer signalMuon(boost::static_pointer_cast<Muon>(signalMuons));
