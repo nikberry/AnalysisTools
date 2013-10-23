@@ -69,7 +69,7 @@ void EventCountAnalyser::topMuMuReferenceSelection(const EventPtr event) {
 	double efficiencyCorrection1 = event->isRealData() ? 1. : muon1->getEfficiencyCorrection();
 	double efficiencyCorrection2 = event->isRealData() ? 1. : muon2->getEfficiencyCorrection();
 	
-	 	scale_ = efficiencyCorrection1*efficiencyCorrection2; //(1) Muon 1, (2) Muon 2
+	 	scale_ = efficiencyCorrection1*efficiencyCorrection2*0.967; //(1) Muon 1, (2) Muon 2, trigger SF
 	}else{
 		scale_ =1;
 	}
@@ -103,7 +103,7 @@ void EventCountAnalyser::topMuMuReferenceSelection(const EventPtr event) {
  		weight_ge1b = 1.;
  	}
 
-	weight_ = event->weight() * prescale_ * scale_ *0.967; //0.967 == trigger scale factor
+	weight_ = event->weight() * prescale_ * scale_ ;
 
 	histMan_->H1D("TTbarMuMuRefSelection")->Fill(-1, weight_);
 	histMan_->H1D("TTbarMuMuRefSelection_singleCuts")->Fill(-1, weight_);
@@ -154,7 +154,7 @@ void EventCountAnalyser::topEEReferenceSelection(const EventPtr event) {
 	double efficiencyCorrection1 = event->isRealData() ? 1. : electron1->getEfficiencyCorrection();
 	double efficiencyCorrection2 = event->isRealData() ? 1. : electron2->getEfficiencyCorrection();
 	
- 	 	scale_ = efficiencyCorrection1*efficiencyCorrection2;
+ 	 	scale_ = efficiencyCorrection1*efficiencyCorrection2*0.974;
  	}else{
  		scale_ =1;
  	}
@@ -188,7 +188,7 @@ void EventCountAnalyser::topEEReferenceSelection(const EventPtr event) {
  		weight_ge1b = 1.;
  	}
 
-	weight_ = event->weight() * prescale_ * scale_ *0.974;
+	weight_ = event->weight() * prescale_ * scale_ ;
 
 	histMan_->H1D("TTbarEERefSelection")->Fill(-1, weight_);
 	histMan_->H1D("TTbarEERefSelection_singleCuts")->Fill(-1, weight_);
@@ -241,7 +241,7 @@ void EventCountAnalyser::topEEReferenceSelectionUnweighted(const EventPtr event)
 	double efficiencyCorrection1 = event->isRealData() ? 1. : muon->getEfficiencyCorrection();
 	double efficiencyCorrection2 = event->isRealData() ? 1. : electron->getEfficiencyCorrection();
 	
-	 	scale_ = efficiencyCorrection1*efficiencyCorrection2;
+	 	scale_ = efficiencyCorrection1*efficiencyCorrection2*0.953;
 	}else{
 		scale_ =1;
 	}
@@ -275,7 +275,7 @@ void EventCountAnalyser::topEEReferenceSelectionUnweighted(const EventPtr event)
  		weight_ge1b = 1.;
  	}
 
-	weight_ = event->weight() * prescale_ * scale_ *0.953;
+	weight_ = event->weight() * prescale_ * scale_ ;
 
 	histMan_->H1D("TTbarEMuRefSelection")->Fill(-1, weight_);
 	histMan_->H1D("TTbarEMuRefSelection_singleCuts")->Fill(-1, weight_);

@@ -91,6 +91,17 @@ void Analysis::initiateEvent() {
 			}
 		}
 	}
+	
+	
+	//top pt weight
+  	if(Globals::applyTopPtReweighting == true && currentEvent->getDataType() == DataType::TTJets){
+
+ 	   double topPtweight = 1.;
+  	   topPtweight = weights->reweightTopPt(currentEvent);
+
+ 	   weight *= topPtweight;
+ 	}
+
 
 	currentEvent->setEventWeight(weight);
 	currentEvent->setPileUpWeight(pileUpWeight);
