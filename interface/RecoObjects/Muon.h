@@ -67,6 +67,8 @@ public:
 
 	//other
 	double getEfficiencyCorrection() const;
+	double getdiMuonTriggerSF() const;
+	double getdiLeptonTriggerSF() const;
 
 private:
 	MuonAlgorithm::value usedAlgorithm_;

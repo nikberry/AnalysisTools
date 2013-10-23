@@ -129,6 +129,8 @@ public:
     virtual std::string toString() const;
 
     double getEfficiencyCorrection() const;
+    double getdiElectronTriggerSF() const;
+
 
 private:
     ElectronAlgorithm::value usedAlgorithm_;

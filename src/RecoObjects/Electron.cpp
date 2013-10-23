@@ -450,5 +450,12 @@ double Electron::getEfficiencyCorrection() const {
 	return correction;
 }
 
+double Electron::getdiElectronTriggerSF() const {
+
+	double SF = 0.974;
+
+	return SF;
+}
+
 
 }
