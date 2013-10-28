@@ -42,15 +42,15 @@ void TTbarPhotonAnalyser::muMuSignalAnalysis(const EventPtr event) {
 			const ElectronPointer signalElectron(boost::static_pointer_cast<Electron>(signalLepton));
 			const PhotonCollection photons = topMuMuPhotonSelection_->signalPhotons(event);
 
-			    //get dilepton collection
-			    const ElectronCollection electrons = topMuMuPhotonSelection_->signalElectrons(event);
+			        //get dilepton collection
+			        const ElectronCollection electrons = topMuMuPhotonSelection_->signalElectrons(event);
 				const MuonCollection muons = topMuMuPhotonSelection_->signalMuons(event);
 
 				for (unsigned int weightIndex = 0; weightIndex < bjetWeights.size(); ++weightIndex) {
 
 				double bjetWeight = bjetWeights.at(weightIndex);
 				histMan_->setCurrentBJetBin(weightIndex);
-				histMan_->setCurrentHistogramFolder(histogramFolder_ + "/MuMu/One Photon");
+				histMan_->setCurrentHistogramFolder(histogramFolder_ + "/MuMu/Ref selection");
 
 				//met
 				metAnalyserMuMuPhotonSelection_->setScale(bjetWeight);
@@ -64,9 +64,14 @@ void TTbarPhotonAnalyser::muMuSignalAnalysis(const EventPtr event) {
 				diMuonAnalyserMuMuPhotonSelection_->setScale(bjetWeight);
 				diMuonAnalyserMuMuPhotonSelection_->analyse(event, muons);
 
-			    //photons
-			    photonAnalyserMuMuPhotonSelection_->setScale(bjetWeight);
-			    photonAnalyserMuMuPhotonSelection_->analyse(event, photons, jets, electrons, muons);
+			    	//photons
+			    	photonAnalyserMuMuPhotonSelection_->setScale(bjetWeight);
+			    	photonAnalyserMuMuPhotonSelection_->analyse(event, photons, jets, electrons, muons);
+				
+				//Vertices
+				//vertexAnalyserMuMuPhotonSelection_->setScale(bjetWeight);
+				//vertexAnalyserMuMuPhotonSelection_->analyse(event);
+				
 
 			    if(event->getDataType() == DataType::TTJets){
 			    ttphotonAnalyserMuMuRefSelection_->setScale(bjetWeight);
@@ -110,7 +115,7 @@ void TTbarPhotonAnalyser::eESignalAnalysis(const EventPtr event) {
 
 				double bjetWeight = bjetWeights.at(weightIndex);
 				histMan_->setCurrentBJetBin(weightIndex);
-				histMan_->setCurrentHistogramFolder(histogramFolder_ + "/EE/One Photon");
+				histMan_->setCurrentHistogramFolder(histogramFolder_ + "/EE/Ref selection");
 				//MET
 				metAnalyserEEPhotonSelection_->setScale(bjetWeight);
 				metAnalyserEEPhotonSelection_->analyse(event, signalLepton);
@@ -121,11 +126,16 @@ void TTbarPhotonAnalyser::eESignalAnalysis(const EventPtr event) {
 
 				//DiElectron
 				diElectronAnalyserEEPhotonSelection_->setScale(bjetWeight);
-			    diElectronAnalyserEEPhotonSelection_->analyse(event, electrons);
+			    	diElectronAnalyserEEPhotonSelection_->analyse(event, electrons);
 
-			    //photons
-			    photonAnalyserEEPhotonSelection_->setScale(bjetWeight);
-			    photonAnalyserEEPhotonSelection_->analyse(event, photons, jets, electrons, muons);
+			    	//photons
+			    	photonAnalyserEEPhotonSelection_->setScale(bjetWeight);
+			    	photonAnalyserEEPhotonSelection_->analyse(event, photons, jets, electrons, muons);
+				
+				//Vertices
+				//vertexAnalyserEEPhotonSelection_->setScale(bjetWeight);
+				//vertexAnalyserEEPhotonSelection_->analyse(event);
+				
 
 			    if(event->getDataType() == DataType::TTJets){
 			    ttphotonAnalyserEERefSelection_->setScale(bjetWeight);
@@ -167,7 +177,7 @@ void TTbarPhotonAnalyser::eMuSignalAnalysis(const EventPtr event) {
 
 				double bjetWeight = bjetWeights.at(weightIndex);
 				histMan_->setCurrentBJetBin(weightIndex);
-				histMan_->setCurrentHistogramFolder(histogramFolder_ + "/EMu/One Photon");
+				histMan_->setCurrentHistogramFolder(histogramFolder_ + "/EMu/Ref selection");
 
 				//met
 				metAnalyserEMuPhotonSelection_->setScale(bjetWeight);
@@ -179,11 +189,16 @@ void TTbarPhotonAnalyser::eMuSignalAnalysis(const EventPtr event) {
 
 				//DiLepton
 				eMuAnalyserEMuPhotonSelection_->setScale(bjetWeight);
-			    eMuAnalyserEMuPhotonSelection_->analyse(event, electrons, muons);
+			    	eMuAnalyserEMuPhotonSelection_->analyse(event, electrons, muons);
 
-			    //photon
-			    photonAnalyserEMuPhotonSelection_->setScale(bjetWeight);
-			    photonAnalyserEMuPhotonSelection_->analyse(event, photons, jets, electrons, muons);
+			    	//photon
+			    	photonAnalyserEMuPhotonSelection_->setScale(bjetWeight);
+			    	photonAnalyserEMuPhotonSelection_->analyse(event, photons, jets, electrons, muons);
+				
+				//Vertices
+				//vertexAnalyserEMuPhotonSelection_->setScale(bjetWeight);
+				//vertexAnalyserEMuPhotonSelection_->analyse(event);
+				
 
 			    if(event->getDataType() == DataType::TTJets){
 			    ttphotonAnalyserEMuRefSelection_->setScale(bjetWeight);
@@ -218,6 +233,10 @@ TTbarPhotonAnalyser::TTbarPhotonAnalyser(HistogramManagerPtr histMan, std::strin
 		ttphotonAnalyserMuMuRefSelection_(new SignalPhotonAnalyser(histMan, histogramFolder + "/MuMu/Ref selection/Photons")), //
 		ttphotonAnalyserEERefSelection_(new SignalPhotonAnalyser(histMan, histogramFolder + "/EE/Ref selection/Photons")), //
 		ttphotonAnalyserEMuRefSelection_(new SignalPhotonAnalyser(histMan, histogramFolder + "/EMu/Ref selection/Photons")) //
+		//vertices
+		//vertexAnalyserMuMuPhotonSelection_(new VertexAnalyser(histMan, histogramFolder + "/MuMu/Ref selection/Vertex")), //
+		//vertexAnalyserEEPhotonSelection_(new VertexAnalyser(histMan, histogramFolder + "/EE/Ref selection/Vertex")), //
+		//vertexAnalyserEMuPhotonSelection_(new VertexAnalyser(histMan, histogramFolder + "/EMu/Ref selection/Vertex")),//
 		{
 
 }
@@ -247,6 +266,11 @@ void TTbarPhotonAnalyser::createHistograms() {
 	ttphotonAnalyserMuMuRefSelection_->createHistograms();
 	ttphotonAnalyserEERefSelection_->createHistograms();
 	ttphotonAnalyserEMuRefSelection_->createHistograms();
+	//vertices
+//	vertexAnalyserMuMuPhotonSelection_->createHistograms();
+//	vertexAnalyserEEPhotonSelection_->createHistograms();
+//	vertexAnalyserEMuPhotonSelection_->createHistograms();
+
 }
 
 }
