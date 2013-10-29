@@ -251,10 +251,6 @@ void TTbarDiLeptonAnalyser::eMuSignalAnalysis(const EventPtr event) {
 			    photonAnalyserEMuRefSelection_->setScale(bjetWeight);
 			    photonAnalyserEMuRefSelection_->analyse(event, photons, jets, electrons, muons);
 
-			    //photon
-			    photonAnalyserEMuRefSelection_->setScale(bjetWeight);
-			    photonAnalyserEMuRefSelection_->analyse(event, photons, jets, electrons, muons);
-
 			    //n-EtAndEta photons
 			    const PhotonCollection photonsMinusEtAndEta = topEMuRefSelection_->nMinusOnePhotons(event, "passesEtAndEta");
 			    photonAnalyserEMuRefSelection_->analyse_NminusOnePhotons(event, photonsMinusEtAndEta, jets, electrons, muons, "passesEtAndEta");
