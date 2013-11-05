@@ -53,6 +53,10 @@ private:
 
 	//ttphoton anlyser
 	SignalPhotonAnalyserLocalPtr ttphotonAnalyserMuMuRefSelection_, ttphotonAnalyserEERefSelection_, ttphotonAnalyserEMuRefSelection_;
+	
+	//Vertex analyser
+//	VertexAnalyserLocalPtr vertexAnalyserMuMuPhotonSelection_, vertexAnalyserEEPhotonSelection_, vertexAnalyserEMuPhotonSelection_;
+
 
 };
 
