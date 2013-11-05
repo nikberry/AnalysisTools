@@ -336,7 +336,6 @@ TTbarPhotonAnalyser::TTbarPhotonAnalyser(HistogramManagerPtr histMan, std::strin
 		ttphotonAnalyserMuMuPhotonSelection_(new SignalPhotonAnalyser(histMan, histogramFolder + "/MuMu/Ref selection/Photons")), //
 		ttphotonAnalyserEEPhotonSelection_(new SignalPhotonAnalyser(histMan, histogramFolder + "/EE/Ref selection/Photons")), //
 		ttphotonAnalyserEMuPhotonSelection_(new SignalPhotonAnalyser(histMan, histogramFolder + "/EMu/Ref selection/Photons")) //
->>>>>>> add n-1 for photon analyser and make so that folder is DiLepton so easier to read in plotting tools
 		{
 
 }
@@ -362,21 +361,15 @@ void TTbarPhotonAnalyser::createHistograms() {
 	photonAnalyserEEPhotonSelection_->createHistograms();
 	photonAnalyserMuMuPhotonSelection_->createHistograms();
 	photonAnalyserEMuPhotonSelection_->createHistograms();
-	//for ttbar
-<<<<<<< HEAD
-	ttphotonAnalyserMuMuRefSelection_->createHistograms();
-	ttphotonAnalyserEERefSelection_->createHistograms();
-	ttphotonAnalyserEMuRefSelection_->createHistograms();
 	//vertices
 //	vertexAnalyserMuMuPhotonSelection_->createHistograms();
 //	vertexAnalyserEEPhotonSelection_->createHistograms();
 //	vertexAnalyserEMuPhotonSelection_->createHistograms();
-
-=======
+	//for ttbar
 	ttphotonAnalyserMuMuPhotonSelection_->createHistograms();
 	ttphotonAnalyserEEPhotonSelection_->createHistograms();
 	ttphotonAnalyserEMuPhotonSelection_->createHistograms();
->>>>>>> add n-1 for photon analyser and make so that folder is DiLepton so easier to read in plotting tools
+
 }
 
 }
