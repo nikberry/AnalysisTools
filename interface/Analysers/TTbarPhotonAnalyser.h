@@ -52,12 +52,11 @@ private:
 	PhotonAnalyserLocalPtr photonAnalyserMuMuPhotonSelection_, photonAnalyserEEPhotonSelection_, photonAnalyserEMuPhotonSelection_;
 
 	//ttphoton anlyser
-	SignalPhotonAnalyserLocalPtr ttphotonAnalyserMuMuRefSelection_, ttphotonAnalyserEERefSelection_, ttphotonAnalyserEMuRefSelection_;
-	
+	SignalPhotonAnalyserLocalPtr ttphotonAnalyserMuMuPhotonSelection_, ttphotonAnalyserEEPhotonSelection_, ttphotonAnalyserEMuPhotonSelection_;
+
 	//Vertex analyser
-//	VertexAnalyserLocalPtr vertexAnalyserMuMuPhotonSelection_, vertexAnalyserEEPhotonSelection_, vertexAnalyserEMuPhotonSelection_;
-
-
+ 	//  VertexAnalyserLocalPtr vertexAnalyserMuMuPhotonSelection_, vertexAnalyserEEPhotonSelection_, vertexAnalyserEMuPhotonSelection_;
+ 
 };
 
 typedef boost::scoped_ptr<BAT::TTbarPhotonAnalyser> TTbarPhotonAnalyserLocalPtr;
