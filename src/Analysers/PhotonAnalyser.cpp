@@ -10,6 +10,7 @@
 #include "../../interface/Selections/TopPairEEReferenceSelection.h"
 #include "../../interface/Selections/TopPairEMuReferenceSelection.h"
 #include "../../interface/Selections/BasicSelection.h"
+#include "TLatex.h"
 
 namespace BAT {
 
@@ -153,9 +154,9 @@ void PhotonAnalyser::analyse_signalPhotons(const EventPtr event, PhotonCollectio
 		histMan_->H1D_BJetBinned("Photon_TrkVeto")->Fill(photon->TrackVeto(), weight_);
 		histMan_->H1D_BJetBinned("Photon_ConvSEVeto")->Fill(photon->ConversionSafeElectronVeto(), weight_);
 		histMan_->H1D_BJetBinned("Photon_HtowoE")->Fill(photon->SingleTowerHoE(), weight_);
-		histMan_->H1D_BJetBinned("Photon_PFChargedHadronIso")->Fill(photon->PFChargedHadronIso(), weight_);
-		histMan_->H1D_BJetBinned("Photon_PFNeutralHadronIso")->Fill(photon->PFNeutralHadronIso(), weight_);
-		histMan_->H1D_BJetBinned("Photon_PFPhotonIso")->Fill(photon->PFPhotonIso(), weight_);
+// 		histMan_->H1D_BJetBinned("Photon_PFChargedHadronIso")->Fill(photon->PFChargedHadronIso(), weight_);
+// 		histMan_->H1D_BJetBinned("Photon_PFNeutralHadronIso")->Fill(photon->PFNeutralHadronIso(), weight_);
+// 		histMan_->H1D_BJetBinned("Photon_PFPhotonIso")->Fill(photon->PFPhotonIso(), weight_);
 		
 		for (unsigned int index = 0; index < jets.size(); ++index) { 
 			const JetPointer jet(jets.at(index));
@@ -214,30 +215,30 @@ void PhotonAnalyser::analyse_NminusOnePhotons(const EventPtr event, PhotonCollec
 			histMan_->H1D_BJetBinned("Photon_sigma_ietaieta_barrel")->Fill(photon->sigmaIEtaIEta(), weight_);
 		}
 
-		if (photon->isInEndCapRegion() && cut =="passesPFChargedIso"){
-			histMan_->H1D_BJetBinned("Photon_PFChargedHadronIso")->Fill(photon->PFChargedHadronIso(), weight_);
+		if (photon->isInEndCapRegion()){
+			histMan_->H1D_BJetBinned("Photon_PFChargedHadronIso_endcap")->Fill(photon->PFChargedHadronIso(), weight_);
 			histMan_->H1D_BJetBinned("Photon_RhoCorrectedPFChargedHadronIso_endcap")->Fill(photon->RhoCorrectedPFChargedHadronIso(event->rho()), weight_);
 		}
-		if (photon->isInBarrelRegion() && cut =="passesPFChargedIso"){
-			histMan_->H1D_BJetBinned("Photon_PFChargedHadronIso")->Fill(photon->PFChargedHadronIso(), weight_);
+		if (photon->isInBarrelRegion()){
+			histMan_->H1D_BJetBinned("Photon_PFChargedHadronIso_barrel")->Fill(photon->PFChargedHadronIso(), weight_);
 			histMan_->H1D_BJetBinned("Photon_RhoCorrectedPFChargedHadronIso_barrel")->Fill(photon->RhoCorrectedPFChargedHadronIso(event->rho()), weight_);
 		}
 
 		if (photon->isInEndCapRegion() && cut =="passesPFNeutralIso"){
-			histMan_->H1D_BJetBinned("Photon_PFNeutralHadronIso")->Fill(photon->PFNeutralHadronIso(), weight_);
+			histMan_->H1D_BJetBinned("Photon_PFNeutralHadronIso_endcap")->Fill(photon->PFNeutralHadronIso(), weight_);
 			histMan_->H1D_BJetBinned("Photon_RhoCorrectedPFNeutralHadronIso_endcap")->Fill(photon->RhoCorrectedPFNeutralHadronIso(event->rho()), weight_);
 		}
 		if (photon->isInBarrelRegion() && cut =="passesPFNeutralIso"){
-			histMan_->H1D_BJetBinned("Photon_PFNeutralHadronIso")->Fill(photon->PFNeutralHadronIso(), weight_);
+			histMan_->H1D_BJetBinned("Photon_PFNeutralHadronIso_barrel")->Fill(photon->PFNeutralHadronIso(), weight_);
 			histMan_->H1D_BJetBinned("Photon_RhoCorrectedPFNeutralHadronIso_barrel")->Fill(photon->RhoCorrectedPFNeutralHadronIso(event->rho()), weight_);
 	    }
 
 
 		if (photon->isInEndCapRegion() && cut =="passesPFPhotonIso"){
-			histMan_->H1D_BJetBinned("Photon_PFPhotonIso")->Fill(photon->PFPhotonIso(), weight_);
+			histMan_->H1D_BJetBinned("Photon_PFPhotonIso_endcap")->Fill(photon->PFPhotonIso(), weight_);
 			histMan_->H1D_BJetBinned("Photon_RhoCorrectedPFPhotonIso_endcap")->Fill(photon->RhoCorrectedPFPhotonIso(event->rho()), weight_);
 		}
-		if (photon->isInBarrelRegion() && cut =="passesPFPhotonIso"){
+		if (photon->isInBarrelRegion() && cut =="passesPFPhotonIso_barrel"){
 			histMan_->H1D_BJetBinned("Photon_PFPhotonIso")->Fill(photon->PFPhotonIso(), weight_);
 			histMan_->H1D_BJetBinned("Photon_RhoCorrectedPFPhotonIso_barrel")->Fill(photon->RhoCorrectedPFPhotonIso(event->rho()), weight_);
 		}
@@ -343,22 +344,22 @@ void PhotonAnalyser::createHistograms() {
 	histMan_->addH1D_BJetBinned("Photon_deltaR_electrons", "Photon #DeltaR(#gamma, electrons); #DeltaR(#gamma, electrons); Events", 500, 0, 5);
 	histMan_->addH1D_BJetBinned("Photon_deltaR_muons", "Photon #DeltaR(#gamma, #mu); #DeltaR(#gamma, #mu); Events", 500, 0, 5);
 	histMan_->addH1D_BJetBinned("Photon_ConvSEVeto", "Photon Conversion Safe Electron Veto; 0=false, 1=true; Events", 2, 0, 2);
-	histMan_->addH1D_BJetBinned("Photon_HtowoE", "Photon Single Tower HoverE; ; Events", 500, 0, 5);
-	histMan_->addH1D_BJetBinned("Photon_PFChargedHadronIso", "Photon PFChargedHadronIso; ; Events", 500, -20, 100);
-	histMan_->addH1D_BJetBinned("Photon_PFNeutralHadronIso", "Photon PFNeutralHadronIso; ; Events", 500, -20, 50);
-	histMan_->addH1D_BJetBinned("Photon_PFPhotonIso", "Photon PFPhotonIso; ; Events", 500, -20, 130);
-	histMan_->addH1D_BJetBinned("Photon_PFChargedHadronIso_barrel", "Photon PFChargedHadronIso; ; Events", 500, -20, 100);
-	histMan_->addH1D_BJetBinned("Photon_PFNeutralHadronIso_barrel", "Photon PFNeutralHadronIso; ; Events", 500, -20, 50);
-	histMan_->addH1D_BJetBinned("Photon_PFPhotonIso_barrel", "Photon PFPhotonIso; ; Events", 500, -20, 130);
-	histMan_->addH1D_BJetBinned("Photon_PFChargedHadronIso_endcap", "Photon PFChargedHadronIso; ; Events", 500, -20, 100);
-	histMan_->addH1D_BJetBinned("Photon_PFNeutralHadronIso_endcap", "Photon PFNeutralHadronIso; ; Events", 500, -20, 50);
-	histMan_->addH1D_BJetBinned("Photon_PFPhotonIso_endcap", "Photon PFPhotonIso; ; Events", 500, -20, 130);
-	histMan_->addH1D_BJetBinned("Photon_RhoCorrectedPFChargedHadronIso_barrel", "Photon PFChargedHadronIso; ; Events", 500, -20, 100);
-	histMan_->addH1D_BJetBinned("Photon_RhoCorrectedPFNeutralHadronIso_barrel", "Photon PFNeutralHadronIso; ; Events", 500, -20, 50);
-	histMan_->addH1D_BJetBinned("Photon_RhoCorrectedPFPhotonIso_barrel", "Photon PFPhotonIso; ; Events", 500, -20, 130);
-	histMan_->addH1D_BJetBinned("Photon_RhoCorrectedPFChargedHadronIso_endcap", "Photon PFChargedHadronIso; ; Events", 500, -20, 100);
-	histMan_->addH1D_BJetBinned("Photon_RhoCorrectedPFNeutralHadronIso_endcap", "Photon PFNeutralHadronIso; ; Events", 500, -20, 50);
-	histMan_->addH1D_BJetBinned("Photon_RhoCorrectedPFPhotonIso_endcap", "Photon PFPhotonIso; ; Events", 500, -20, 130);
+	histMan_->addH1D_BJetBinned("Photon_HtowoE", "Photon Single Tower HoverE; ; Events", 50, 0, 10);
+	histMan_->addH1D_BJetBinned("Photon_PFChargedHadronIso_barrel", "Charged Hadron Isolation / GeV; ; Events", 50, 0, 10);
+	histMan_->addH1D_BJetBinned("Photon_PFNeutralHadron", "Neutral Hadron Isolation / GeV; ; Events", 50, 0, 10);
+	histMan_->addH1D_BJetBinned("Photon_PFPhotonIso", "Photon Isolation / GeV; ; Events", 50, 0, 10);
+	histMan_->addH1D_BJetBinned("Photon_PFChargedHadronIso_barrel", "Charged Hadron Isolation / GeV; ; Events", 50, 0, 10);
+	histMan_->addH1D_BJetBinned("Photon_PFNeutralHadronIso_barrel", "Neutral Hadron Isolation / GeV; ; Events", 50, 0, 10);
+	histMan_->addH1D_BJetBinned("Photon_PFPhotonIso_barrel", "Photon Isolation / GeV; ; Events", 50, 0, 10);
+	histMan_->addH1D_BJetBinned("Photon_PFChargedHadronIso_endcap", "Charged Hadron Isolation / GeV; ; Events", 50, 0, 10);
+	histMan_->addH1D_BJetBinned("Photon_PFNeutralHadronIso_endcap", "Neutral Hadron Isolation / GeV; ; Events", 50, 0, 10);
+	histMan_->addH1D_BJetBinned("Photon_PFPhotonIso_endcap", "Photon Isolation / GeV; ; Events", 50, 0, 10);
+	histMan_->addH1D_BJetBinned("Photon_RhoCorrectedPFChargedHadronIso_barrel", "Charged Hadron Isolation (#rho corr) / GeV; ; Events", 50, 0, 10);
+	histMan_->addH1D_BJetBinned("Photon_RhoCorrectedPFNeutralHadronIso_barrel", "Neutral Hadron Isolation (#rho corr) / GeV; ; Events", 50, 0, 10);
+	histMan_->addH1D_BJetBinned("Photon_RhoCorrectedPFPhotonIso_barrel", "Photon Isolation (#rho corr) / GeV; ; Events", 50, 0, 10);
+	histMan_->addH1D_BJetBinned("Photon_RhoCorrectedPFChargedHadronIso_endcap", "Charged Hadron Isolation (#rho corr) / GeV; ; Events", 50, 0, 10);
+	histMan_->addH1D_BJetBinned("Photon_RhoCorrectedPFNeutralHadronIso_endcap", "Neutral Hadron Isolation (#rho corr) / GeV; ; Events", 50, 0, 10);
+	histMan_->addH1D_BJetBinned("Photon_RhoCorrectedPFPhotonIso_endcap", "Photon Isolation (#rho corr) / GeV; ; Events", 50, 0, 10);
 
 	
 	string folder = histogramFolder_ + "/NminusOnePhotons";
@@ -383,17 +384,21 @@ void PhotonAnalyser::createHistograms() {
 	histMan_->addH1D_BJetBinned("Photon_HtowoE", "Photon Single Tower HoverE; ; Events", 500, 0, 5);
 	histMan_->addH1D_BJetBinned("Photon_HadOverEM", "Photon HadronicOverEM; HadOverEM; Events/(0.01)", 500, 0, 5);
 
-	histMan_->addH1D_BJetBinned("Photon_PFChargedHadronIso", "Photon PFChargedHadronIso; ; Events", 500, -20, 100);
-	histMan_->addH1D_BJetBinned("Photon_PFNeutralHadronIso", "Photon PFNeutralHadronIso; ; Events", 500, -20, 50);
-	histMan_->addH1D_BJetBinned("Photon_PFPhotonIso", "Photon PFPhotonIso; ; Events", 500, -20, 130);
+	histMan_->addH1D_BJetBinned("Photon_PFChargedHadronIso_barrel", "Charged Hadron Isolation / GeV; Events", 50, 0, 10);
+	histMan_->addH1D_BJetBinned("Photon_PFNeutralHadronIso_barrel", "Neutral Hadron Isolation / GeV; Events", 50, 0, 10);
+	histMan_->addH1D_BJetBinned("Photon_PFPhotonIso_barrel", "Photon Isolation / GeV; ; Events", 50, 0, 10);
+	
+	histMan_->addH1D_BJetBinned("Photon_PFChargedHadronIso_endcap", "Charged Hadron Isolation / GeV; Events", 50, 0, 10);
+	histMan_->addH1D_BJetBinned("Photon_PFNeutralHadronIso_endcap", "Neutral Hadron Isolation / GeV; Events", 50, 0, 10);
+	histMan_->addH1D_BJetBinned("Photon_PFPhotonIso_endcap", "Photon Isolation / GeV; ; Events", 50, 0, 10);
 
-	histMan_->addH1D_BJetBinned("Photon_RhoCorrectedPFChargedHadronIso_barrel", "Photon PFChargedHadronIso; ; Events", 500, -20, 100);
-	histMan_->addH1D_BJetBinned("Photon_RhoCorrectedPFNeutralHadronIso_barrel", "Photon PFNeutralHadronIso; ; Events", 500, -20, 50);
-	histMan_->addH1D_BJetBinned("Photon_RhoCorrectedPFPhotonIso_barrel", "Photon PFPhotonIso; ; Events", 500, -20, 130);
+	histMan_->addH1D_BJetBinned("Photon_RhoCorrectedPFChargedHadronIso_barrel", "Charged Hadron Isolation (#rho corr) / GeV; ; Events", 50, 0, 10);
+	histMan_->addH1D_BJetBinned("Photon_RhoCorrectedPFNeutralHadronIso_barrel", "Neutral Hadron Isolation (#rho corr) / GeV; ; Events", 50, 0, 10);
+	histMan_->addH1D_BJetBinned("Photon_RhoCorrectedPFPhotonIso_barrel", "Photon Isolation (#rho corr) / GeV; ; Events", 50, 0, 10);
 
-	histMan_->addH1D_BJetBinned("Photon_RhoCorrectedPFChargedHadronIso_endcap", "Photon PFChargedHadronIso; ; Events", 500, -20, 100);
-	histMan_->addH1D_BJetBinned("Photon_RhoCorrectedPFNeutralHadronIso_endcap", "Photon PFNeutralHadronIso; ; Events", 500, -20, 50);
-	histMan_->addH1D_BJetBinned("Photon_RhoCorrectedPFPhotonIso_endcap", "Photon PFPhotonIso; ; Events", 500, -20, 130);
+	histMan_->addH1D_BJetBinned("Photon_RhoCorrectedPFChargedHadronIso_endcap", "Charged Hadron Isolation (#rho corr) / GeV; ; Events", 50, 0, 10);
+	histMan_->addH1D_BJetBinned("Photon_RhoCorrectedPFNeutralHadronIso_endcap", "Neutral Hadron Isolation (#rho corr) / GeV; ; Events", 50, 0, 10);
+	histMan_->addH1D_BJetBinned("Photon_RhoCorrectedPFPhotonIso_endcap", "Photon Isolation (#rho corr) / GeV; ; Events", 50, 0, 10);
 
 }
 

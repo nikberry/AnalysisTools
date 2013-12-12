@@ -102,9 +102,9 @@ bool TopPairEEReferenceSelection::isNminusOnePhoton(const PhotonPointer photon, 
 
 	 	for (unsigned int index = 0; index < electrons.size(); ++index) {
 	 			const ElectronPointer electron(electrons.at(index));
-	 			passesDeltaRgammaElectrons = photon->deltaR(electron) > 0.5;
+	 			passesDeltaRgammaElectrons = photon->deltaR(electron) > 0.7;
 				
-				if(photon->deltaR(electron) < 0.5)
+				if(photon->deltaR(electron) < 0.7)
 				break;
 	 	}
 	//
@@ -164,9 +164,9 @@ bool TopPairEEReferenceSelection::isGoodPhoton(const PhotonPointer photon, const
 
 	 	for (unsigned int index = 0; index < electrons.size(); ++index) {
 	 			const ElectronPointer electron(electrons.at(index));
-	 			passesDeltaRgammaElectrons = photon->deltaR(electron) > 0.5;
+	 			passesDeltaRgammaElectrons = photon->deltaR(electron) > 0.7;
 				
-				if(photon->deltaR(electron) < 0.5)
+				if(photon->deltaR(electron) < 0.7)
 				break;
 	 	}
 	//
@@ -295,7 +295,7 @@ bool TopPairEEReferenceSelection::passesMetCut(const EventPtr event) const {
 
 	const METPointer met(event->MET());
 
-	return met->pt() > 40;
+	return met->pt() > 20;
 
 }
 

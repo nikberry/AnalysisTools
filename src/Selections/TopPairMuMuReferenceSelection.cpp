@@ -105,9 +105,9 @@ bool TopPairMuMuReferenceSelection::isNminusOnePhoton(const PhotonPointer photon
 
 	 	for (unsigned int index = 0; index < muons.size(); ++index) {
 	 			const MuonPointer muon(muons.at(index));
-	 			passesDeltaRgammaMuons = photon->deltaR(muon) > 0.5;
+	 			passesDeltaRgammaMuons = photon->deltaR(muon) > 0.7;
 				
-				if(photon->deltaR(muon) < 0.5)
+				if(photon->deltaR(muon) < 0.7)
 				break;
 	 	}
 
@@ -169,9 +169,9 @@ bool TopPairMuMuReferenceSelection::isGoodPhoton(const PhotonPointer photon, con
 
 	 	for (unsigned int index = 0; index < muons.size(); ++index) {
 	 			const MuonPointer muon(muons.at(index));
-	 			passesDeltaRgammaMuons = photon->deltaR(muon) > 0.5;
+	 			passesDeltaRgammaMuons = photon->deltaR(muon) > 0.7;
 				
-				if(photon->deltaR(muon) < 0.5)
+				if(photon->deltaR(muon) < 0.7)
 				break;
 	}
 
