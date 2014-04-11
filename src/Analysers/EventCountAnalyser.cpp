@@ -66,18 +66,37 @@ void EventCountAnalyser::topMuMuReferenceSelection(const EventPtr event) {
 
 	if (topMuMuRefSelection_->passesSelectionUpToStep(event, TTbarMuMuReferenceSelection::DiMuonSelection)) { 
 
-	const MuonCollection signalMuons = topMuMuRefSelection_->signalMuons(event);
-//	const MuonPointer signalMuon(boost::static_pointer_cast<Muon>(signalMuons));
-	const MuonPointer muon1(signalMuons.at(0));
-	const MuonPointer muon2(signalMuons.at(1));
+		const MuonCollection signalMuons = topMuMuRefSelection_->signalMuons(event);
+//		const MuonPointer signalMuon(boost::static_pointer_cast<Muon>(signalMuons));
+		const MuonPointer muon1(signalMuons.at(0));
+		const MuonPointer muon2(signalMuons.at(1));
 
-	double efficiencyCorrection1 = event->isRealData() ? 1. : muon1->getEfficiencyCorrection();
-	double efficiencyCorrection2 = event->isRealData() ? 1. : muon2->getEfficiencyCorrection();
-	
-	 	scale_ = efficiencyCorrection1*efficiencyCorrection2;//*0.967; //(1) Muon 1, (2) Muon 2, trigger SF
+		double efficiencyCorrection1 = event->isRealData() ? 1. : muon1->getEfficiencyCorrection();
+		double efficiencyCorrection2 = event->isRealData() ? 1. : muon2->getEfficiencyCorrection();
+		
+	 	scale_ = efficiencyCorrection1*efficiencyCorrection2;//*0.967; //(1) Muon 1, (2) Muon 2
 	}else{
 		scale_ =1;
 	}
+	
+	if(topMuMuRefSelection_->passesSelectionUpToStep(event, TTbarMuMuReferenceSelection::AtLeastOnePhotonPostSelection)) {
+	
+		const PhotonCollection signalPhotons = topMuMuRefSelection_->signalPhotons(event);
+		
+		for(unsigned int i = 0; i<signalPhotons.size(); i++){
+		
+			const PhotonPointer photon(signalPhotons[i]);
+			
+			double efficiencyCorrection = event->isRealData() ? 1 : photon->getEfficiencyCorrection();
+			
+			scale_ = efficiencyCorrection;
+		}
+		
+		//scale_ = efficiencyCorrection;
+	} else {
+		scale_ = 1;
+	}
+		
 
  	//use bjet weights in histograms for muons
  	const JetCollection jets(topMuMuRefSelection_->cleanedJets(event));
@@ -169,6 +188,23 @@ void EventCountAnalyser::topEEReferenceSelection(const EventPtr event) {
  		scale_ =1;
  	}
 
+        if(topEERefSelection_->passesSelectionUpToStep(event, TTbarEEReferenceSelection::AtLeastOnePhotonPostSelection)) {
+        
+                const PhotonCollection signalPhotons = topEERefSelection_->signalPhotons(event);
+                
+                for(unsigned int i = 0; i<signalPhotons.size(); i++){
+                
+                        const PhotonPointer photon(signalPhotons[i]);
+                        
+                        double efficiencyCorrection = event->isRealData() ? 1 : photon->getEfficiencyCorrection();
+                        
+                        scale_ = efficiencyCorrection;
+                }                                                                                                                                                                                                                                                        
+                
+                //scale_ = efficiencyCorrection;
+        } else {
+                scale_ = 1;
+        }
 
  	//use bjet weights in histograms for muons
  	const JetCollection jets(topEERefSelection_->cleanedJets(event));
@@ -260,6 +296,24 @@ void EventCountAnalyser::topEEReferenceSelectionUnweighted(const EventPtr event)
 	}else{
 		scale_ =1;
 	}
+
+        if(topEMuRefSelection_->passesSelectionUpToStep(event, TTbarEMuReferenceSelection::AtLeastOnePhotonPostSelection)) {
+        
+                const PhotonCollection signalPhotons = topEMuRefSelection_->signalPhotons(event);
+                
+                for(unsigned int i = 0; i<signalPhotons.size(); i++){
+                
+                        const PhotonPointer photon(signalPhotons[i]);
+                        
+                        double efficiencyCorrection = event->isRealData() ? 1 : photon->getEfficiencyCorrection();
+                        
+                        scale_ = efficiencyCorrection;
+                }                                                                                                                                                                                                                                                        
+                
+                //scale_ = efficiencyCorrection;
+        } else {
+                scale_ = 1;
+        }
 
  	//use bjet weights in histograms for muons
  	const JetCollection jets(topEMuRefSelection_->cleanedJets(event));
