@@ -59,11 +59,13 @@ void EventCountAnalyser::individualCuts(const EventPtr event) {
 void EventCountAnalyser::topMuMuReferenceSelection(const EventPtr event) {
 	histMan_->setCurrentHistogramFolder(histogramFolder_);
 
+	//Trigger SF
 	if (!event->isRealData() && topMuMuRefSelection_->passesSelectionUpToStep(event, TTbarMuMuReferenceSelection::EventCleaningAndTrigger)) 
 		scale_ *= 0.967; 
 	else 
 		scale_ = 1;
 
+	//Muon efficiencies
 	if (topMuMuRefSelection_->passesSelectionUpToStep(event, TTbarMuMuReferenceSelection::DiMuonSelection)) { 
 
 		const MuonCollection signalMuons = topMuMuRefSelection_->signalMuons(event);
@@ -79,23 +81,24 @@ void EventCountAnalyser::topMuMuReferenceSelection(const EventPtr event) {
 		scale_ =1;
 	}
 	
-	if(topMuMuRefSelection_->passesSelectionUpToStep(event, TTbarMuMuReferenceSelection::AtLeastOnePhotonPostSelection)) {
-	
-		const PhotonCollection signalPhotons = topMuMuRefSelection_->signalPhotons(event);
-		
-		for(unsigned int i = 0; i<signalPhotons.size(); i++){
-		
-			const PhotonPointer photon(signalPhotons[i]);
-			
-			double efficiencyCorrection = event->isRealData() ? 1 : photon->getEfficiencyCorrection();
-			
-			scale_ = efficiencyCorrection;
-		}
-		
-		//scale_ = efficiencyCorrection;
-	} else {
-		scale_ = 1;
-	}
+	//hoton efficiencies - don't need due to the nature of analysis
+// 	if(topMuMuRefSelection_->passesSelectionUpToStep(event, TTbarMuMuReferenceSelection::AtLeastOnePhotonPostSelection)) {
+// 	
+// 		const PhotonCollection signalPhotons = topMuMuRefSelection_->signalPhotons(event);
+// 		
+// 		for(unsigned int i = 0; i<signalPhotons.size(); i++){
+// 		
+// 			const PhotonPointer photon(signalPhotons[i]);
+// 			
+// 			double efficiencyCorrection = event->isRealData() ? 1 : photon->getEfficiencyCorrection();
+// 			
+// 			scale_ = efficiencyCorrection;
+// 		}
+// 		
+// 		//scale_ = efficiencyCorrection;
+// 	} else {
+// 		scale_ = 1;
+// 	}
 		
 
  	//use bjet weights in histograms for muons
@@ -168,11 +171,13 @@ void EventCountAnalyser::topMuMuReferenceSelectionUnweighted(const EventPtr even
 void EventCountAnalyser::topEEReferenceSelection(const EventPtr event) {
 	histMan_->setCurrentHistogramFolder(histogramFolder_);
 	
+	//Trigger SFs
 	if (!event->isRealData() && topEERefSelection_->passesSelectionUpToStep(event, TTbarEEReferenceSelection::EventCleaningAndTrigger)) 
 		scale_ *= 0.974; 
 	else 
 		scale_ = 1;
 
+	//Electron Efficiencies 
 	if (topEERefSelection_->passesSelectionUpToStep(event, TTbarEEReferenceSelection::DiElectronSelection)) {
 
 	const ElectronCollection signalElectrons = topEERefSelection_->signalElectrons(event);
@@ -188,23 +193,24 @@ void EventCountAnalyser::topEEReferenceSelection(const EventPtr event) {
  		scale_ =1;
  	}
 
-        if(topEERefSelection_->passesSelectionUpToStep(event, TTbarEEReferenceSelection::AtLeastOnePhotonPostSelection)) {
-        
-                const PhotonCollection signalPhotons = topEERefSelection_->signalPhotons(event);
-                
-                for(unsigned int i = 0; i<signalPhotons.size(); i++){
-                
-                        const PhotonPointer photon(signalPhotons[i]);
-                        
-                        double efficiencyCorrection = event->isRealData() ? 1 : photon->getEfficiencyCorrection();
-                        
-                        scale_ = efficiencyCorrection;
-                }                                                                                                                                                                                                                                                        
-                
-                //scale_ = efficiencyCorrection;
-        } else {
-                scale_ = 1;
-        }
+	//hoton efficiencies - don't need due to the nature of analysis
+//         if(topEERefSelection_->passesSelectionUpToStep(event, TTbarEEReferenceSelection::AtLeastOnePhotonPostSelection)) {
+//         
+//                 const PhotonCollection signalPhotons = topEERefSelection_->signalPhotons(event);
+//                 
+//                 for(unsigned int i = 0; i<signalPhotons.size(); i++){
+//                 
+//                         const PhotonPointer photon(signalPhotons[i]);
+//                         
+//                         double efficiencyCorrection = event->isRealData() ? 1 : photon->getEfficiencyCorrection();
+//                         
+//                         scale_ = efficiencyCorrection;
+//                 }                                                                                                                                                                                                                                                        
+//                 
+//                 //scale_ = efficiencyCorrection;
+//         } else {
+//                 scale_ = 1;
+//         }
 
  	//use bjet weights in histograms for muons
  	const JetCollection jets(topEERefSelection_->cleanedJets(event));
@@ -276,11 +282,13 @@ void EventCountAnalyser::topEEReferenceSelectionUnweighted(const EventPtr event)
  void EventCountAnalyser::topEMuReferenceSelection(const EventPtr event) {
 	histMan_->setCurrentHistogramFolder(histogramFolder_);
 	
+	//Trigger SF
 	if (!event->isRealData() && topEMuRefSelection_->passesSelectionUpToStep(event, TTbarEMuReferenceSelection::EventCleaningAndTrigger)) 
 		scale_ *= 0.953; 
 	else 
 		scale_ = 1;
 
+	//EMu SF's
  	if (topEMuRefSelection_->passesSelectionUpToStep(event, TTbarEMuReferenceSelection::DiLeptonSelection)) {
 
 	const MuonCollection signalMuons = topEMuRefSelection_->signalMuons(event);
@@ -297,23 +305,24 @@ void EventCountAnalyser::topEEReferenceSelectionUnweighted(const EventPtr event)
 		scale_ =1;
 	}
 
-        if(topEMuRefSelection_->passesSelectionUpToStep(event, TTbarEMuReferenceSelection::AtLeastOnePhotonPostSelection)) {
-        
-                const PhotonCollection signalPhotons = topEMuRefSelection_->signalPhotons(event);
-                
-                for(unsigned int i = 0; i<signalPhotons.size(); i++){
-                
-                        const PhotonPointer photon(signalPhotons[i]);
-                        
-                        double efficiencyCorrection = event->isRealData() ? 1 : photon->getEfficiencyCorrection();
-                        
-                        scale_ = efficiencyCorrection;
-                }                                                                                                                                                                                                                                                        
-                
-                //scale_ = efficiencyCorrection;
-        } else {
-                scale_ = 1;
-        }
+	//hoton efficiencies - don't need due to the nature of analysis
+//         if(topEMuRefSelection_->passesSelectionUpToStep(event, TTbarEMuReferenceSelection::AtLeastOnePhotonPostSelection)) {
+//         
+//                 const PhotonCollection signalPhotons = topEMuRefSelection_->signalPhotons(event);
+//                 
+//                 for(unsigned int i = 0; i<signalPhotons.size(); i++){
+//                 
+//                         const PhotonPointer photon(signalPhotons[i]);
+//                         
+//                         double efficiencyCorrection = event->isRealData() ? 1 : photon->getEfficiencyCorrection();
+//                         
+//                         scale_ = efficiencyCorrection;
+//                 }                                                                                                                                                                                                                                                        
+//                 
+//                 //scale_ = efficiencyCorrection;
+//         } else {
+//                 scale_ = 1;
+//         }
 
  	//use bjet weights in histograms for muons
  	const JetCollection jets(topEMuRefSelection_->cleanedJets(event));
