@@ -105,7 +105,7 @@ bool TopPairEMuReferenceSelection::isGoodPhoton(const PhotonPointer photon, cons
 //		passesPFChargedIso = photon->RhoCorrectedPFChargedHadronIso(event->rho()) < 2.6;
 		passesPFNeutralIso = photon->RhoCorrectedPFNeutralHadronIso(event->rho()) < 3.5 + 0.04 * photon->pt();
 		passesPFPhotonIso = photon->RhoCorrectedPFPhotonIso(event->rho()) < 1.3 + 0.005 * photon->pt();
-		passesphoSCChIso = photon->RhoCorrectedSCChIso(event->rho()) < 5;
+		passesphoSCChIso = photon->RhoCorrectedSCChIso(event->rho()) < 10;
 //		passesphoSCNuIso = photon->RhoCorrectedSCNuIso(event->rho()) < 3.5 + 0.04 * photon->pt();
 //		passesphoSCPhIso = photon->RhoCorrectedSCPhIso(event->rho()) < 1.3 + 0.005 * photon->pt();
 	} else if (photon->isInEndCapRegion()) {
@@ -113,7 +113,7 @@ bool TopPairEMuReferenceSelection::isGoodPhoton(const PhotonPointer photon, cons
 //		passesPFChargedIso = photon->RhoCorrectedPFChargedHadronIso(event->rho()) < 2.3;
 		passesPFNeutralIso = photon->RhoCorrectedPFNeutralHadronIso(event->rho()) < 2.9 + 0.04 * photon->pt();
 		passesPFPhotonIso = photon->RhoCorrectedPFPhotonIso(event->rho()) < 1.5 + 0.005 * photon->pt();
-		passesphoSCChIso = photon->RhoCorrectedSCChIso(event->rho()) < 5;
+		passesphoSCChIso = photon->RhoCorrectedSCChIso(event->rho()) < 2.3;
 //		passesphoSCNuIso = photon->RhoCorrectedSCNuIso(event->rho()) < 2.9 + 0.04 * photon->pt();
 //		passesphoSCPhIso = photon->RhoCorrectedSCPhIso(event->rho()) < 1.5 + 0.005 * photon->pt();
 	}
@@ -192,23 +192,30 @@ bool TopPairEMuReferenceSelection::isNminusOnePhoton(const PhotonPointer photon,
 	bool passesphoSCChIso = false;
 //	bool passesphoSCNuIso = false;
 //	bool passesphoSCPhIso = false;
+
+	bool backgroundShape = false;
 	
 	if (photon->isInBarrelRegion()) {
 		passesShowerShape = photon->sigmaIEtaIEta() < 0.012;
 //		passesPFChargedIso = photon->RhoCorrectedPFChargedHadronIso(event->rho()) < 2.6;
 		passesPFNeutralIso = photon->RhoCorrectedPFNeutralHadronIso(event->rho()) < 3.5 + 0.04 * photon->pt();
 		passesPFPhotonIso = photon->RhoCorrectedPFPhotonIso(event->rho()) < 1.3 + 0.005 * photon->pt();
-		passesphoSCChIso = photon->RhoCorrectedSCChIso(event->rho()) < 5;
+		passesphoSCChIso = photon->RhoCorrectedSCChIso(event->rho()) < 20;
 //		passesphoSCNuIso = photon->RhoCorrectedSCNuIso(event->rho()) < 3.5 + 0.04 * photon->pt();
 //		passesphoSCPhIso = photon->RhoCorrectedSCPhIso(event->rho()) < 1.3 + 0.005 * photon->pt();
+
+		backgroundShape = photon->sigmaIEtaIEta() > 0.012 && photon->sigmaIEtaIEta() < 0.029;
+		
 	} else if (photon->isInEndCapRegion()) {
 		passesShowerShape = photon->sigmaIEtaIEta() < 0.034;
 //		passesPFChargedIso = photon->RhoCorrectedPFChargedHadronIso(event->rho()) < 2.3;
 		passesPFNeutralIso = photon->RhoCorrectedPFNeutralHadronIso(event->rho()) < 2.9 + 0.04 * photon->pt();
 		passesPFPhotonIso = photon->RhoCorrectedPFPhotonIso(event->rho()) < 1.5 + 0.005 * photon->pt();
-		passesphoSCChIso = photon->RhoCorrectedSCChIso(event->rho()) < 5;
+		passesphoSCChIso = photon->RhoCorrectedSCChIso(event->rho()) < 20;
 //		passesphoSCNuIso = photon->RhoCorrectedSCNuIso(event->rho()) < 2.9 + 0.04 * photon->pt();
 //		passesphoSCPhIso = photon->RhoCorrectedSCPhIso(event->rho()) < 1.5 + 0.005 * photon->pt();
+
+		backgroundShape = photon->sigmaIEtaIEta() > 0.012 && photon->sigmaIEtaIEta() < 0.029;
 	}
 
 
@@ -277,7 +284,7 @@ bool TopPairEMuReferenceSelection::isNminusOnePhoton(const PhotonPointer photon,
 			return passesEtAndEta && passesSafeElectronVeto && passesHOverE && passesShowerShape && passesPFNeutralIso && passesDeltaRgammaElectrons && 
 			passesDeltaRgammaMuons && passesDeltaRgammaJets && passesDeltaRjetsMuons && passesDeltaRjetsElectrons && passesphoSCChIso;
 		else if(cut == "passesphoSCChIso")
-			return passesEtAndEta && passesSafeElectronVeto && passesHOverE && passesShowerShape && passesPFNeutralIso && passesPFPhotonIso &&
+			return passesEtAndEta && passesSafeElectronVeto && passesHOverE && backgroundShape && passesPFNeutralIso && passesPFPhotonIso &&
 			passesDeltaRgammaElectrons && passesDeltaRgammaMuons && passesDeltaRgammaJets && passesDeltaRjetsMuons && passesDeltaRjetsElectrons;
 		else if(cut == "passesDeltaRgammaMuons" && cut == "passesDeltaRgammaElectrons")
 			return passesEtAndEta && passesSafeElectronVeto && passesHOverE && passesShowerShape && passesPFNeutralIso && passesPFPhotonIso && 
@@ -288,6 +295,9 @@ bool TopPairEMuReferenceSelection::isNminusOnePhoton(const PhotonPointer photon,
 		else if(cut == "passesDeltaRgammaJets")	
 			return passesEtAndEta && passesSafeElectronVeto && passesHOverE && passesShowerShape && passesPFNeutralIso && passesPFPhotonIso && 
 			passesDeltaRgammaElectrons && passesDeltaRgammaMuons && passesDeltaRjetsMuons && passesDeltaRjetsElectrons && passesphoSCChIso;
+		else if(cut == "backgroundShape")
+			return passesEtAndEta && passesSafeElectronVeto && passesHOverE && passesPFNeutralIso && passesPFPhotonIso && passesDeltaRgammaElectrons && 
+			passesDeltaRgammaMuons && passesDeltaRjetsMuons && passesDeltaRjetsElectrons && passesphoSCChIso && passesDeltaRgammaJets && backgroundShape;
 		else	
 			return passesEtAndEta && passesSafeElectronVeto && passesHOverE && passesShowerShape && passesPFNeutralIso && passesPFPhotonIso && passesDeltaRgammaElectrons && passesDeltaRgammaMuons &&
 			passesDeltaRgammaJets && passesDeltaRjetsMuons && passesDeltaRjetsElectrons && passesphoSCChIso;
@@ -499,7 +509,7 @@ bool TopPairEMuReferenceSelection::passesMetCut(const EventPtr event) const {
 
 	const METPointer met(event->MET());
 
-	return met->pt() > 20;
+	return met->pt() > 40;
 
 }
 

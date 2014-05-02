@@ -79,6 +79,9 @@ void TTbarPhotonAnalyser::muMuSignalAnalysis(const EventPtr event) {
 				//vertexAnalyserMuMuPhotonSelection_->setScale(bjetWeight);
 				//vertexAnalyserMuMuPhotonSelection_->analyse(event);
 				
+				//abcdAnalyserMuMuPhotonSelection_->setScale(bjetWeight);
+			    	//abcdAnalyserMuMuPhotonSelection_->analyse(event, photons, jets, electrons, muons);
+				
 
 			    //n-EtAndEta photons
 			    const PhotonCollection photonsMinusEtAndEta = topMuMuPhotonSelection_->nMinusOnePhotons(event, "passesEtAndEta");
@@ -195,6 +198,8 @@ void TTbarPhotonAnalyser::eESignalAnalysis(const EventPtr event) {
 				//vertexAnalyserEEPhotonSelection_->setScale(bjetWeight);
 				//vertexAnalyserEEPhotonSelection_->analyse(event);
 				
+				//abcdAnalyserEEPhotonSelection_->setScale(bjetWeight);
+			    	//abcdAnalyserEEPhotonSelection_->analyse(event, photons, jets, electrons, muons);
 
 						    //n-EtAndEta photons
 			    const PhotonCollection photonsMinusEtAndEta = topEEPhotonSelection_->nMinusOnePhotons(event, "passesEtAndEta");
@@ -301,6 +306,9 @@ void TTbarPhotonAnalyser::eMuSignalAnalysis(const EventPtr event) {
 				//vertexAnalyserEMuPhotonSelection_->setScale(bjetWeight);
 				//vertexAnalyserEMuPhotonSelection_->analyse(event);
 				
+				//abcdAnalyserEMuPhotonSelection_->setScale(bjetWeight);
+			    	//abcdAnalyserEMuPhotonSelection_->analyse(event, photons, jets, electrons, muons);
+				
 			    //photon
 			    photonAnalyserEMuPhotonSelection_->setScale(bjetWeight);
 			    photonAnalyserEMuPhotonSelection_->analyse(event, photons, jets, electrons, muons);
@@ -403,7 +411,11 @@ TTbarPhotonAnalyser::TTbarPhotonAnalyser(HistogramManagerPtr histMan, std::strin
 		ttphotonAnalyserMuMuPhotonSelection_(new SignalPhotonAnalyser(histMan, histogramFolder + "/MuMu/Ref selection/Photons")), //
 		ttphotonAnalyserEEPhotonSelection_(new SignalPhotonAnalyser(histMan, histogramFolder + "/EE/Ref selection/Photons")), //
 		ttphotonAnalyserEMuPhotonSelection_(new SignalPhotonAnalyser(histMan, histogramFolder + "/EMu/Ref selection/Photons")) //
-		{
+		//ABCD
+		//abcdAnalyserMuMuPhotonSelection_(new ABCDAnalyser(histMan, histogramFolder + "/MuMu/Ref selection/Photons")), //
+		//abcdAnalyserEEPhotonSelection_(new ABCDAnalyser(histMan, histogramFolder + "/EE/Ref selection/Photons")), //
+		//abcdAnalyserEMuPhotonSelection_(new ABCDAnalyser(histMan, histogramFolder + "/EMu/Ref selection/Photons"))//
+		{	
 
 }
 
@@ -436,6 +448,10 @@ void TTbarPhotonAnalyser::createHistograms() {
 	ttphotonAnalyserMuMuPhotonSelection_->createHistograms();
 	ttphotonAnalyserEEPhotonSelection_->createHistograms();
 	ttphotonAnalyserEMuPhotonSelection_->createHistograms();
+	//ABCD
+	//abcdAnalyserEEPhotonSelection_->createHistograms();
+	//abcdAnalyserMuMuPhotonSelection_->createHistograms();
+	//abcdAnalyserEMuPhotonSelection_->createHistograms();
 
 }
 

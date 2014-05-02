@@ -166,10 +166,10 @@ void SignalPhotonAnalyser::analyse_signalPhotons(const EventPtr event, PhotonCol
 			
 				const MCParticlePointer phoMother(genPart.at(genPart.at(i)->motherIndex()));
 				phoMothers.push_back(phoMother);
-				cout << "The number of photon mothers is " << phoMothers.size() << endl;
+//				cout << "The number of photon mothers is " << phoMothers.size() << endl;
 				
 				motherInd = genPart.at(genPart.at(i)->motherIndex())->pdgId();
-				cout << "found photon, mother is: " << genPart.at(genPart.at(i)->motherIndex())->pdgId() << endl;
+//				cout << "found photon, mother is: " << genPart.at(genPart.at(i)->motherIndex())->pdgId() << endl;
 				
 				const MCParticlePointer genPhoton(genPart.at(i));
 				genPhotons.push_back(genPhoton);

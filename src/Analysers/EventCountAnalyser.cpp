@@ -61,7 +61,13 @@ void EventCountAnalyser::topMuMuReferenceSelection(const EventPtr event) {
 
 	//Trigger SF
 	if (!event->isRealData() && topMuMuRefSelection_->passesSelectionUpToStep(event, TTbarMuMuReferenceSelection::EventCleaningAndTrigger)) 
-		scale_ *= 0.967; 
+//		if(Globals::TriggerSFUp == true)
+//			scale_ *= 0.977; 
+//		else if(Globals::TriggerSFDown == true)
+//			scale_ *= 0.957;
+//		else
+			scale_ *= 0.967;
+		
 	else 
 		scale_ = 1;
 
@@ -173,7 +179,12 @@ void EventCountAnalyser::topEEReferenceSelection(const EventPtr event) {
 	
 	//Trigger SFs
 	if (!event->isRealData() && topEERefSelection_->passesSelectionUpToStep(event, TTbarEEReferenceSelection::EventCleaningAndTrigger)) 
-		scale_ *= 0.974; 
+//              if(Globals::TriggerSFUp == true)
+//                      scale_ *= 0.986; 
+//              else if(Globals::TriggerSFDown == true)
+//                      scale_ *= 0.962;
+//              else
+			scale_ *= 0.974; 
 	else 
 		scale_ = 1;
 
@@ -284,7 +295,12 @@ void EventCountAnalyser::topEEReferenceSelectionUnweighted(const EventPtr event)
 	
 	//Trigger SF
 	if (!event->isRealData() && topEMuRefSelection_->passesSelectionUpToStep(event, TTbarEMuReferenceSelection::EventCleaningAndTrigger)) 
-		scale_ *= 0.953; 
+//              if(Globals::TriggerSFUp == true)
+//                      scale_ *= 0.964; 
+//              else if(Globals::TriggerSFDown == true)
+//                      scale_ *= 0.942;
+//              else
+			scale_ *= 0.953; 
 	else 
 		scale_ = 1;
 
@@ -354,6 +370,9 @@ void EventCountAnalyser::topEEReferenceSelectionUnweighted(const EventPtr event)
  	}
 
 	weight_ = event->weight() * prescale_ * scale_ ;
+	
+	if(!event->isRealData())
+		cout << weight_ << endl;
 
 	histMan_->H1D("TTbarEMuRefSelection")->Fill(-1, weight_);
 	histMan_->H1D("TTbarEMuRefSelection_singleCuts")->Fill(-1, weight_);
