@@ -455,9 +455,9 @@ void PhotonAnalyser::createHistograms() {
 	histMan_->addH1D_BJetBinned("Photon_RhoCorrectedSCNuIso", "SCFR Nu. Had.Iso. (#rho-corr)", 600, -1100, 100);
 	histMan_->addH1D_BJetBinned("Photon_RhoCorrectedSCPhIso", "SCFR Photon Iso. (#rho-corr)", 600, -1100, 100);
 	
-	histMan_->addH2D_BJetBinned("RhoCorrectedSCFRChIso_v._Sigma_ietaieta","RhoCorrectedSCFRChIso_v._Sigma_ietaieta", 200, 0, 20, 200, 0, 0.1);
-	histMan_->addH2D_BJetBinned("RhoCorrectedSCFRChIso_v._Sigma_ietaieta_endcap","RhoCorrectedSCFRChIso_v._Sigma_ietaieta (endcap)", 200, 0, 20, 200, 0, 0.1);
-	histMan_->addH2D_BJetBinned("RhoCorrectedSCFRChIso_v._Sigma_ietaieta_barrel","RhoCorrectedSCFRChIso_v._Sigma_ietaieta (barrel)", 200, 0, 20, 200, 0, 0.1);
+	histMan_->addH2D_BJetBinned("RhoCorrectedSCFRChIso_v._Sigma_ietaieta","RhoCorrectedSCFRChIso_v._Sigma_ietaieta", 200, 0, 20, 200, 0, 0.03);
+	histMan_->addH2D_BJetBinned("RhoCorrectedSCFRChIso_v._Sigma_ietaieta_endcap","RhoCorrectedSCFRChIso_v._Sigma_ietaieta (endcap)", 200, 0, 20, 200, 0, 0.03);
+	histMan_->addH2D_BJetBinned("RhoCorrectedSCFRChIso_v._Sigma_ietaieta_barrel","RhoCorrectedSCFRChIso_v._Sigma_ietaieta (barrel)", 200, 0, 20, 200, 0, 0.03);
 	
 	histMan_->setCurrentHistogramFolder(histogramFolder_ + "/SignalPhotons");
 
@@ -527,9 +527,9 @@ void PhotonAnalyser::createHistograms() {
 	histMan_->addH1D_BJetBinned("Photon_RhoCorrectedSCNuIso", "SCFR Nu. Had.Iso. (#rho-corr)", 200, -5, 20);
 	histMan_->addH1D_BJetBinned("Photon_RhoCorrectedSCPhIso", "SCFR Photon Iso. (#rho-corr)", 200, -5, 20);
 	
-	histMan_->addH2D_BJetBinned("RhoCorrectedSCFRChIso_v._Sigma_ietaieta","RhoCorrectedSCFRChIso_v._Sigma_ietaieta", 200, 0, 10, 200, 0, 0.1);
-	histMan_->addH2D_BJetBinned("RhoCorrectedSCFRChIso_v._Sigma_ietaieta_endcap","RhoCorrectedSCFRChIso_v._Sigma_ietaieta (endcap)", 200, 0, 20, 200, 0, 0.1);
-        histMan_->addH2D_BJetBinned("RhoCorrectedSCFRChIso_v._Sigma_ietaieta_barrel","RhoCorrectedSCFRChIso_v._Sigma_ietaieta (barrel)", 200, 0, 20, 200, 0, 0.1); 
+	histMan_->addH2D_BJetBinned("RhoCorrectedSCFRChIso_v._Sigma_ietaieta","RhoCorrectedSCFRChIso_v._Sigma_ietaieta", 200, 0, 10, 200, 0, 0.03);
+	histMan_->addH2D_BJetBinned("RhoCorrectedSCFRChIso_v._Sigma_ietaieta_endcap","RhoCorrectedSCFRChIso_v._Sigma_ietaieta (endcap)", 200, 0, 20, 200, 0, 0.03);
+        histMan_->addH2D_BJetBinned("RhoCorrectedSCFRChIso_v._Sigma_ietaieta_barrel","RhoCorrectedSCFRChIso_v._Sigma_ietaieta (barrel)", 200, 0, 20, 200, 0, 0.03); 
 
 	
 	string folder = histogramFolder_ + "/NminusOnePhotons";

@@ -61,11 +61,11 @@ void EventCountAnalyser::topMuMuReferenceSelection(const EventPtr event) {
 
 	//Trigger SF
 	if (!event->isRealData() && topMuMuRefSelection_->passesSelectionUpToStep(event, TTbarMuMuReferenceSelection::EventCleaningAndTrigger)) 
-//		if(Globals::TriggerSFUp == true)
-//			scale_ *= 0.977; 
-//		else if(Globals::TriggerSFDown == true)
-//			scale_ *= 0.957;
-//		else
+		if(Globals::TriggerSFUp == true)
+			scale_ *= 0.977; 
+		else if(Globals::TriggerSFDown == true)
+			scale_ *= 0.957;
+		else
 			scale_ *= 0.967;
 		
 	else 
@@ -86,25 +86,7 @@ void EventCountAnalyser::topMuMuReferenceSelection(const EventPtr event) {
 	}else{
 		scale_ =1;
 	}
-	
-	//hoton efficiencies - don't need due to the nature of analysis
-// 	if(topMuMuRefSelection_->passesSelectionUpToStep(event, TTbarMuMuReferenceSelection::AtLeastOnePhotonPostSelection)) {
-// 	
-// 		const PhotonCollection signalPhotons = topMuMuRefSelection_->signalPhotons(event);
-// 		
-// 		for(unsigned int i = 0; i<signalPhotons.size(); i++){
-// 		
-// 			const PhotonPointer photon(signalPhotons[i]);
-// 			
-// 			double efficiencyCorrection = event->isRealData() ? 1 : photon->getEfficiencyCorrection();
-// 			
-// 			scale_ = efficiencyCorrection;
-// 		}
-// 		
-// 		//scale_ = efficiencyCorrection;
-// 	} else {
-// 		scale_ = 1;
-// 	}
+
 		
 
  	//use bjet weights in histograms for muons
@@ -179,11 +161,11 @@ void EventCountAnalyser::topEEReferenceSelection(const EventPtr event) {
 	
 	//Trigger SFs
 	if (!event->isRealData() && topEERefSelection_->passesSelectionUpToStep(event, TTbarEEReferenceSelection::EventCleaningAndTrigger)) 
-//              if(Globals::TriggerSFUp == true)
-//                      scale_ *= 0.986; 
-//              else if(Globals::TriggerSFDown == true)
-//                      scale_ *= 0.962;
-//              else
+             if(Globals::TriggerSFUp == true)
+                     scale_ *= 0.986; 
+             else if(Globals::TriggerSFDown == true)
+                     scale_ *= 0.962;
+             else
 			scale_ *= 0.974; 
 	else 
 		scale_ = 1;
@@ -199,29 +181,11 @@ void EventCountAnalyser::topEEReferenceSelection(const EventPtr event) {
 	double efficiencyCorrection1 = event->isRealData() ? 1. : electron1->getEfficiencyCorrection();
 	double efficiencyCorrection2 = event->isRealData() ? 1. : electron2->getEfficiencyCorrection();
 	
- 	 	scale_ = efficiencyCorrection1*efficiencyCorrection2;//*0.974;
- 	}else{
- 		scale_ =1;
- 	}
+	 	scale_ = efficiencyCorrection1*efficiencyCorrection2;//*0.974;
+	}else{
+		scale_ =1;
+	}
 
-	//hoton efficiencies - don't need due to the nature of analysis
-//         if(topEERefSelection_->passesSelectionUpToStep(event, TTbarEEReferenceSelection::AtLeastOnePhotonPostSelection)) {
-//         
-//                 const PhotonCollection signalPhotons = topEERefSelection_->signalPhotons(event);
-//                 
-//                 for(unsigned int i = 0; i<signalPhotons.size(); i++){
-//                 
-//                         const PhotonPointer photon(signalPhotons[i]);
-//                         
-//                         double efficiencyCorrection = event->isRealData() ? 1 : photon->getEfficiencyCorrection();
-//                         
-//                         scale_ = efficiencyCorrection;
-//                 }                                                                                                                                                                                                                                                        
-//                 
-//                 //scale_ = efficiencyCorrection;
-//         } else {
-//                 scale_ = 1;
-//         }
 
  	//use bjet weights in histograms for muons
  	const JetCollection jets(topEERefSelection_->cleanedJets(event));
@@ -295,11 +259,11 @@ void EventCountAnalyser::topEEReferenceSelectionUnweighted(const EventPtr event)
 	
 	//Trigger SF
 	if (!event->isRealData() && topEMuRefSelection_->passesSelectionUpToStep(event, TTbarEMuReferenceSelection::EventCleaningAndTrigger)) 
-//              if(Globals::TriggerSFUp == true)
-//                      scale_ *= 0.964; 
-//              else if(Globals::TriggerSFDown == true)
-//                      scale_ *= 0.942;
-//              else
+             if(Globals::TriggerSFUp == true)
+                     scale_ *= 0.964; 
+             else if(Globals::TriggerSFDown == true)
+                     scale_ *= 0.942;
+             else
 			scale_ *= 0.953; 
 	else 
 		scale_ = 1;
@@ -321,7 +285,7 @@ void EventCountAnalyser::topEEReferenceSelectionUnweighted(const EventPtr event)
 		scale_ =1;
 	}
 
-	//hoton efficiencies - don't need due to the nature of analysis
+	//photon efficiencies - don't need due to the nature of analysis
 //         if(topEMuRefSelection_->passesSelectionUpToStep(event, TTbarEMuReferenceSelection::AtLeastOnePhotonPostSelection)) {
 //         
 //                 const PhotonCollection signalPhotons = topEMuRefSelection_->signalPhotons(event);
