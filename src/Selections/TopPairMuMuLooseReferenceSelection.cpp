@@ -1,27 +1,28 @@
-/*
- * TopPairEEReferenceSelection.cpp
- *
- *  Created on: 30 May 2013
- *      Author: N.Berry
- */
-	
-#include "../../interface/Selections/TopPairEEReferenceSelection.h"
+/*********************************************************|
+ * 	    TopPairMuMuLooseReferenceSelection.cpp	  |
+ *							  |
+ *  		    Author: N.Berry			  |
+ *     							  |
+ *********************************************************/
+
+#include "../../interface/Selections/TopPairMuMuLooseReferenceSelection.h"
 #include "../../interface/HighLevelTriggers.h"
 
 using namespace std;
 
 namespace BAT {
 
-TopPairEEReferenceSelection::TopPairEEReferenceSelection(unsigned int numberOfSelectionSteps) : //
+TopPairMuMuLooseReferenceSelection::TopPairMuMuLooseReferenceSelection(unsigned int numberOfSelectionSteps) : //
 		BasicSelection(numberOfSelectionSteps) //
 {
 
 }
 
-TopPairEEReferenceSelection::~TopPairEEReferenceSelection() {
+TopPairMuMuLooseReferenceSelection::~TopPairMuMuLooseReferenceSelection() {
 }
 
-bool TopPairEEReferenceSelection::isGoodJet(const JetPointer jet) const {
+
+bool TopPairMuMuLooseReferenceSelection::isGoodJet(const JetPointer jet) const {
 
 	/**
 	 * This function tests the jet ID and eta (and pt) range for jet
@@ -56,28 +57,30 @@ bool TopPairEEReferenceSelection::isGoodJet(const JetPointer jet) const {
 
 }
 
-const LeptonPointer TopPairEEReferenceSelection::signalLepton(const EventPtr event) const {
+const LeptonPointer TopPairMuMuLooseReferenceSelection::signalLepton(const EventPtr event) const {
 
-	const ElectronCollection allElectrons(event->Electrons());
-	ElectronCollection goodIsolatedElectrons;
-	for (unsigned int index = 0; index < allElectrons.size(); ++index) {
-		const ElectronPointer electron(allElectrons.at(index));
-		if (isGoodElectron(electron) && isIsolated(electron)) {
-			goodIsolatedElectrons.push_back(electron);
+	const MuonCollection allMuons(event->Muons());
+	MuonCollection goodIsolatedMuons;
+	for (unsigned int index = 0; index < allMuons.size(); ++index) {
+		const MuonPointer muon(allMuons.at(index));
+		if (isGoodMuon(muon) && isIsolated(muon)) {
+			goodIsolatedMuons.push_back(muon);
 		}
 	}
+	
 
-
-	return goodIsolatedElectrons.front();
+	return goodIsolatedMuons.front();
 
 }
 
-bool TopPairEEReferenceSelection::isNminusOnePhoton(const PhotonPointer photon, const EventPtr event, TString cut) const {
 
-	const ElectronCollection electrons(goodElectrons(event));
+
+bool TopPairMuMuLooseReferenceSelection::isNminusOnePhoton(const PhotonPointer photon, const EventPtr event, TString cut) const {
+
+	const MuonCollection muons(goodMuons(event));
 	const JetCollection jets(event->Jets());
 
-	bool passesEtAndEta = photon->et() > 25 && fabs(photon->eta()) < 2.5 && !photon->isInCrack();
+	bool passesEtAndEta = photon->et() > 25 && fabs(photon->eta()) < 1.4442 && !photon->isInCrack(); // 2.5
 	bool passesSafeElectronVeto = photon->ConversionSafeElectronVeto();
 	bool passesHOverE = photon->SingleTowerHoE() < 0.05; // same for EE and EB
 	
@@ -88,6 +91,7 @@ bool TopPairEEReferenceSelection::isNminusOnePhoton(const PhotonPointer photon, 
 	bool passesphoSCChIso = false;
 
 	bool backgroundShape = false;
+//	backgroundShape = photon->sigmaIEtaIEta() > 0.012 && photon->sigmaIEtaIEta() < 0.029;
 	
 	if (photon->isInBarrelRegion()) {
 		passesShowerShape = photon->sigmaIEtaIEta() < 0.012;
@@ -107,16 +111,15 @@ bool TopPairEEReferenceSelection::isNminusOnePhoton(const PhotonPointer photon, 
 
 		backgroundShape = photon->sigmaIEtaIEta() > 0.012 && photon->sigmaIEtaIEta() < 0.029;
 	}
+
 	
+	bool passesDeltaRgammaMuons = false;
 
-
-	bool passesDeltaRgammaElectrons = false;
-
-	 for (unsigned int index = 0; index < electrons.size(); ++index) {
-	 			const ElectronPointer electron(electrons.at(index));
-	 			passesDeltaRgammaElectrons = photon->deltaR(electron) > 0.7;
+	 for (unsigned int index = 0; index < muons.size(); ++index) {
+	 			const MuonPointer muon(muons.at(index));
+	 			passesDeltaRgammaMuons = photon->deltaR(muon) > 0.7;
 				
-				if(photon->deltaR(electron) < 0.7)
+				if(photon->deltaR(muon) < 0.7)
 				break;
 	}
 
@@ -127,58 +130,58 @@ bool TopPairEEReferenceSelection::isNminusOnePhoton(const PhotonPointer photon, 
 			passesDeltaRgammaJets = photon->deltaR(jet) > 0.7;
 	}
 	
-	bool passesDeltaRjetsElectrons = false;
+	bool passesDeltaRjetsMuons = false;
 
-	 for (unsigned int index = 0; index < electrons.size(); ++index) {
-	 		const ElectronPointer electron(electrons.at(index));
+	 for (unsigned int index = 0; index < muons.size(); ++index) {
+	 		const MuonPointer muon(muons.at(index));
 			for(unsigned int jindex = 0; jindex<jets.size(); ++jindex){
 				const JetPointer jet(jets[jindex]);
-	 			passesDeltaRjetsElectrons = electron->deltaR(jet) > 0.5;
-			}	
+	 			passesDeltaRjetsMuons = muon->deltaR(jet) > 0.5;
 
+			}
 	}
 
 		if(cut == "passesEtAndEta")
 			return passesSafeElectronVeto && passesHOverE && passesShowerShape && passesPFNeutralIso && passesPFPhotonIso && passesphoSCChIso &&
-			passesDeltaRgammaElectrons && passesDeltaRgammaJets && passesDeltaRjetsElectrons;
+			passesDeltaRgammaMuons && passesDeltaRgammaJets && passesDeltaRjetsMuons;
 		else if(cut == "passesHOverE")
 			return passesEtAndEta && passesSafeElectronVeto && passesShowerShape && passesPFNeutralIso && passesPFPhotonIso && passesphoSCChIso &&
-			passesDeltaRgammaElectrons && passesDeltaRgammaJets && passesDeltaRjetsElectrons;
+			passesDeltaRgammaMuons && passesDeltaRgammaJets && passesDeltaRjetsMuons;
 		else if(cut == "passesShowerShape")
 			return passesEtAndEta && passesSafeElectronVeto && passesHOverE && passesPFNeutralIso && passesPFPhotonIso && passesphoSCChIso &&
-			passesDeltaRgammaElectrons && passesDeltaRgammaJets && passesDeltaRjetsElectrons;
+			passesDeltaRgammaMuons && passesDeltaRgammaJets && passesDeltaRjetsMuons;
 		else if(cut == "passesPFNeutralIso")
 			return passesEtAndEta && passesSafeElectronVeto && passesHOverE && passesShowerShape && passesPFPhotonIso && passesphoSCChIso &&
-			passesDeltaRgammaElectrons && passesDeltaRgammaJets && passesDeltaRjetsElectrons;
+			passesDeltaRgammaMuons && passesDeltaRgammaJets && passesDeltaRjetsMuons;
 		else if(cut == "passesPFPhotonIso")
 			return passesEtAndEta && passesSafeElectronVeto && passesHOverE && passesShowerShape && passesPFNeutralIso && passesphoSCChIso &&
-			passesDeltaRgammaElectrons && passesDeltaRgammaJets && passesDeltaRjetsElectrons;
+			passesDeltaRgammaMuons && passesDeltaRgammaJets && passesDeltaRjetsMuons;
 		else if(cut == "passesphoSCChIso")
-			return passesEtAndEta && passesSafeElectronVeto && passesHOverE && backgroundShape && passesPFNeutralIso && passesPFPhotonIso &&
-			passesDeltaRgammaElectrons && passesDeltaRgammaJets && passesDeltaRjetsElectrons;
-		else if(cut == "passesDeltaRgammaElectrons")
+			return passesEtAndEta && passesSafeElectronVeto && passesHOverE && passesPFNeutralIso && passesPFPhotonIso &&
+			passesDeltaRgammaMuons && passesDeltaRgammaJets && passesDeltaRjetsMuons && backgroundShape;
+		else if(cut == "passesDeltaRgammaMuons")
 			return passesEtAndEta && passesSafeElectronVeto && passesHOverE && passesShowerShape && passesPFNeutralIso && passesPFPhotonIso &&
-			passesphoSCChIso && passesDeltaRgammaJets && passesDeltaRjetsElectrons;
+			passesphoSCChIso && passesDeltaRgammaJets && passesDeltaRjetsMuons;
 		else if(cut == "passesDeltaRgammaJets")	
 			return passesEtAndEta && passesSafeElectronVeto && passesHOverE && passesShowerShape && passesPFNeutralIso && passesPFPhotonIso &&
-			passesDeltaRgammaElectrons && passesphoSCChIso && passesDeltaRjetsElectrons;
-		else if(cut == "passesDeltaRjetsElectrons")
+			passesDeltaRgammaMuons && passesphoSCChIso && passesDeltaRjetsMuons;
+		else if(cut == "passesDeltaRjetsMuons")
 			return passesEtAndEta && passesSafeElectronVeto && passesHOverE && passesShowerShape && passesPFNeutralIso && passesPFPhotonIso &&
-			passesDeltaRgammaElectrons && passesDeltaRgammaJets && passesphoSCChIso;
+			passesDeltaRgammaMuons && passesDeltaRgammaJets && passesphoSCChIso;	
 		else if(cut == "backgroundShape")
-			return passesEtAndEta && passesSafeElectronVeto && passesHOverE && passesPFNeutralIso && passesPFPhotonIso && passesDeltaRgammaElectrons &&
-			passesDeltaRgammaJets && passesDeltaRjetsElectrons && backgroundShape;	
+			return passesEtAndEta && passesSafeElectronVeto && passesHOverE && passesPFNeutralIso && passesPFPhotonIso && passesDeltaRgammaMuons &&
+			passesDeltaRgammaJets && passesDeltaRjetsMuons && backgroundShape;
 		else	
 			return passesEtAndEta && passesSafeElectronVeto && passesHOverE && passesShowerShape && passesPFNeutralIso && passesPFPhotonIso &&
-			passesphoSCChIso && passesDeltaRgammaElectrons && passesDeltaRgammaJets && passesDeltaRjetsElectrons;
+			passesphoSCChIso && passesDeltaRgammaMuons && passesDeltaRgammaJets && passesDeltaRjetsMuons;
 
 
 
 }
 
-bool TopPairEEReferenceSelection::isGoodPhoton(const PhotonPointer photon, const EventPtr event) const {
+bool TopPairMuMuLooseReferenceSelection::isGoodPhoton(const PhotonPointer photon, const EventPtr event) const {
 
-	const ElectronCollection electrons(goodElectrons(event));
+	const MuonCollection muons(goodMuons(event));
 	const JetCollection jets(event->Jets());
 
 	bool passesEtAndEta = photon->et() > 25 && fabs(photon->eta()) < 1.4442 && !photon->isInCrack();
@@ -196,7 +199,7 @@ bool TopPairEEReferenceSelection::isGoodPhoton(const PhotonPointer photon, const
 	if (photon->isInBarrelRegion()) {
 //		passesShowerShape = photon->sigmaIEtaIEta() < 0.012;
 //		passesPFChargedIso = photon->RhoCorrectedPFChargedHadronIso(event->rho()) < 2.6;
-		passesPFNeutralIso = photon->RhoCorrectedPFNeutralHadronIso(event->rho()) < 7.5 + 0.04 * photon->pt(); // 3.5
+		passesPFNeutralIso = photon->RhoCorrectedPFNeutralHadronIso(event->rho()) < 7.5 + 0.04 * photon->pt(); //3.5
 		passesPFPhotonIso = photon->RhoCorrectedPFPhotonIso(event->rho()) < 5 + 0.005 * photon->pt(); //1.3
 		passesphoSCChIso = photon->RhoCorrectedSCChIso(event->rho()) < 20;
 //		passesphoSCNuIso = photon->RhoCorrectedSCNuIso(event->rho()) < 3.5 + 0.04 * photon->pt();
@@ -211,13 +214,13 @@ bool TopPairEEReferenceSelection::isGoodPhoton(const PhotonPointer photon, const
 //		passesphoSCPhIso = photon->RhoCorrectedSCPhIso(event->rho()) < 1.5 + 0.005 * photon->pt();
 	}
 
-	bool passesDeltaRgammaElectrons = false;
+	bool passesDeltaRgammaMuons = false;
 
-	 for (unsigned int index = 0; index < electrons.size(); ++index) {
-	 			const ElectronPointer electron(electrons.at(index));
-	 			passesDeltaRgammaElectrons = photon->deltaR(electron) > 0.5;
+	 	for (unsigned int index = 0; index < muons.size(); ++index) {
+	 			const MuonPointer muon(muons.at(index));
+	 			passesDeltaRgammaMuons = photon->deltaR(muon) > 0.5;
 				
-				if(photon->deltaR(electron) < 0.5)
+				if(photon->deltaR(muon) < 0.5)
 				break;
 	}
 
@@ -228,57 +231,52 @@ bool TopPairEEReferenceSelection::isGoodPhoton(const PhotonPointer photon, const
 			passesDeltaRgammaJets = photon->deltaR(jet) > 0.5;
 	}
 	
-	bool passesDeltaRjetsElectrons = false;
+	bool passesDeltaRjetsMuons = false;
 
-	 for (unsigned int index = 0; index < electrons.size(); ++index) {
-	 		const ElectronPointer electron(electrons.at(index));
+	 for (unsigned int index = 0; index < muons.size(); ++index) {
+	 		const MuonPointer muon(muons.at(index));
 			for(unsigned int jindex = 0; jindex<jets.size(); ++jindex){
 				const JetPointer jet(jets[jindex]);
-	 			passesDeltaRjetsElectrons = electron->deltaR(jet) > 0.5;
+	 			passesDeltaRjetsMuons = muon->deltaR(jet) > 0.5;
 			}	
 
 	}
 	
-	return passesEtAndEta && passesSafeElectronVeto && passesHOverE /*&& passesShowerShape*/ && passesPFNeutralIso && passesPFPhotonIso &&  passesphoSCChIso &&
-	passesDeltaRgammaJets && passesDeltaRgammaElectrons && passesDeltaRjetsElectrons;
+	return passesEtAndEta && passesSafeElectronVeto && passesHOverE /*&& passesShowerShape*/  && passesPFNeutralIso && passesPFPhotonIso && passesphoSCChIso &&
+	passesDeltaRgammaJets && passesDeltaRgammaMuons && passesDeltaRjetsMuons; 
 }
 
-bool TopPairEEReferenceSelection::isBJet(const JetPointer jet) const {
-	return jet->isBJet(BtagAlgorithm::CombinedSecondaryVertex, BtagAlgorithm::LOOSE);
-}
-
-bool TopPairEEReferenceSelection::isGoodMuon(const MuonPointer muon) const {
+//adapted for dilepton channel
+bool TopPairMuMuLooseReferenceSelection::isGoodMuon(const MuonPointer muon) const {
 	bool passesEtAndEta = muon->pt() > 20 && fabs(muon->eta()) < 2.4;
 	bool passesID = (muon->isGlobal() || muon->isTracker()) && muon->isPFMuon();
-        bool passesIsolation  = muon->pfRelativeIsolation(0.4, true) < 0.2;
+    bool passesIsolation  = isIsolated(muon);
 
 	return passesEtAndEta && passesID && passesIsolation;
 }
 
-bool TopPairEEReferenceSelection::passesSelectionStep(const EventPtr event, unsigned int selectionStep) const {
-	TTbarEEReferenceSelection::Step step = TTbarEEReferenceSelection::Step(selectionStep);
+bool TopPairMuMuLooseReferenceSelection::isBJet(const JetPointer jet) const {
+        return jet->isBJet(BtagAlgorithm::CombinedSecondaryVertex, BtagAlgorithm::LOOSE);
+}
+
+bool TopPairMuMuLooseReferenceSelection::passesSelectionStep(const EventPtr event, unsigned int selectionStep) const {
+	TTbarMuMuLooseReferenceSelection::Step step = TTbarMuMuLooseReferenceSelection::Step(selectionStep);
 	switch (step) {
-	case TTbarEEReferenceSelection::EventCleaningAndTrigger:
+	case TTbarMuMuLooseReferenceSelection::EventCleaningAndTrigger:
 		return passesEventCleaning(event) && passesTriggerSelection(event);
-	case TTbarEEReferenceSelection::DiElectronSelection:
-		return passesDiElectronSelection(event);
-	case TTbarEEReferenceSelection::ZmassVeto:
+	case TTbarMuMuLooseReferenceSelection::DiMuonSelection:
+		return passesDiMuonSelection(event);
+	case TTbarMuMuLooseReferenceSelection::ZmassVeto:
 		return passesZmassVeto(event);
-	case TTbarEEReferenceSelection::AtLeastOneGoodJets:
+	case TTbarMuMuLooseReferenceSelection::AtLeastOneGoodJets:
 		return hasAtLeastNGoodJets(event, 1);
-	case TTbarEEReferenceSelection::AtLeastTwoGoodJets:
-		return hasAtLeastNGoodJets(event, 2);
-	case TTbarEEReferenceSelection::MetCut:
+	case TTbarMuMuLooseReferenceSelection::MetCut:
 		return passesMetCut(event);
-	case TTbarEEReferenceSelection::AtLeastOneBtag:
-		return hasAtLeastOneGoodBJet(event);
-//	case TTbarEEReferenceSelection::AtLeastTwoBtags:
-//		return hasAtLeastTwoGoodBJets(event);
-	case TTbarEEReferenceSelection::AtLeastOnePhotonPreSelection:
+	case TTbarMuMuLooseReferenceSelection::AtLeastOnePhotonPreSelection:
 		return hasAtLeastOnePhotonPreSelection(event);
-	case TTbarEEReferenceSelection::AtLeastOnePhotonPostSelection:
+	case TTbarMuMuLooseReferenceSelection::AtLeastOnePhotonPostSelection:
 		return hasAtLeastOneGoodPhotonPostSelection(event);
-	case TTbarEEReferenceSelection::JustOneGoodPhotonPostSelection:
+	case TTbarMuMuLooseReferenceSelection::JustOneGoodPhotonPostSelection:
 		return hasJustOneGoodPhotonPostSelection(event);
 	default:
 		break;
@@ -287,7 +285,7 @@ bool TopPairEEReferenceSelection::passesSelectionStep(const EventPtr event, unsi
 	return false;
 }
 
-bool TopPairEEReferenceSelection::passesEventCleaning(const EventPtr event) const {
+bool TopPairMuMuLooseReferenceSelection::passesEventCleaning(const EventPtr event) const {
 	bool passesAllFilters(!event->isBeamScraping());
 	passesAllFilters = passesAllFilters && event->passesHBHENoiseFilter();
 	passesAllFilters = passesAllFilters && event->passesCSCTightBeamHaloFilter();
@@ -304,30 +302,29 @@ bool TopPairEEReferenceSelection::passesEventCleaning(const EventPtr event) cons
 	return passesAllFilters;
 }
 
-bool TopPairEEReferenceSelection::passesTriggerSelection(const EventPtr event) const {
+bool TopPairMuMuLooseReferenceSelection::passesTriggerSelection(const EventPtr event) const {
 
-		return event->HLT(HLTriggers::HLT_Ele17_CaloIdT_CaloIsoVL_TrkIdVL_TrkIsoVL_Ele8_CaloIdT_CaloIsoVL_TrkIdVL_TrkIsoVL);
+		return event->HLT(HLTriggers::HLT_Mu17_Mu8);
 }
 
-bool TopPairEEReferenceSelection::isIsolated(const LeptonPointer lepton) const {
-	const ElectronPointer electron(boost::static_pointer_cast<Electron>(lepton));
-	return electron->pfRelativeIsolationRhoCorrected() < 0.15;
+bool TopPairMuMuLooseReferenceSelection::isIsolated(const LeptonPointer lepton) const {
+	const MuonPointer muon(boost::static_pointer_cast<Muon>(lepton));
+
+	return muon->pfRelativeIsolation(0.4, true) < 0.2;
+
 }
 
-
-
-bool TopPairEEReferenceSelection::passesDiElectronSelection(const EventPtr event) const {
-
- 	const ElectronCollection electrons(signalElectrons(event));
+bool TopPairMuMuLooseReferenceSelection::passesDiMuonSelection(const EventPtr event) const {
+	const MuonCollection muons(signalMuons(event));
 
 	double mass = 0;
 
-	if(electrons.size()>1){
-		const ElectronPointer electron(electrons.at(0));
-		const ElectronPointer electron2(electrons.at(1));
+	if(muons.size()>1){
+		const MuonPointer muon(muons.at(0));
+		const MuonPointer muon2(muons.at(1));
 
 		ParticlePointer dilepton;
-		dilepton = ParticlePointer(new Particle(*electron + *electron2));
+		dilepton = ParticlePointer(new Particle(*muon + *muon2));
 		mass = dilepton->mass();
 	}
 
@@ -335,17 +332,17 @@ bool TopPairEEReferenceSelection::passesDiElectronSelection(const EventPtr event
 
 }
 
-bool TopPairEEReferenceSelection::passesZmassVeto(const EventPtr event) const {
-	const ElectronCollection electrons(signalElectrons(event));
+bool TopPairMuMuLooseReferenceSelection::passesZmassVeto(const EventPtr event) const {
+	const MuonCollection muons(signalMuons(event));
 
 	double mass = 0;
 
-	if(electrons.size()>1){
-		const ElectronPointer electron(electrons.at(0));
-		const ElectronPointer electron2(electrons.at(1));
+	if(muons.size()>1){
+		const MuonPointer muon(muons.at(0));
+		const MuonPointer muon2(muons.at(1));
 
 		ParticlePointer dilepton;
-		dilepton = ParticlePointer(new Particle(*electron + *electron2));
+		dilepton = ParticlePointer(new Particle(*muon + *muon2));
 		mass = dilepton->mass();
 	}
 
@@ -353,7 +350,7 @@ bool TopPairEEReferenceSelection::passesZmassVeto(const EventPtr event) const {
 
 }
 
-bool TopPairEEReferenceSelection::passesMetCut(const EventPtr event) const {
+bool TopPairMuMuLooseReferenceSelection::passesMetCut(const EventPtr event) const {
 
 	const METPointer met(event->MET());
 
@@ -361,7 +358,7 @@ bool TopPairEEReferenceSelection::passesMetCut(const EventPtr event) const {
 
 }
 
-bool TopPairEEReferenceSelection::hasAtLeastNGoodJets(const EventPtr event, int Njets) const {
+bool TopPairMuMuLooseReferenceSelection::hasAtLeastNGoodJets(const EventPtr event, int Njets) const {
 	const JetCollection goodJets(cleanedJets(event));
 	int nJetsAbove30GeV(0);
 
@@ -373,28 +370,20 @@ bool TopPairEEReferenceSelection::hasAtLeastNGoodJets(const EventPtr event, int 
 	}
 	return nJetsAbove30GeV >= Njets;
 }
-
-bool TopPairEEReferenceSelection::hasAtLeastOneGoodBJet(const EventPtr event) const {
-	return cleanedBJets(event).size() > 0;
-}
-
-// bool TopPairEEReferenceSelection::hasAtLeastTwoGoodBJets(const EventPtr event) const {
-// 	return cleanedBJets(event).size() > 1;
-// }
-
-bool TopPairEEReferenceSelection::hasAtLeastOnePhotonPreSelection(const EventPtr event) const {
+	
+bool TopPairMuMuLooseReferenceSelection::hasAtLeastOnePhotonPreSelection(const EventPtr event) const {
 	return AllPhotonsPreSelection(event).size() > 0;
-}
-
-bool TopPairEEReferenceSelection::hasAtLeastOneGoodPhotonPostSelection(const EventPtr event) const {
+}	
+	
+bool TopPairMuMuLooseReferenceSelection::hasAtLeastOneGoodPhotonPostSelection(const EventPtr event) const {
 	return signalPhotons(event).size() > 0;
 }
 
-bool TopPairEEReferenceSelection::hasJustOneGoodPhotonPostSelection(const EventPtr event) const {
+bool TopPairMuMuLooseReferenceSelection::hasJustOneGoodPhotonPostSelection(const EventPtr event) const {
 	return signalPhotons(event).size() == 1;
 }
 
-const ElectronCollection TopPairEEReferenceSelection::goodElectrons(const EventPtr event) const {
+const ElectronCollection TopPairMuMuLooseReferenceSelection::goodElectrons(const EventPtr event) const {
 
 	const ElectronCollection allElectrons(event->Electrons());
 	ElectronCollection goodIsolatedElectrons;
@@ -409,7 +398,7 @@ const ElectronCollection TopPairEEReferenceSelection::goodElectrons(const EventP
 
 }
 
-const MuonCollection TopPairEEReferenceSelection::goodMuons(const EventPtr event) const {
+const MuonCollection TopPairMuMuLooseReferenceSelection::goodMuons(const EventPtr event) const {
 
 	const MuonCollection allMuons(event->Muons());
 	MuonCollection goodIsolatedMuons;
@@ -424,7 +413,7 @@ const MuonCollection TopPairEEReferenceSelection::goodMuons(const EventPtr event
 
 }
 
-const MuonCollection TopPairEEReferenceSelection::signalMuons(const EventPtr event) const {
+const MuonCollection TopPairMuMuLooseReferenceSelection::signalMuons(const EventPtr event) const {
 
 	const MuonCollection muons(goodMuons(event));
 	MuonCollection signalMuons;
@@ -453,20 +442,28 @@ const MuonCollection TopPairEEReferenceSelection::signalMuons(const EventPtr eve
 						storeIndexB = indexB;
 					}
 				}
+
 		}
 
-		if(storeIndexA != storeIndexB){
+
+    	if(storeIndexA != storeIndexB){
 			signalMuons.push_back(muons.at(storeIndexA));
 			signalMuons.push_back(muons.at(storeIndexB));
-		}
-
 	}
 
+
+	}
+	
+	
+
+	
 	return signalMuons;
 
 }
 
-const ElectronCollection TopPairEEReferenceSelection::signalElectrons(const EventPtr event) const {
+
+
+const ElectronCollection TopPairMuMuLooseReferenceSelection::signalElectrons(const EventPtr event) const {
 
 	const ElectronCollection electrons(goodElectrons(event));
 	ElectronCollection signalElectrons;
@@ -478,7 +475,7 @@ const ElectronCollection TopPairEEReferenceSelection::signalElectrons(const Even
 		for (unsigned int indexA = 0; indexA < electrons.size(); ++indexA) {
 		const ElectronPointer electron(electrons.at(indexA));
 				for (unsigned int indexB = 0; indexB < electrons.size(); ++indexB) {
-					
+				
 					if(indexA == indexB)
 						continue;
 						
@@ -494,12 +491,14 @@ const ElectronCollection TopPairEEReferenceSelection::signalElectrons(const Even
 						storeIndexA = indexA;
 						storeIndexB = indexB;
 					}
+			
 				}
+
 		}
 
 		if(storeIndexA != storeIndexB){
-		signalElectrons.push_back(electrons.at(storeIndexA));
-		signalElectrons.push_back(electrons.at(storeIndexB));
+			signalElectrons.push_back(electrons.at(storeIndexA));
+			signalElectrons.push_back(electrons.at(storeIndexB));
 		}
 
 	}
@@ -508,7 +507,7 @@ const ElectronCollection TopPairEEReferenceSelection::signalElectrons(const Even
 
 }
 
-const PhotonCollection TopPairEEReferenceSelection::signalPhotons(const EventPtr event) const {
+const PhotonCollection TopPairMuMuLooseReferenceSelection::signalPhotons(const EventPtr event) const {
 
 	const PhotonCollection allPhotons(event->Photons());
 	PhotonCollection goodIsolatedPhotons;
@@ -522,9 +521,8 @@ const PhotonCollection TopPairEEReferenceSelection::signalPhotons(const EventPtr
 	return goodIsolatedPhotons;
 
 }
- 
 
-const PhotonCollection TopPairEEReferenceSelection::nMinusOnePhotons(const EventPtr event, TString cut) const {
+const PhotonCollection TopPairMuMuLooseReferenceSelection::nMinusOnePhotons(const EventPtr event, TString cut) const {
 
 	const PhotonCollection allPhotons(event->Photons());
 	PhotonCollection nMinusOnePhotons;
@@ -539,7 +537,7 @@ const PhotonCollection TopPairEEReferenceSelection::nMinusOnePhotons(const Event
 
 }
 
-const PhotonCollection TopPairEEReferenceSelection::AllPhotonsPreSelection(const EventPtr event) const {
+const PhotonCollection TopPairMuMuLooseReferenceSelection::AllPhotonsPreSelection(const EventPtr event) const {
 	
 	const PhotonCollection allPhotons(event->Photons());
 	PhotonCollection AllPhotonsPreSelection;
@@ -551,15 +549,15 @@ const PhotonCollection TopPairEEReferenceSelection::AllPhotonsPreSelection(const
 	return AllPhotonsPreSelection; 
 }
 
-const JetCollection TopPairEEReferenceSelection::cleanedJets(const EventPtr event) const {
+const JetCollection TopPairMuMuLooseReferenceSelection::cleanedJets(const EventPtr event) const {
 	const JetCollection jets(event->Jets());
 	JetCollection cleanedJets;
 
 	//if no signal lepton is found, can't clean jets, return them all!
-	if (!passesDiElectronSelection(event))
+	if (!passesDiMuonSelection(event))
 		return jets;
 
-	const ElectronCollection electrons(signalElectrons(event));
+	const MuonCollection muons(signalMuons(event));
 	const PhotonCollection photons(signalPhotons(event));
 
 	double minDR = 999999999.;
@@ -567,8 +565,8 @@ const JetCollection TopPairEEReferenceSelection::cleanedJets(const EventPtr even
 
 	for (unsigned int index = 0; index < jets.size(); ++index) {
 		const JetPointer jet(jets.at(index));
-		for (unsigned int lep = 0; lep < electrons.size(); lep++){
-			const LeptonPointer lepton(electrons.at(lep));
+		for (unsigned int lep = 0; lep < muons.size(); lep++){
+			const MuonPointer lepton(muons.at(lep));
 			if(jet->deltaR(lepton) < minDR)
 				minDR = jet->deltaR(lepton);
 		}
@@ -585,21 +583,21 @@ const JetCollection TopPairEEReferenceSelection::cleanedJets(const EventPtr even
 	return cleanedJets;
 }
 
-const JetCollection TopPairEEReferenceSelection::cleanedBJets(const EventPtr event) const {
-	const JetCollection jets(cleanedJets(event));
-	JetCollection cleanedBJets;
+const JetCollection TopPairMuMuLooseReferenceSelection::cleanedBJets(const EventPtr event) const {
+        const JetCollection jets(cleanedJets(event));
+        JetCollection cleanedBJets;
 
-	for (unsigned int index = 0; index < jets.size(); ++index) {
-		const JetPointer jet(jets.at(index));
-		if (isBJet(jet))
-			cleanedBJets.push_back(jet);
-	}
+        for (unsigned int index = 0; index < jets.size(); ++index) {
+                const JetPointer jet(jets.at(index));
+                if (isBJet(jet))
+                        cleanedBJets.push_back(jet);
+        }
 
-	return cleanedBJets;
+        return cleanedBJets;
 
 }
 
-bool TopPairEEReferenceSelection::isLooseMuon(const MuonPointer muon) const {
+bool TopPairMuMuLooseReferenceSelection::isLooseMuon(const MuonPointer muon) const {
 	bool passesPt = muon->pt() > 10;
 	bool passesEta = fabs(muon->eta()) < 2.5;
 	bool isPFMuon = muon->isPFMuon();
@@ -609,7 +607,7 @@ bool TopPairEEReferenceSelection::isLooseMuon(const MuonPointer muon) const {
 	return isPFMuon && passesPt && passesEta && isGlobalOrTracker && isLooselyIsolated;
 }
 
-bool TopPairEEReferenceSelection::isLooseElectron(const ElectronPointer electron) const {
+bool TopPairMuMuLooseReferenceSelection::isLooseElectron(const ElectronPointer electron) const {
 
 	bool passesEtAndEta = electron->et() > 20. && fabs(electron->eta()) < 2.5;
 	bool passesID(electron->passesElectronID(ElectronID::MVAIDTrigger));
@@ -617,15 +615,12 @@ bool TopPairEEReferenceSelection::isLooseElectron(const ElectronPointer electron
 	return passesEtAndEta && passesIso && passesID;
 }
 
-
-bool TopPairEEReferenceSelection::isGoodElectron(const ElectronPointer electron) const {
-
-	bool passesEtAndEta = electron->et() > 20 && fabs(electron->eta()) < 2.5;
-	bool passesD0 = fabs(electron->d0()) < 0.04; //cm
+bool TopPairMuMuLooseReferenceSelection::isGoodElectron(const ElectronPointer electron) const {
+	bool passesEtAndEta = electron->et() > 30 && fabs(electron->eta()) < 2.5 && !electron->isInCrack();
+	bool passesD0 = fabs(electron->d0()) < 0.02; //cm
+	bool passesHOverE = electron->HadOverEm() < 0.05; // same for EE and EB
 	bool passesID(electron->passesElectronID(ElectronID::MVAIDTrigger));
-	bool passesIsolation  = isIsolated(electron);
-	bool passesConvVeto = electron->passConversionVeto();
-
-	return passesEtAndEta && passesD0 && passesID && passesIsolation && passesConvVeto;
+	return passesEtAndEta && passesD0 &&
+			passesHOverE && passesID;
 }
 } /* namespace BAT */

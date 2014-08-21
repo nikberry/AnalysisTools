@@ -18,9 +18,10 @@
 
 datasetInfo = {}
 #if using the designated subset:
+datasetInfo['TTGamma2to7'] = {"cross-section": 1.8, "NumberOfProcessedEvents":916500}
 datasetInfo['TTGamma'] = {"cross-section": 1.8, "NumberOfProcessedEvents":1074860}
 datasetInfo['TTJet'] = {"cross-section": 245.8, "NumberOfProcessedEvents":6923652}
-datasetInfo['WJetsToLNu'] = {"cross-section": 37509.0, "NumberOfProcessedEvents":30491743}
+datasetInfo['WJetsToLNu'] = {"cross-section": 36257.2, "NumberOfProcessedEvents":30491743}
 datasetInfo['W1Jet'] = {"cross-section": 5400.0, "NumberOfProcessedEvents":23140779 }
 datasetInfo['W2Jets'] = {"cross-section": 1750.0, "NumberOfProcessedEvents":34041404}
 datasetInfo['W3Jets'] = {"cross-section": 519.0, "NumberOfProcessedEvents":15536443}
@@ -35,13 +36,13 @@ datasetInfo['DY4JetsToLL'] = {"cross-section": 23.04, "NumberOfProcessedEvents":
 datasetInfo['GJets_HT-200To400'] = {"cross-section": 960.5, "NumberOfProcessedEvents":10484464}
 datasetInfo['GJets_HT-400ToInf'] = {"cross-section": 107.5, "NumberOfProcessedEvents":1606586}
 
-datasetInfo['T_s-channel'] = {"cross-section": 3.89394, "NumberOfProcessedEvents":259911}
-datasetInfo['T_t-channel'] = {"cross-section": 55.531, "NumberOfProcessedEvents":3757707}
-datasetInfo['T_tW-channel'] = {"cross-section": 11.1773, "NumberOfProcessedEvents":493460}
+datasetInfo['T_s-channel'] = {"cross-section": 3.79, "NumberOfProcessedEvents":259911}
+datasetInfo['T_t-channel'] = {"cross-section": 56.4, "NumberOfProcessedEvents":3757707}
+datasetInfo['T_tW-channel'] = {"cross-section": 11.1, "NumberOfProcessedEvents":493460}
 
-datasetInfo['Tbar_s-channel'] = {"cross-section": 1.75776, "NumberOfProcessedEvents":139948}
-datasetInfo['Tbar_t-channel'] = {"cross-section": 30.0042, "NumberOfProcessedEvents":1934817}
-datasetInfo['Tbar_tW-channel'] = {"cross-section": 11.1773, "NumberOfProcessedEvents":497658}
+datasetInfo['Tbar_s-channel'] = {"cross-section": 1.76, "NumberOfProcessedEvents":139948}
+datasetInfo['Tbar_t-channel'] = {"cross-section": 30.7, "NumberOfProcessedEvents":1934817}
+datasetInfo['Tbar_tW-channel'] = {"cross-section": 11.1, "NumberOfProcessedEvents":497658}
 
 #systematic samples
 datasetInfo['TTJets-matchingdown'] = {"cross-section": 130., "NumberOfProcessedEvents":5458456}
@@ -75,9 +76,9 @@ datasetInfo['GJets_HT-40To100'] = {"cross-section": 23620., "NumberOfProcessedEv
 datasetInfo['GJets_HT-100To200'] = {"cross-section": 3476., "NumberOfProcessedEvents":1536287}
 datasetInfo['GJets_HT-200ToInf'] = {"cross-section": 485., "NumberOfProcessedEvents":9377170}
 
-datasetInfo['WWToAnything'] = {"cross-section": 57.1097, "NumberOfProcessedEvents":10000431}
-datasetInfo['WZToAnything'] = {"cross-section": 32.3161, "NumberOfProcessedEvents":10000283}
-datasetInfo['ZZToAnything'] = {"cross-section": 8.25561, "NumberOfProcessedEvents":9799908}
+datasetInfo['WWToAnything'] = {"cross-section": 56.0, "NumberOfProcessedEvents":10000431}
+datasetInfo['WZToAnything'] = {"cross-section": 33.6, "NumberOfProcessedEvents":10000283}
+datasetInfo['ZZToAnything'] = {"cross-section": 8.2, "NumberOfProcessedEvents":9799908}
 
 #Ttbar + Z/W from http://cms.cern.ch/iCMS/jsp/openfile.jsp?tp=draft&files=AN2011_288_v14.pdf
 datasetInfo['TTbarZIncl'] = {"cross-section": 0.14, "NumberOfProcessedEvents":196277}

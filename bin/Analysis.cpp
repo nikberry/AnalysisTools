@@ -94,7 +94,7 @@ void Analysis::initiateEvent() {
 	
 	
 	//top pt weight
-  	if(Globals::applyTopPtReweighting == true && (currentEvent->getDataType() == DataType::TTJets || currentEvent->getDataType() == DataType::TTGamma)){
+  	if(Globals::applyTopPtReweighting == true && (currentEvent->getDataType() == DataType::TTJets || currentEvent->getDataType() == DataType::TTGamma || currentEvent->getDataType() == DataType::TTGamma2to7)){
 
  	   double topPtweight = 1.;
   	   topPtweight = weights->reweightTopPt(currentEvent);

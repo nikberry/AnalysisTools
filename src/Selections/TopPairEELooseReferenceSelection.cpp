@@ -1,27 +1,27 @@
-/*
- * TopPairEEReferenceSelection.cpp
- *
- *  Created on: 30 May 2013
- *      Author: N.Berry
- */
-	
-#include "../../interface/Selections/TopPairEEReferenceSelection.h"
+/*********************************************************|
+ * 	    TopPairEELooseReferenceSelection.cpp	  |
+ *							  |
+ *  		    Author: N.Berry			  |
+ *     							  |
+ *********************************************************/
+ 	
+#include "../../interface/Selections/TopPairEELooseReferenceSelection.h"
 #include "../../interface/HighLevelTriggers.h"
 
 using namespace std;
 
 namespace BAT {
 
-TopPairEEReferenceSelection::TopPairEEReferenceSelection(unsigned int numberOfSelectionSteps) : //
+TopPairEELooseReferenceSelection::TopPairEELooseReferenceSelection(unsigned int numberOfSelectionSteps) : //
 		BasicSelection(numberOfSelectionSteps) //
 {
 
 }
 
-TopPairEEReferenceSelection::~TopPairEEReferenceSelection() {
+TopPairEELooseReferenceSelection::~TopPairEELooseReferenceSelection() {
 }
 
-bool TopPairEEReferenceSelection::isGoodJet(const JetPointer jet) const {
+bool TopPairEELooseReferenceSelection::isGoodJet(const JetPointer jet) const {
 
 	/**
 	 * This function tests the jet ID and eta (and pt) range for jet
@@ -56,7 +56,7 @@ bool TopPairEEReferenceSelection::isGoodJet(const JetPointer jet) const {
 
 }
 
-const LeptonPointer TopPairEEReferenceSelection::signalLepton(const EventPtr event) const {
+const LeptonPointer TopPairEELooseReferenceSelection::signalLepton(const EventPtr event) const {
 
 	const ElectronCollection allElectrons(event->Electrons());
 	ElectronCollection goodIsolatedElectrons;
@@ -72,7 +72,7 @@ const LeptonPointer TopPairEEReferenceSelection::signalLepton(const EventPtr eve
 
 }
 
-bool TopPairEEReferenceSelection::isNminusOnePhoton(const PhotonPointer photon, const EventPtr event, TString cut) const {
+bool TopPairEELooseReferenceSelection::isNminusOnePhoton(const PhotonPointer photon, const EventPtr event, TString cut) const {
 
 	const ElectronCollection electrons(goodElectrons(event));
 	const JetCollection jets(event->Jets());
@@ -176,7 +176,7 @@ bool TopPairEEReferenceSelection::isNminusOnePhoton(const PhotonPointer photon, 
 
 }
 
-bool TopPairEEReferenceSelection::isGoodPhoton(const PhotonPointer photon, const EventPtr event) const {
+bool TopPairEELooseReferenceSelection::isGoodPhoton(const PhotonPointer photon, const EventPtr event) const {
 
 	const ElectronCollection electrons(goodElectrons(event));
 	const JetCollection jets(event->Jets());
@@ -243,11 +243,8 @@ bool TopPairEEReferenceSelection::isGoodPhoton(const PhotonPointer photon, const
 	passesDeltaRgammaJets && passesDeltaRgammaElectrons && passesDeltaRjetsElectrons;
 }
 
-bool TopPairEEReferenceSelection::isBJet(const JetPointer jet) const {
-	return jet->isBJet(BtagAlgorithm::CombinedSecondaryVertex, BtagAlgorithm::LOOSE);
-}
 
-bool TopPairEEReferenceSelection::isGoodMuon(const MuonPointer muon) const {
+bool TopPairEELooseReferenceSelection::isGoodMuon(const MuonPointer muon) const {
 	bool passesEtAndEta = muon->pt() > 20 && fabs(muon->eta()) < 2.4;
 	bool passesID = (muon->isGlobal() || muon->isTracker()) && muon->isPFMuon();
         bool passesIsolation  = muon->pfRelativeIsolation(0.4, true) < 0.2;
@@ -255,30 +252,28 @@ bool TopPairEEReferenceSelection::isGoodMuon(const MuonPointer muon) const {
 	return passesEtAndEta && passesID && passesIsolation;
 }
 
-bool TopPairEEReferenceSelection::passesSelectionStep(const EventPtr event, unsigned int selectionStep) const {
-	TTbarEEReferenceSelection::Step step = TTbarEEReferenceSelection::Step(selectionStep);
+bool TopPairEELooseReferenceSelection::isBJet(const JetPointer jet) const {
+        return jet->isBJet(BtagAlgorithm::CombinedSecondaryVertex, BtagAlgorithm::MEDIUM);
+}
+
+bool TopPairEELooseReferenceSelection::passesSelectionStep(const EventPtr event, unsigned int selectionStep) const {
+	TTbarEELooseReferenceSelection::Step step = TTbarEELooseReferenceSelection::Step(selectionStep);
 	switch (step) {
-	case TTbarEEReferenceSelection::EventCleaningAndTrigger:
+	case TTbarEELooseReferenceSelection::EventCleaningAndTrigger:
 		return passesEventCleaning(event) && passesTriggerSelection(event);
-	case TTbarEEReferenceSelection::DiElectronSelection:
+	case TTbarEELooseReferenceSelection::DiElectronSelection:
 		return passesDiElectronSelection(event);
-	case TTbarEEReferenceSelection::ZmassVeto:
+	case TTbarEELooseReferenceSelection::ZmassVeto:
 		return passesZmassVeto(event);
-	case TTbarEEReferenceSelection::AtLeastOneGoodJets:
+	case TTbarEELooseReferenceSelection::AtLeastOneGoodJets:
 		return hasAtLeastNGoodJets(event, 1);
-	case TTbarEEReferenceSelection::AtLeastTwoGoodJets:
-		return hasAtLeastNGoodJets(event, 2);
-	case TTbarEEReferenceSelection::MetCut:
+	case TTbarEELooseReferenceSelection::MetCut:
 		return passesMetCut(event);
-	case TTbarEEReferenceSelection::AtLeastOneBtag:
-		return hasAtLeastOneGoodBJet(event);
-//	case TTbarEEReferenceSelection::AtLeastTwoBtags:
-//		return hasAtLeastTwoGoodBJets(event);
-	case TTbarEEReferenceSelection::AtLeastOnePhotonPreSelection:
+	case TTbarEELooseReferenceSelection::AtLeastOnePhotonPreSelection:
 		return hasAtLeastOnePhotonPreSelection(event);
-	case TTbarEEReferenceSelection::AtLeastOnePhotonPostSelection:
+	case TTbarEELooseReferenceSelection::AtLeastOnePhotonPostSelection:
 		return hasAtLeastOneGoodPhotonPostSelection(event);
-	case TTbarEEReferenceSelection::JustOneGoodPhotonPostSelection:
+	case TTbarEELooseReferenceSelection::JustOneGoodPhotonPostSelection:
 		return hasJustOneGoodPhotonPostSelection(event);
 	default:
 		break;
@@ -287,7 +282,7 @@ bool TopPairEEReferenceSelection::passesSelectionStep(const EventPtr event, unsi
 	return false;
 }
 
-bool TopPairEEReferenceSelection::passesEventCleaning(const EventPtr event) const {
+bool TopPairEELooseReferenceSelection::passesEventCleaning(const EventPtr event) const {
 	bool passesAllFilters(!event->isBeamScraping());
 	passesAllFilters = passesAllFilters && event->passesHBHENoiseFilter();
 	passesAllFilters = passesAllFilters && event->passesCSCTightBeamHaloFilter();
@@ -304,19 +299,19 @@ bool TopPairEEReferenceSelection::passesEventCleaning(const EventPtr event) cons
 	return passesAllFilters;
 }
 
-bool TopPairEEReferenceSelection::passesTriggerSelection(const EventPtr event) const {
+bool TopPairEELooseReferenceSelection::passesTriggerSelection(const EventPtr event) const {
 
 		return event->HLT(HLTriggers::HLT_Ele17_CaloIdT_CaloIsoVL_TrkIdVL_TrkIsoVL_Ele8_CaloIdT_CaloIsoVL_TrkIdVL_TrkIsoVL);
 }
 
-bool TopPairEEReferenceSelection::isIsolated(const LeptonPointer lepton) const {
+bool TopPairEELooseReferenceSelection::isIsolated(const LeptonPointer lepton) const {
 	const ElectronPointer electron(boost::static_pointer_cast<Electron>(lepton));
 	return electron->pfRelativeIsolationRhoCorrected() < 0.15;
 }
 
 
 
-bool TopPairEEReferenceSelection::passesDiElectronSelection(const EventPtr event) const {
+bool TopPairEELooseReferenceSelection::passesDiElectronSelection(const EventPtr event) const {
 
  	const ElectronCollection electrons(signalElectrons(event));
 
@@ -335,7 +330,7 @@ bool TopPairEEReferenceSelection::passesDiElectronSelection(const EventPtr event
 
 }
 
-bool TopPairEEReferenceSelection::passesZmassVeto(const EventPtr event) const {
+bool TopPairEELooseReferenceSelection::passesZmassVeto(const EventPtr event) const {
 	const ElectronCollection electrons(signalElectrons(event));
 
 	double mass = 0;
@@ -353,7 +348,7 @@ bool TopPairEEReferenceSelection::passesZmassVeto(const EventPtr event) const {
 
 }
 
-bool TopPairEEReferenceSelection::passesMetCut(const EventPtr event) const {
+bool TopPairEELooseReferenceSelection::passesMetCut(const EventPtr event) const {
 
 	const METPointer met(event->MET());
 
@@ -361,7 +356,7 @@ bool TopPairEEReferenceSelection::passesMetCut(const EventPtr event) const {
 
 }
 
-bool TopPairEEReferenceSelection::hasAtLeastNGoodJets(const EventPtr event, int Njets) const {
+bool TopPairEELooseReferenceSelection::hasAtLeastNGoodJets(const EventPtr event, int Njets) const {
 	const JetCollection goodJets(cleanedJets(event));
 	int nJetsAbove30GeV(0);
 
@@ -374,27 +369,19 @@ bool TopPairEEReferenceSelection::hasAtLeastNGoodJets(const EventPtr event, int 
 	return nJetsAbove30GeV >= Njets;
 }
 
-bool TopPairEEReferenceSelection::hasAtLeastOneGoodBJet(const EventPtr event) const {
-	return cleanedBJets(event).size() > 0;
-}
-
-// bool TopPairEEReferenceSelection::hasAtLeastTwoGoodBJets(const EventPtr event) const {
-// 	return cleanedBJets(event).size() > 1;
-// }
-
-bool TopPairEEReferenceSelection::hasAtLeastOnePhotonPreSelection(const EventPtr event) const {
+bool TopPairEELooseReferenceSelection::hasAtLeastOnePhotonPreSelection(const EventPtr event) const {
 	return AllPhotonsPreSelection(event).size() > 0;
 }
 
-bool TopPairEEReferenceSelection::hasAtLeastOneGoodPhotonPostSelection(const EventPtr event) const {
+bool TopPairEELooseReferenceSelection::hasAtLeastOneGoodPhotonPostSelection(const EventPtr event) const {
 	return signalPhotons(event).size() > 0;
 }
 
-bool TopPairEEReferenceSelection::hasJustOneGoodPhotonPostSelection(const EventPtr event) const {
+bool TopPairEELooseReferenceSelection::hasJustOneGoodPhotonPostSelection(const EventPtr event) const {
 	return signalPhotons(event).size() == 1;
 }
 
-const ElectronCollection TopPairEEReferenceSelection::goodElectrons(const EventPtr event) const {
+const ElectronCollection TopPairEELooseReferenceSelection::goodElectrons(const EventPtr event) const {
 
 	const ElectronCollection allElectrons(event->Electrons());
 	ElectronCollection goodIsolatedElectrons;
@@ -409,7 +396,7 @@ const ElectronCollection TopPairEEReferenceSelection::goodElectrons(const EventP
 
 }
 
-const MuonCollection TopPairEEReferenceSelection::goodMuons(const EventPtr event) const {
+const MuonCollection TopPairEELooseReferenceSelection::goodMuons(const EventPtr event) const {
 
 	const MuonCollection allMuons(event->Muons());
 	MuonCollection goodIsolatedMuons;
@@ -424,7 +411,7 @@ const MuonCollection TopPairEEReferenceSelection::goodMuons(const EventPtr event
 
 }
 
-const MuonCollection TopPairEEReferenceSelection::signalMuons(const EventPtr event) const {
+const MuonCollection TopPairEELooseReferenceSelection::signalMuons(const EventPtr event) const {
 
 	const MuonCollection muons(goodMuons(event));
 	MuonCollection signalMuons;
@@ -466,7 +453,7 @@ const MuonCollection TopPairEEReferenceSelection::signalMuons(const EventPtr eve
 
 }
 
-const ElectronCollection TopPairEEReferenceSelection::signalElectrons(const EventPtr event) const {
+const ElectronCollection TopPairEELooseReferenceSelection::signalElectrons(const EventPtr event) const {
 
 	const ElectronCollection electrons(goodElectrons(event));
 	ElectronCollection signalElectrons;
@@ -508,7 +495,7 @@ const ElectronCollection TopPairEEReferenceSelection::signalElectrons(const Even
 
 }
 
-const PhotonCollection TopPairEEReferenceSelection::signalPhotons(const EventPtr event) const {
+const PhotonCollection TopPairEELooseReferenceSelection::signalPhotons(const EventPtr event) const {
 
 	const PhotonCollection allPhotons(event->Photons());
 	PhotonCollection goodIsolatedPhotons;
@@ -524,7 +511,7 @@ const PhotonCollection TopPairEEReferenceSelection::signalPhotons(const EventPtr
 }
  
 
-const PhotonCollection TopPairEEReferenceSelection::nMinusOnePhotons(const EventPtr event, TString cut) const {
+const PhotonCollection TopPairEELooseReferenceSelection::nMinusOnePhotons(const EventPtr event, TString cut) const {
 
 	const PhotonCollection allPhotons(event->Photons());
 	PhotonCollection nMinusOnePhotons;
@@ -539,7 +526,7 @@ const PhotonCollection TopPairEEReferenceSelection::nMinusOnePhotons(const Event
 
 }
 
-const PhotonCollection TopPairEEReferenceSelection::AllPhotonsPreSelection(const EventPtr event) const {
+const PhotonCollection TopPairEELooseReferenceSelection::AllPhotonsPreSelection(const EventPtr event) const {
 	
 	const PhotonCollection allPhotons(event->Photons());
 	PhotonCollection AllPhotonsPreSelection;
@@ -551,7 +538,7 @@ const PhotonCollection TopPairEEReferenceSelection::AllPhotonsPreSelection(const
 	return AllPhotonsPreSelection; 
 }
 
-const JetCollection TopPairEEReferenceSelection::cleanedJets(const EventPtr event) const {
+const JetCollection TopPairEELooseReferenceSelection::cleanedJets(const EventPtr event) const {
 	const JetCollection jets(event->Jets());
 	JetCollection cleanedJets;
 
@@ -585,21 +572,21 @@ const JetCollection TopPairEEReferenceSelection::cleanedJets(const EventPtr even
 	return cleanedJets;
 }
 
-const JetCollection TopPairEEReferenceSelection::cleanedBJets(const EventPtr event) const {
-	const JetCollection jets(cleanedJets(event));
-	JetCollection cleanedBJets;
+const JetCollection TopPairEELooseReferenceSelection::cleanedBJets(const EventPtr event) const {
+        const JetCollection jets(cleanedJets(event));
+        JetCollection cleanedBJets;
 
-	for (unsigned int index = 0; index < jets.size(); ++index) {
-		const JetPointer jet(jets.at(index));
-		if (isBJet(jet))
-			cleanedBJets.push_back(jet);
-	}
+        for (unsigned int index = 0; index < jets.size(); ++index) {
+                const JetPointer jet(jets.at(index));
+                if (isBJet(jet))
+                        cleanedBJets.push_back(jet);
+        }
 
-	return cleanedBJets;
+        return cleanedBJets;
 
 }
 
-bool TopPairEEReferenceSelection::isLooseMuon(const MuonPointer muon) const {
+bool TopPairEELooseReferenceSelection::isLooseMuon(const MuonPointer muon) const {
 	bool passesPt = muon->pt() > 10;
 	bool passesEta = fabs(muon->eta()) < 2.5;
 	bool isPFMuon = muon->isPFMuon();
@@ -609,7 +596,7 @@ bool TopPairEEReferenceSelection::isLooseMuon(const MuonPointer muon) const {
 	return isPFMuon && passesPt && passesEta && isGlobalOrTracker && isLooselyIsolated;
 }
 
-bool TopPairEEReferenceSelection::isLooseElectron(const ElectronPointer electron) const {
+bool TopPairEELooseReferenceSelection::isLooseElectron(const ElectronPointer electron) const {
 
 	bool passesEtAndEta = electron->et() > 20. && fabs(electron->eta()) < 2.5;
 	bool passesID(electron->passesElectronID(ElectronID::MVAIDTrigger));
@@ -618,7 +605,7 @@ bool TopPairEEReferenceSelection::isLooseElectron(const ElectronPointer electron
 }
 
 
-bool TopPairEEReferenceSelection::isGoodElectron(const ElectronPointer electron) const {
+bool TopPairEELooseReferenceSelection::isGoodElectron(const ElectronPointer electron) const {
 
 	bool passesEtAndEta = electron->et() > 20 && fabs(electron->eta()) < 2.5;
 	bool passesD0 = fabs(electron->d0()) < 0.04; //cm

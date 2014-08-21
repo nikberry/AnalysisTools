@@ -211,6 +211,7 @@ void EventCountAnalyser::topEEReferenceSelection(const EventPtr event) {
  	if(weightIndex>0)
  		weight_ge1b += b_weight;
  	}
+
  	}else{
  		weight_ge1b = 1.;
  	}
@@ -335,8 +336,6 @@ void EventCountAnalyser::topEEReferenceSelectionUnweighted(const EventPtr event)
 
 	weight_ = event->weight() * prescale_ * scale_ ;
 	
-	if(!event->isRealData())
-		cout << weight_ << endl;
 
 	histMan_->H1D("TTbarEMuRefSelection")->Fill(-1, weight_);
 	histMan_->H1D("TTbarEMuRefSelection_singleCuts")->Fill(-1, weight_);
