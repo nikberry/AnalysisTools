@@ -60,7 +60,7 @@ void Analysis::analyse() {
 		eventcountAnalyser->analyse(currentEvent);
 		ttbardileptonAnalyser->analyse(currentEvent);
 		ttbarphotonAnalyser->analyse(currentEvent);
-
+		ttbarlooseselectionAnalyser->analyse(currentEvent);
 	}
 }
 
@@ -151,11 +151,15 @@ void Analysis::createHistograms() {
         cout << "Number of histograms added by ttbardileptonAnalyser: " << numberOfHistograms - lastNumberOfHistograms << endl;
         lastNumberOfHistograms = numberOfHistograms;
 
-    ttbarphotonAnalyser->createHistograms();
+        ttbarphotonAnalyser->createHistograms();
         numberOfHistograms = histMan->size();
         cout << "Number of histograms added by ttbarphotonAnalyser: " << numberOfHistograms - lastNumberOfHistograms << endl;
         lastNumberOfHistograms = numberOfHistograms;
 
+        ttbarlooseselectionAnalyser->createHistograms();
+        numberOfHistograms = histMan->size();
+        cout << "Number of histograms added by ttbarlooseselectionAnalyser: " << numberOfHistograms - lastNumberOfHistograms << endl;
+        lastNumberOfHistograms = numberOfHistograms;
 	cout << "Total number of histograms: " << histMan->size() << endl;
 
 }
@@ -186,8 +190,8 @@ Analysis::Analysis(std::string datasetInfoFile) : //
 		vertexAnalyser(new VertexAnalyser(histMan)),
 		photonAnalyser(new PhotonAnalyser(histMan)),
 		ttbardileptonAnalyser(new TTbarDiLeptonAnalyser(histMan)),
-		ttbarphotonAnalyser(new TTbarPhotonAnalyser(histMan)){
-
+		ttbarphotonAnalyser(new TTbarPhotonAnalyser(histMan)),
+		ttbarlooseselectionAnalyser(new TTbarLooseSelectionAnalyser(histMan)){
 
 	histMan->enableDebugMode(true);
 }

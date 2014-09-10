@@ -41,6 +41,7 @@
 #include "../interface/Analysers/PhotonAnalyser.h"
 #include "../interface/Analysers/TTbarDiLeptonAnalyser.h"
 #include "../interface/Analysers/TTbarPhotonAnalyser.h"
+#include "../interface/Analysers/TTbarLooseSelectionAnalyser.h"
 
 //typedef boost::array<unsigned long, BAT::TTbarEPlusJetsSelection::NUMBER_OF_SELECTION_STEPS> ePlusJetscutarray;
 //typedef boost::array<unsigned long, BAT::TTbarMuPlusJetsSelection::NUMBER_OF_SELECTION_STEPS> muPlusJetscutarray;
@@ -80,6 +81,7 @@ private:
     boost::scoped_ptr<BAT::PhotonAnalyser> photonAnalyser;
     boost::scoped_ptr<BAT::TTbarDiLeptonAnalyser> ttbardileptonAnalyser;
     boost::scoped_ptr<BAT::TTbarPhotonAnalyser> ttbarphotonAnalyser;
+    boost::scoped_ptr<BAT::TTbarLooseSelectionAnalyser> ttbarlooseselectionAnalyser;
 
 public:
 //    static float luminosity;
