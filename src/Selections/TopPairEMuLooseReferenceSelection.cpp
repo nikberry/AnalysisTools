@@ -200,7 +200,7 @@ bool TopPairEMuLooseReferenceSelection::isNminusOnePhoton(const PhotonPointer ph
 		passesPFPhotonIso = photon->RhoCorrectedPFPhotonIso(event->rho()) < 1.3 + 0.005 * photon->pt();
 		passesphoSCChIso = photon->RhoCorrectedSCChIso(event->rho()) < 20;
 
-		backgroundShape = photon->sigmaIEtaIEta() > 0.012 && photon->sigmaIEtaIEta() < 0.029;
+		backgroundShape = photon->sigmaIEtaIEta() >= 0.012 && photon->sigmaIEtaIEta() <= 0.016;
 		
 	} else if (photon->isInEndCapRegion()) {
 		passesShowerShape = photon->sigmaIEtaIEta() < 0.034;
@@ -209,7 +209,6 @@ bool TopPairEMuLooseReferenceSelection::isNminusOnePhoton(const PhotonPointer ph
 		passesPFPhotonIso = photon->RhoCorrectedPFPhotonIso(event->rho()) < 1.5 + 0.005 * photon->pt();
 		passesphoSCChIso = photon->RhoCorrectedSCChIso(event->rho()) < 20;
 		
-		backgroundShape = photon->sigmaIEtaIEta() > 0.012 && photon->sigmaIEtaIEta() < 0.029;
 	}
 
 
@@ -227,9 +226,9 @@ bool TopPairEMuLooseReferenceSelection::isNminusOnePhoton(const PhotonPointer ph
 
 	 	 	for (unsigned int index = 0; index < electrons.size(); ++index) {
 	 	 		const ElectronPointer electron(electrons.at(index));
-	 	 		passesDeltaRgammaElectrons = photon->deltaR(electron) > 0.7;
+	 	 		passesDeltaRgammaElectrons = photon->deltaR(electron) > 0.5;
 					
-				if(photon->deltaR(electron) < 0.7)
+				if(photon->deltaR(electron) < 0.5)
 				break;	
 	  	}
 		
@@ -237,7 +236,7 @@ bool TopPairEMuLooseReferenceSelection::isNminusOnePhoton(const PhotonPointer ph
 	
 	for (unsigned int index = 0; index < jets.size(); ++index) { 
 			const JetPointer jet(jets.at(index));
-			passesDeltaRgammaJets = photon->deltaR(jet) > 0.7;
+			passesDeltaRgammaJets = photon->deltaR(jet) > 0.5;
 	}	
 		
 	bool passesDeltaRjetsElectrons = false;

@@ -101,7 +101,7 @@ bool TopPairMuMuReferenceSelection::isNminusOnePhoton(const PhotonPointer photon
 		passesPFPhotonIso = photon->RhoCorrectedPFPhotonIso(event->rho()) < 1.3 + 0.005 * photon->pt();
 		passesphoSCChIso = photon->RhoCorrectedSCChIso(event->rho()) < 5;
 
-		backgroundShape = photon->sigmaIEtaIEta() > 0.012 && photon->sigmaIEtaIEta() < 0.029;
+		backgroundShape = photon->sigmaIEtaIEta() >= 0.012 && photon->sigmaIEtaIEta() <= 0.016;
 		
 	} else if (photon->isInEndCapRegion()) {
 		passesShowerShape = photon->sigmaIEtaIEta() < 0.034;
@@ -110,7 +110,6 @@ bool TopPairMuMuReferenceSelection::isNminusOnePhoton(const PhotonPointer photon
 		passesPFPhotonIso = photon->RhoCorrectedPFPhotonIso(event->rho()) < 1.5 + 0.005 * photon->pt();
 		passesphoSCChIso = photon->RhoCorrectedSCChIso(event->rho()) < 20;
 
-		backgroundShape = photon->sigmaIEtaIEta() > 0.012 && photon->sigmaIEtaIEta() < 0.029;
 	}
 
 	
@@ -118,9 +117,9 @@ bool TopPairMuMuReferenceSelection::isNminusOnePhoton(const PhotonPointer photon
 
 	 for (unsigned int index = 0; index < muons.size(); ++index) {
 	 			const MuonPointer muon(muons.at(index));
-	 			passesDeltaRgammaMuons = photon->deltaR(muon) > 0.7;
+	 			passesDeltaRgammaMuons = photon->deltaR(muon) > 0.5;
 				
-				if(photon->deltaR(muon) < 0.7)
+				if(photon->deltaR(muon) < 0.5)
 				break;
 	}
 
@@ -128,7 +127,7 @@ bool TopPairMuMuReferenceSelection::isNminusOnePhoton(const PhotonPointer photon
 	
 	for (unsigned int index = 0; index < jets.size(); ++index) { 
 			const JetPointer jet(jets.at(index));
-			passesDeltaRgammaJets = photon->deltaR(jet) > 0.7;
+			passesDeltaRgammaJets = photon->deltaR(jet) > 0.5;
 	}
 	
 	bool passesDeltaRjetsMuons = false;
@@ -198,7 +197,7 @@ bool TopPairMuMuReferenceSelection::isGoodPhoton(const PhotonPointer photon, con
 //	bool passesphoSCPhIso = false;
 	
 	if (photon->isInBarrelRegion()) {
-//		passesShowerShape = photon->sigmaIEtaIEta() < 0.012;
+	//	passesShowerShape = photon->sigmaIEtaIEta() < 0.012;
 //		passesPFChargedIso = photon->RhoCorrectedPFChargedHadronIso(event->rho()) < 2.6;
 		passesPFNeutralIso = photon->RhoCorrectedPFNeutralHadronIso(event->rho()) < 7.5 + 0.04 * photon->pt(); //3.5
 		passesPFPhotonIso = photon->RhoCorrectedPFPhotonIso(event->rho()) < 5 + 0.005 * photon->pt(); //1.3
