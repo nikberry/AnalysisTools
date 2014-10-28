@@ -113,12 +113,12 @@ void TTbarLooseSelectionAnalyser::muMuSignalAnalysis(const EventPtr event) {
 			    const PhotonCollection photonsMinuspassesDeltaRgammaElectrons = topMuMuLooseRefSelection_->nMinusOnePhotons(event, "passesDeltaRgammaElectrons");
 			    photonAnalyserMuMuRefSelection_->analyse_NminusOnePhotons(event, photonsMinuspassesDeltaRgammaElectrons, jets, electrons, muons, "passesDeltaRgammaElectrons");
 			    //background shape
-			    const PhotonCollection photonBackgroundShape = topMuMuLooseRefSelection_->nMinusOnePhotons(event, "backgroundShape");
-			    photonAnalyserMuMuRefSelection_->analyse_NminusOnePhotons(event, photonBackgroundShape, jets, electrons, muons, "backgroundShape");
+			    //const PhotonCollection photonBackgroundShape = topMuMuLooseRefSelection_->nMinusOnePhotons(event, "backgroundShape");
+			    //photonAnalyserMuMuRefSelection_->analyse_NminusOnePhotons(event, photonBackgroundShape, jets, electrons, muons, "backgroundShape");
 			
 			///////CHECK THIS
 
-			    if(event->getDataType() == DataType::TTJets){
+			    if(event->getDataType() == DataType::TTJets || event->getDataType() == DataType::TTGamma || event->getDataType() == DataType::TTGamma2to7){
 			    ttphotonAnalyserMuMuRefSelection_->setScale(bjetWeight);
 			    ttphotonAnalyserMuMuRefSelection_->analyse(event, photons, jets, electrons, muons);
 			    }
@@ -222,10 +222,10 @@ void TTbarLooseSelectionAnalyser::eESignalAnalysis(const EventPtr event) {
 			    photonAnalyserEERefSelection_->analyse_NminusOnePhotons(event, photonsMinuspassesDeltaRgammaElectrons, jets, electrons, muons, "passesDeltaRgammaElectrons");
 
 	                     //background shape
-                            const PhotonCollection photonBackgroundShape = topEELooseRefSelection_->nMinusOnePhotons(event, "backgroundShape");
-                            photonAnalyserEERefSelection_->analyse_NminusOnePhotons(event, photonBackgroundShape, jets, electrons, muons, "backgroundShape");
+                            //const PhotonCollection photonBackgroundShape = topEELooseRefSelection_->nMinusOnePhotons(event, "backgroundShape");
+                            //photonAnalyserEERefSelection_->analyse_NminusOnePhotons(event, photonBackgroundShape, jets, electrons, muons, "backgroundShape");
 
-			    if(event->getDataType() == DataType::TTJets){
+			    if(event->getDataType() == DataType::TTJets  || event->getDataType() == DataType::TTGamma || event->getDataType() == DataType::TTGamma2to7){
 			    ttphotonAnalyserEERefSelection_->setScale(bjetWeight);
 			    ttphotonAnalyserEERefSelection_->analyse(event, photons, jets, electrons, muons);
 			    }
@@ -330,10 +330,10 @@ void TTbarLooseSelectionAnalyser::eMuSignalAnalysis(const EventPtr event) {
 			    photonAnalyserEMuRefSelection_->analyse_NminusOnePhotons(event, photonsMinuspassesDeltaRgammaElectrons, jets, electrons, muons, "passesDeltaRgammaElectrons");
 
 		             //background shape
-                            const PhotonCollection photonBackgroundShape = topEMuLooseRefSelection_->nMinusOnePhotons(event, "backgroundShape");
-                            photonAnalyserEMuRefSelection_->analyse_NminusOnePhotons(event, photonBackgroundShape, jets, electrons, muons, "backgroundShape");
+                            //const PhotonCollection photonBackgroundShape = topEMuLooseRefSelection_->nMinusOnePhotons(event, "backgroundShape");
+                            //photonAnalyserEMuRefSelection_->analyse_NminusOnePhotons(event, photonBackgroundShape, jets, electrons, muons, "backgroundShape");
 
-			    if(event->getDataType() == DataType::TTJets){
+			    if(event->getDataType() == DataType::TTJets || event->getDataType() == DataType::TTGamma || event->getDataType() == DataType::TTGamma2to7){
 			    ttphotonAnalyserEMuRefSelection_->setScale(bjetWeight);
 			    ttphotonAnalyserEMuRefSelection_->analyse(event, photons, jets, electrons, muons);
 			    }

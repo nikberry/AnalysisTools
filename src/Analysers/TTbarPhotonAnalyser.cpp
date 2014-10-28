@@ -131,8 +131,8 @@ void TTbarPhotonAnalyser::muMuSignalAnalysis(const EventPtr event) {
                             const PhotonCollection photonsMinuspassesDeltaRjetsMuons = topMuMuPhotonSelection_->nMinusOnePhotons(event, "passesDeltaRjetsMuons");
                             photonAnalyserMuMuPhotonSelection_->analyse_NminusOnePhotons(event, photonsMinuspassesDeltaRjetsMuons, jets, electrons, muons, "passesDeltaRjetsMuons");
 
-			    const PhotonCollection photonsBackgroundRegion = topMuMuPhotonSelection_->nMinusOnePhotons(event, "backgroundShape");
-			    photonAnalyserMuMuPhotonSelection_->analyse_NminusOnePhotons(event, photonsBackgroundRegion, jets, electrons, muons, "backgroundShape");
+//			    const PhotonCollection photonsBackgroundRegion = topMuMuPhotonSelection_->nMinusOnePhotons(event, "backgroundShape");
+//			    photonAnalyserMuMuPhotonSelection_->analyse_NminusOnePhotons(event, photonsBackgroundRegion, jets, electrons, muons, "backgroundShape");
 
 			}
 	}
@@ -255,8 +255,8 @@ void TTbarPhotonAnalyser::eESignalAnalysis(const EventPtr event) {
                             const PhotonCollection photonsMinuspassesDeltaRjetsElectrons = topMuMuPhotonSelection_->nMinusOnePhotons(event, "passesDeltaRjetsElectrons");
                             photonAnalyserMuMuPhotonSelection_->analyse_NminusOnePhotons(event, photonsMinuspassesDeltaRjetsElectrons, jets, electrons, muons, "passesDeltaRjetsElectrons");
 			
-                            const PhotonCollection photonsBackgroundRegion = topEEPhotonSelection_->nMinusOnePhotons(event, "backgroundShape");
-                            photonAnalyserEEPhotonSelection_->analyse_NminusOnePhotons(event, photonsBackgroundRegion, jets, electrons, muons, "backgroundShape");                    
+   //                         const PhotonCollection photonsBackgroundRegion = topEEPhotonSelection_->nMinusOnePhotons(event, "backgroundShape");
+ //                           photonAnalyserEEPhotonSelection_->analyse_NminusOnePhotons(event, photonsBackgroundRegion, jets, electrons, muons, "backgroundShape");                    
 		}
 	}
 }
@@ -384,8 +384,8 @@ void TTbarPhotonAnalyser::eMuSignalAnalysis(const EventPtr event) {
                             const PhotonCollection photonsMinuspassesDeltaRjetsElectrons = topEMuPhotonSelection_->nMinusOnePhotons(event, "passesDeltaRjetsElectrons");
                             photonAnalyserEMuPhotonSelection_->analyse_NminusOnePhotons(event, photonsMinuspassesDeltaRjetsElectrons, jets, electrons, muons, "passesDeltaRjetsElectrons");
 			
-                            const PhotonCollection photonsBackgroundRegion = topEMuPhotonSelection_->nMinusOnePhotons(event, "backgroundShape");
-                            photonAnalyserEMuPhotonSelection_->analyse_NminusOnePhotons(event, photonsBackgroundRegion, jets, electrons, muons, "backgroundShape");                    
+//                            const PhotonCollection photonsBackgroundRegion = topEMuPhotonSelection_->nMinusOnePhotons(event, "backgroundShape");
+  //                          photonAnalyserEMuPhotonSelection_->analyse_NminusOnePhotons(event, photonsBackgroundRegion, jets, electrons, muons, "backgroundShape");                    
 		}
 	}
 }

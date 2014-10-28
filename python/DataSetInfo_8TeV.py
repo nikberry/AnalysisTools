@@ -36,13 +36,13 @@ datasetInfo['DY4JetsToLL'] = {"cross-section": 23.04, "NumberOfProcessedEvents":
 datasetInfo['GJets_HT-200To400'] = {"cross-section": 960.5, "NumberOfProcessedEvents":10484464}
 datasetInfo['GJets_HT-400ToInf'] = {"cross-section": 107.5, "NumberOfProcessedEvents":1606586}
 
-datasetInfo['T_s-channel'] = {"cross-section": 3.79, "NumberOfProcessedEvents":259911}
-datasetInfo['T_t-channel'] = {"cross-section": 56.4, "NumberOfProcessedEvents":3757707}
-datasetInfo['T_tW-channel'] = {"cross-section": 11.1, "NumberOfProcessedEvents":493460}
+datasetInfo['T_s-channel'] = {"cross-section": 3.79, "NumberOfProcessedEvents":259961}
+datasetInfo['T_t-channel'] = {"cross-section": 56.4, "NumberOfProcessedEvents":99876}
+datasetInfo['T_tW-channel'] = {"cross-section": 11.1, "NumberOfProcessedEvents":497658}
 
-datasetInfo['Tbar_s-channel'] = {"cross-section": 1.76, "NumberOfProcessedEvents":139948}
-datasetInfo['Tbar_t-channel'] = {"cross-section": 30.7, "NumberOfProcessedEvents":1934817}
-datasetInfo['Tbar_tW-channel'] = {"cross-section": 11.1, "NumberOfProcessedEvents":497658}
+datasetInfo['Tbar_s-channel'] = {"cross-section": 1.76, "NumberOfProcessedEvents":139974}
+datasetInfo['Tbar_t-channel'] = {"cross-section": 30.7, "NumberOfProcessedEvents":1935072}
+datasetInfo['Tbar_tW-channel'] = {"cross-section": 11.1, "NumberOfProcessedEvents":493460}
 
 #systematic samples
 datasetInfo['TTJets-matchingdown'] = {"cross-section": 130., "NumberOfProcessedEvents":5458456}
@@ -127,5 +127,5 @@ datasetInfo['TTJets_FullLept'] = {"cross-section": 245.8, "NumberOfProcessedEven
 datasetInfo['TTJets_Hadronic'] = {"cross-section": 245.8, "NumberOfProcessedEvents":27609920}
 #extra DY samples
 datasetInfo['DYJetsToLL_M-10To50'] = {"cross-section": 11050.0, "NumberOfProcessedEvents":37835275}
-datasetInfo['DYJetsToLL_M-50'] = {"cross-section": 2950.0, "NumberOfProcessedEvents":30459503}
+datasetInfo['DYJetsToLL_M-50'] = {"cross-section": 3350.0, "NumberOfProcessedEvents":30458871}
 

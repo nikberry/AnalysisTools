@@ -168,9 +168,9 @@ bool TopPairMuMuLooseReferenceSelection::isNminusOnePhoton(const PhotonPointer p
 		else if(cut == "passesDeltaRjetsMuons")
 			return passesEtAndEta && passesSafeElectronVeto && passesHOverE && passesShowerShape && passesPFNeutralIso && passesPFPhotonIso &&
 			passesDeltaRgammaMuons && passesDeltaRgammaJets && passesphoSCChIso;	
-		else if(cut == "backgroundShape")
-			return passesEtAndEta && passesSafeElectronVeto && passesHOverE && passesPFNeutralIso && passesPFPhotonIso && passesDeltaRgammaMuons &&
-			passesDeltaRgammaJets && passesDeltaRjetsMuons && backgroundShape && passesphoSCChIso;
+		//else if(cut == "backgroundShape")
+		//	return passesEtAndEta && passesSafeElectronVeto && passesHOverE && passesPFNeutralIso && passesPFPhotonIso && passesDeltaRgammaMuons &&
+		//	passesDeltaRgammaJets && passesDeltaRjetsMuons && backgroundShape && passesphoSCChIso;
 		else	
 			return passesEtAndEta && passesSafeElectronVeto && passesHOverE && passesShowerShape && passesPFNeutralIso && passesPFPhotonIso &&
 			passesphoSCChIso && passesDeltaRgammaMuons && passesDeltaRgammaJets && passesDeltaRjetsMuons;

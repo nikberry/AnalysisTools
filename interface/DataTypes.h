@@ -100,7 +100,7 @@ const boost::array<std::string, DataType::NUMBER_OF_DATA_TYPES> names = { {
 		"T_t-channel", //
 		"T_s-channel", //
 		"Tbar_tW-channel", //
-		"Tbar_t-channel", //20
+		"Tbar_t-channel", //
 		"Tbar_s-channel", //
 		"WWToAnything", //
 		"WZToAnything", //
