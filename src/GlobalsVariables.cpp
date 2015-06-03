@@ -14,7 +14,7 @@ namespace BAT {
 unsigned long Globals::maxEvents = 0;
 
 double Globals::luminosity = 3934.085;
-unsigned short Globals::energyInTeV = 7;
+unsigned short Globals::energyInTeV = 8;
 unsigned long Globals::printEveryXEvents = 100000;
 std::string Globals::selectedEventsOutputfile = "selectedEvents.txt";
 std::string Globals::selectedEventsWithMetaDataOutputfile = "selectedEventsWithMetaData.txt";
@@ -43,7 +43,7 @@ bool Globals::MuonIDSFDown = false;
 //jets
 JetAlgorithm::value Globals::jetAlgorithm = JetAlgorithm::PF2PAT;
 int Globals::JESsystematic = 0;
-int Globals::BJetSystematic = 0;
+int Globals::BJetSystematic = -1;
 int Globals::LightJetSystematic = 0;
 
 //Level7 JEC arrays

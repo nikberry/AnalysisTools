@@ -92,7 +92,7 @@ void EventCountAnalyser::topMuMuReferenceSelection(const EventPtr event) {
 		double efficiencyCorrection1 = event->isRealData() ? 1. : muon1->getEfficiencyCorrection();
 		double efficiencyCorrection2 = event->isRealData() ? 1. : muon2->getEfficiencyCorrection();
 		
-	 	scale_ = efficiencyCorrection1*efficiencyCorrection2;//*0.967; //(1) Muon 1, (2) Muon 2
+	 	scale_ *= efficiencyCorrection1*efficiencyCorrection2;//*0.967; //(1) Muon 1, (2) Muon 2
 	}else{
 		scale_ =1;
 	}
@@ -184,14 +184,14 @@ void EventCountAnalyser::topEEReferenceSelection(const EventPtr event) {
 	if (topEERefSelection_->passesSelectionUpToStep(event, TTbarEEReferenceSelection::DiElectronSelection)) {
 
 	const ElectronCollection signalElectrons = topEERefSelection_->signalElectrons(event);
-//	const ElectronPointer signalMuon(boost::static_pointer_cast<Muon>(signalMuons));
+	//const ElectronPointer signalMuon(boost::static_pointer_cast<Muon>(signalMuons));
 	const ElectronPointer electron1(signalElectrons.at(0));
 	const ElectronPointer electron2(signalElectrons.at(1));
 
 	double efficiencyCorrection1 = event->isRealData() ? 1. : electron1->getEfficiencyCorrection();
 	double efficiencyCorrection2 = event->isRealData() ? 1. : electron2->getEfficiencyCorrection();
 	
-	 	scale_ = efficiencyCorrection1*efficiencyCorrection2;//*0.974;
+	 	scale_ *= efficiencyCorrection1*efficiencyCorrection2;//*0.974;
 	}else{
 		scale_ =1;
 	}
@@ -269,18 +269,20 @@ void EventCountAnalyser::topEEReferenceSelectionUnweighted(const EventPtr event)
 	histMan_->setCurrentHistogramFolder(histogramFolder_);
 	
 	//Trigger SF
-	if (!event->isRealData() && topEMuRefSelection_->passesSelectionUpToStep(event, TTbarEMuReferenceSelection::EventCleaningAndTrigger)) 
+	if (!event->isRealData() && topEMuRefSelection_->passesSelectionUpToStep(event, TTbarEMuReferenceSelection::EventCleaningAndTrigger)){ 
              if(Globals::TriggerSFUp == true)
                      scale_ *= 0.964; 
              else if(Globals::TriggerSFDown == true)
                      scale_ *= 0.942;
              else
-			scale_ *= 0.953; 
-	else 
-		scale_ = 1;
+			scale_ *= 0.953;
 
+
+	}else{ 
+		scale_ = 1;
+	}
 	//EMu SF's
- 	if (topEMuRefSelection_->passesSelectionUpToStep(event, TTbarEMuReferenceSelection::DiLeptonSelection)) {
+  	if (topEMuRefSelection_->passesSelectionUpToStep(event, TTbarEMuReferenceSelection::DiLeptonSelection)) {
 
 	const MuonCollection signalMuons = topEMuRefSelection_->signalMuons(event);
 	const ElectronCollection signalElectrons = topEMuRefSelection_->signalElectrons(event);
@@ -291,7 +293,8 @@ void EventCountAnalyser::topEEReferenceSelectionUnweighted(const EventPtr event)
 	double efficiencyCorrection1 = event->isRealData() ? 1. : muon->getEfficiencyCorrection();
 	double efficiencyCorrection2 = event->isRealData() ? 1. : electron->getEfficiencyCorrection();
 	
-	 	scale_ = efficiencyCorrection1*efficiencyCorrection2;//*0.953;
+	 	scale_ *= efficiencyCorrection1*efficiencyCorrection2;//*0.953;
+
 	}else{
 		scale_ =1;
 	}
@@ -345,7 +348,7 @@ void EventCountAnalyser::topEEReferenceSelectionUnweighted(const EventPtr event)
  	}
 
 	weight_ = event->weight() * prescale_ * scale_ ;
-	
+
 
 	histMan_->H1D("TTbarEMuRefSelection")->Fill(-1, weight_);
 	histMan_->H1D("TTbarEMuRefSelection_singleCuts")->Fill(-1, weight_);
@@ -413,7 +416,7 @@ void EventCountAnalyser::topMuMuLooseReferenceSelection(const EventPtr event) {
 		double efficiencyCorrection1 = event->isRealData() ? 1. : muon1->getEfficiencyCorrection();
 		double efficiencyCorrection2 = event->isRealData() ? 1. : muon2->getEfficiencyCorrection();
 		
-	 	scale_ = efficiencyCorrection1*efficiencyCorrection2;//*0.967; //(1) Muon 1, (2) Muon 2
+	 	scale_ *= efficiencyCorrection1*efficiencyCorrection2;//*0.967; //(1) Muon 1, (2) Muon 2
 	}else{
 		scale_ =1;
 	}
@@ -509,7 +512,7 @@ void EventCountAnalyser::topEELooseReferenceSelection(const EventPtr event) {
 	double efficiencyCorrection1 = event->isRealData() ? 1. : electron1->getEfficiencyCorrection();
 	double efficiencyCorrection2 = event->isRealData() ? 1. : electron2->getEfficiencyCorrection();
 	
-	 	scale_ = efficiencyCorrection1*efficiencyCorrection2;//*0.974;
+	 	scale_ *= efficiencyCorrection1*efficiencyCorrection2;//*0.974;
 	}else{
 		scale_ =1;
 	}
@@ -606,7 +609,7 @@ void EventCountAnalyser::topEELooseReferenceSelectionUnweighted(const EventPtr e
 	double efficiencyCorrection1 = event->isRealData() ? 1. : muon->getEfficiencyCorrection();
 	double efficiencyCorrection2 = event->isRealData() ? 1. : electron->getEfficiencyCorrection();
 	
-	 	scale_ = efficiencyCorrection1*efficiencyCorrection2;//*0.953;
+	 	scale_ *= efficiencyCorrection1*efficiencyCorrection2;//*0.953;
 	}else{
 		scale_ =1;
 	}

@@ -69,6 +69,8 @@ double EventWeightProvider::reweightTopPt(const EventPtr event) {
         double SFtbar = exp(0.159-0.00141*tbarPt);
 
         double weight=sqrt(SFtop*SFtbar);
+
+	cout << "Top pt reweight: " << weight << endl;
   return weight;
 }
 

@@ -20,7 +20,7 @@ enum value {
 	DoubleMu,
 	DoubleElectron,
 	MuEG,
-	TTGamma2to7,
+	TTGamma_2to7,
 	TTGamma,
 	TTJets,
 	Wjets,
@@ -38,10 +38,14 @@ enum value {
 	PhotonJets_Pt200to400,
 	PhotonJets_Pt400toInf,
 	VQQ,
-	singleTop_And_W, 
+	singleTop_And_W,
+	singleTop_And_W_scaleup,
+	singleTop_And_W_scaledown, 
 	singleTopTChannel,
 	singleTopSChannel,
 	singleAntiTop_And_W,
+	singleAntiTop_And_W_scaleup,
+	singleAntiTop_And_W_scaledown,
 	singleAntiTopTChannel,
 	singleAntiTopSChannel,
 	WWToAnything,
@@ -78,7 +82,7 @@ const boost::array<std::string, DataType::NUMBER_OF_DATA_TYPES> names = { {
 		"DoubleMu", //
 		"DoubleElectron",
 		"MuEG", 
-		"TTGamma2to7",
+		"TTGamma_2-to-7",
 		"TTGamma",
 		"TTJet", //
 		"WJetsToLNu", //
@@ -97,9 +101,13 @@ const boost::array<std::string, DataType::NUMBER_OF_DATA_TYPES> names = { {
 		"GJets_HT-400ToInf", //
 		"VqqJets", //
 		"T_tW-channel", //
+		"T_tW-scaleup", //
+		"T_tW-scaledown", //
 		"T_t-channel", //
 		"T_s-channel", //
 		"Tbar_tW-channel", //
+                "Tbar_tW-scaleup", //
+                "Tbar_tW-scaledown", //
 		"Tbar_t-channel", //
 		"Tbar_s-channel", //
 		"WWToAnything", //
@@ -109,14 +117,14 @@ const boost::array<std::string, DataType::NUMBER_OF_DATA_TYPES> names = { {
 		"TTJets-matchingup", //
 		"TTJets-scaledown", //
 		"TTJets-scaleup", //
-		"WJets-matchingdown", //
-		"WJets-matchingup", //
-		"WJets-scaledown", //
-		"WJets-scaleup", //
-		"ZJets-matchingdown",//
-		"ZJets-matchingup",//
-		"ZJets-scaledown",//
-		"ZJets-scaleup",//
+		"WJetsToLNu-matchingdown", //
+		"WJetsToLNu-matchingup", //
+		"WJetsToLNu-scaledown", //
+		"WJetsToLNu-scaleup", //
+		"DYJetsToLL_M-50-matchingdown",//
+		"DYJetsToLL_M-50-matchingup",//
+		"DYJetsToLL_M-50-scaledown",//
+		"DYJetsToLL_M-50-scaleup",//
 		"TTbarZIncl", //
 		"TTbarInclWIncl", //
 		"TTJets_SemiLept",//

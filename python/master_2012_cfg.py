@@ -12,7 +12,7 @@ datasets = {'DoubleMu' : [  data_path + 'DoubleMuParked_Run2012A-22Jan2013-v1_AO
 	 		    data_path + 'MuEG_Run2012B-22Jan2013-v1_AOD_nTuple_v10_GoldenJSON_diLeptonPlus2Jets_final',
 	  		    data_path + 'MuEG_Run2012C-22Jan2013-v1_AOD_nTuple_v10_GoldenJSON_diLeptonPlus2Jets_final',
 	   		    data_path + 'MuEG_Run2012D-22Jan2013-v1_AOD_nTuple_v10_GoldenJSON_diLeptonPlus2Jets_final'],	    
-#		 'TTGamma2to7' : [data_path + 'TTGamma_TuneZ2star_8TeV-madgraph-tauola-Summer12_DR53X-PU_RD1_START53_V7N-v1_diLeptonPlus2Jets_final'], 
+		 'TTGamma_2-to-7' : [data_path + 'TTGamma_TuneZ2star_8TeV-madgraph-tauola-Summer12_DR53X-PU_RD1_START53_V7N-v1_diLeptonPlus2Jets_final'], 
 		 'TTGamma' : [data_path + 'LHE2EDM_WHIZARD_2to5_ttA/nTuple_v10_Summer12-PU_S7_START52_V9-v1_diLeptonPlus2Jets_final'],	    	
 		 'TTJet' : [data_path + 'TTJets_MassiveBinDECAY_TuneZ2star_8TeV-madgraph-tauola_Summer12_DR53X-PU_S10_START53_V7C-v1_AODSIM_nTuple_v10_diLeptonPlus2Jets_rmgamma'],
                  'DYJetsToLL_M-10To50' : [data_path + 'DYJetsToLL_M-10To50_TuneZ2Star_8TeV-madgraph-tarball_Summer12_DR53X-PU_S10_START53_V7A-v1_AODSIM_nTuple_v10_diLeptonPlus2Jets_final'],
@@ -22,10 +22,10 @@ datasets = {'DoubleMu' : [  data_path + 'DoubleMuParked_Run2012A-22Jan2013-v1_AO
                  'TTJets_SemiLept' : [data_path + 'TTJets_SemiLeptMGDecays_8TeV-madgraph_Summer12_DR53X-PU_S10_START53_V7A_ext-v1_AODSIM_nTuple_v10_diLeptonPlus2Jets_final'],
 		 'T_tW-channel' : [data_path + 'T_tW-channel-DR_TuneZ2star_8TeV-powheg-tauola_Summer12_DR53X-PU_S10_START53_V7A-v1_AODSIM_nTuple_v10_diLeptonPlus2Jets_final'],
                  'Tbar_tW-channel' : [data_path + 'Tbar_tW-channel-DR_TuneZ2star_8TeV-powheg-tauola_Summer12_DR53X-PU_S10_START53_V7A-v1_AODSIM_nTuple_v10_diLeptonPlus2Jets_final'],
-		 'T_t-channel' : [data_path + 'T_t-channel_TuneZ2star_8TeV-powheg-tauola_Summer12-PU_S10_START53_V7A-v3_diLeptonPlus2Jets'],
-		 'Tbar_t-channel' : [data_path + 'Tbar_t-channel_TuneZ2star_8TeV-powheg-tauola_Summer12-PU_S10_START53_V7A-v1_diLeptonPlus2Jets'],
-		 'T_s-channel' : [data_path + 'T_s-channel_TuneZ2star_8TeV-powheg-tauola_Summer12-PU_S10_START53_V7A-v1_diLeptonPlus2Jets'],
-		 'Tbar_s-channel' : [data_path + 'Tbar_s-channel_TuneZ2star_8TeV-powheg-tauola_Summer12-PU_S10_START53_V7A-v1_diLeptonPlus2Jets'],
+		 'T_t-channel' : [data_path + 'T_t-channel_TuneZ2star_8TeV-powheg-tauola/nTuple_Summer12-PU_S10_START53_V7A-v3_diLeptonPlus2Jets'],
+		 'Tbar_t-channel' : [data_path + 'Tbar_t-channel_TuneZ2star_8TeV-powheg-tauola/nTuple_Summer12-PU_S10_START53_V7A-v1_diLeptonPlus2Jets'],
+		 'T_s-channel' : [data_path + 'T_s-channel_TuneZ2star_8TeV-powheg-tauola/nTuple_Summer12-PU_S10_START53_V7A-v1_diLeptonPlus2Jets'],
+		 'Tbar_s-channel' : [data_path + 'Tbar_s-channel_TuneZ2star_8TeV-powheg-tauola/nTuple_Summer12-PU_S10_START53_V7A-v1_diLeptonPlus2Jets'],
 		 'WJetsToLNu' : [data_path + 'WJetsToLNu_TuneZ2Star_8TeV-madgraph-tarball_Summer12_DR53X-PU_S10_START53_V7A-v2_AODSIM_nTuple_v10_diLeptonPlus2Jets_final'],
                  'QCD_Pt_20_MuEnrichedPt_15' : [data_path + 'QCD_Pt_20_MuEnrichedPt_15_TuneZ2star_8TeV_pythia6_Summer12_DR53X-PU_S10_START53_V7A-v3_AODSIM_nTuple_v10_diLeptonPlus2Jets_final'],
 		 'QCD_Pt_20_30_BCtoE' : [data_path + 'QCD_Pt_20_30_BCtoE_TuneZ2star_8TeV_pythia6_Summer12_DR53X-PU_S10_START53_V7A-v1_AODSIM_nTuple_v10_diLeptonPlus2Jets_final'],
@@ -37,7 +37,22 @@ datasets = {'DoubleMu' : [  data_path + 'DoubleMuParked_Run2012A-22Jan2013-v1_AO
 		 'WWToAnything' : [data_path + 'WW_TuneZ2star_8TeV_pythia6_tauola_Summer12_DR53X-PU_S10_START53_V7A-v1_AODSIM_nTuple_v10_diLeptonPlus2Jets_final'],
                  'WZToAnything' : [data_path + 'WZ_TuneZ2star_8TeV_pythia6_tauola_Summer12_DR53X-PU_S10_START53_V7A-v1_AODSIM_nTuple_v10_diLeptonPlus2Jets_final'],
 		 'ZZToAnything' : [data_path + 'ZZ_TuneZ2star_8TeV_pythia6_tauola_Summer12_DR53X-PU_S10_START53_V7A-v1_AODSIM_nTuple_v10_diLeptonPlus2Jets_final'],
-   
+		 'TTJets-matchingup' : [data_path + 'TTJets_matchingup_TuneZ2star_8TeV-madgraph-tauola_Summer12_DR53X-PU_S10_START53_V7A-v1_AODSIM_nTuple_v10_diLeptonPlus2Jets_rmgamma'], 
+		 'TTJets-matchingdown' : [data_path + 'TTJets_matchingdown_TuneZ2star_8TeV-madgraph-tauola_Summer12_DR53X-PU_S10_START53_V7A-v1_AODSIM_nTuple_v10_diLeptonPlus2Jets_rmgamma'],
+		 'TTJets-scaleup' : [data_path + 'TTJets_scaleup_TuneZ2star_8TeV-madgraph-tauola_Summer12_DR53X-PU_S10_START53_V7A-v1_AODSIM_nTuple_v10_diLeptonPlus2Jets_rmgamma'],
+		 'TTJets-scaledown' : [data_path + 'TTJets_scaledown_TuneZ2star_8TeV-madgraph-tauola_Summer12_DR53X-PU_S10_START53_V7A-v1_AODSIM_nTuple_v10_diLeptonPlus2Jets_rmgamma'],
+		 'T_tW-scaleup' : [data_path + 'TToDilepton_tW-channel-DR_scaleup_8TeV-powheg-tauola_Summer12_DR53X-PU_S10_START53_V7A-v1_AODSIM_nTuple_v10_diLeptonPlus2Jets_final'],
+		 'T_tW-scaledown' : [data_path + 'TToDilepton_tW-channel-DR_scaledown_8TeV-powheg-tauola_Summer12_DR53X-PU_S10_START53_V7A-v1_AODSIM_nTuple_v10_diLeptonPlus2Jets_final'],
+		 'Tbar_tW-scaleup' : [data_path + 'TBarToDilepton_tW-channel-DR_scaleup_8TeV-powheg-tauola_Summer12_DR53X-PU_S10_START53_V7A-v1_AODSIM_nTuple_v10_diLeptonPlus2Jets_final'],
+		 'Tbar_tW-scaledown' : [data_path + 'TBarToDilepton_tW-channel-DR_scaledown_8TeV-powheg-tauola_Summer12_DR53X-PU_S10_START53_V7A-v1_AODSIM_nTuple_v10_diLeptonPlus2Jets_final'],
+		 'WJetsToLNu-matchingup' : [data_path + 'WJetsToLNu_matchingup_8TeV-madgraph-tauola_Summer12_DR53X-PU_S10_START53_V7A-v1_AODSIM_nTuple_v10_diLeptonPlus2Jets_final'],
+		 'WJetsToLNu-matchingdown' : [data_path + 'WJetsToLNu_matchingdown_8TeV-madgraph-tauola_Summer12_DR53X-PU_S10_START53_V7A-v1_AODSIM_nTuple_v10_diLeptonPlus2Jets_final'],
+		 'WJetsToLNu-scaleup' : [data_path + 'WJetsToLNu_scaleup_8TeV-madgraph-tauola_Summer12_DR53X-PU_S10_START53_V7A-v2_AODSIM_nTuple_v10_diLeptonPlus2Jets_final'],
+		 'WJetsToLNu-scaledown' : [data_path + 'WJetsToLNu_scaledown_8TeV-madgraph-tauola_Summer12_DR53X-PU_S10_START53_V7A-v1_AODSIM_nTuple_v10_diLeptonPlus2Jets_final'],
+		 'DYJetsToLL_M-50-matchingup' : [data_path + 'DYJetsToLL_M-50_matchingup_8TeV-madgraph-tauola_Summer12_DR53X-PU_S10_START53_V7A-v1_AODSIM_nTuple_v10_diLeptonPlus2Jets_final'],
+		 'DYJetsToLL_M-50-matchingdown' : [data_path + 'DYJetsToLL_M-50_matchingdown_8TeV-madgraph__Summer12_DR53X-PU_S10_START53_V7A-v1_AODSIM_nTuple_v10_diLeptonPlus2Jets_final'],
+		 'DYJetsToLL_M-50-scaleup' : [data_path + 'DYJetsToLL_M-50_scaleup_8TeV-madgraph-tauola_Summer12_DR53X-PU_S10_START53_V7A-v1_AODSIM_nTuple_v10_diLeptonPlus2Jets_final'],
+		 'DYJetsToLL_M-50-scaledown' : [data_path + 'DYJetsToLL_M-50_scaledown_8TeV-madgraph-tauola_Summer12_DR53X-PU_S10_START53_V7A-v1_AODSIM_nTuple_v10_diLeptonPlus2Jets_final'],
                      }
 
 analysisModes = ['central',
@@ -159,8 +174,8 @@ applyMetType0Corr = True
 TQAFPath = ""
 
 #integrated luminosity the MC simulation will be scaled to
-lumi = 19584.#pb-1
-
+#lumi = 19584.#pb-1
+lumi = 19700.
 #center of mass energy: 7TeV for 2010/2011 data/MC, 8TeV for 2012 data
 #this value will be part of the output file name: DataType_CenterOfMassEnergyTeV_lumipb-1_....
 centerOfMassEnergy = 8

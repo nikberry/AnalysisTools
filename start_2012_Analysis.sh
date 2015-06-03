@@ -9,29 +9,66 @@ export exe=${exe}
 export TQAFPath=${TQAFPath}
 
 #Central samples
-sample="TTGamma" analysisMode="central" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> TTGamma_central.log &
-sample="TTJet" analysisMode="central" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> TTJet_central.log &
-sample="WJetsToLNu" analysisMode="central" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> WJetsToLNu_central.log &
-sample="T_tW-channel" analysisMode="central" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> T_tW-channel_central.log &
-sample="Tbar_tW-channel" analysisMode="central" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> Tbar_tW-channel_central.log &
-sample="DYJetsToLL_M-10To50" analysisMode="central" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> DYJetsToLL_M-10To50_central.log &
-sample="DYJetsToLL_M-50" analysisMode="central" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> DYJetsToLL_M-50_central.log &
-sample="TTJets_SemiLept" analysisMode="central" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> TTJets_SemiLept_central.log &
-sample="TTJets_FullLept" analysisMode="central" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> TTJets_FullLept_central.log &
-sample="TTJets_Hadronic" analysisMode="central" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> TTJets_Hadronic_central.log &
-sample="QCD_Pt_20_MuEnrichedPt_15" analysisMode="central" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> QCD_Pt_20_MuEnrichedPt_15_central.log &
-sample="QCD_Pt_20_30_BCtoE" analysisMode="central" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> QCD_Pt_20_30_BCtoE_central.log &
-sample="QCD_Pt_30_80_BCtoE" analysisMode="central" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> QCD_Pt_30_80_BCtoE_central.log &
-sample="QCD_Pt_80_170_BCtoE" analysisMode="central" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> QCD_Pt_80_170_BCtoE_central.log &
-sample="QCD_Pt_20_30_EMEnriched" analysisMode="central" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> QCD_Pt_20_30_EMEnriched_central.log &
-sample="QCD_Pt_30_80_EMEnriched" analysisMode="central" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> QCD_Pt_30_80_EMEnriched_central.log &
-sample="QCD_Pt_80_170_EMEnriched" analysisMode="central" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> QCD_Pt_80_170_EMEnriched_central.log &
-sample="WWtoAnything" analysisMode="central" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> WWtoAnything_central.log &
-sample="WZtoAnything" analysisMode="central" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> WZtoAnything_central.log &
-sample="ZZtoAnything" analysisMode="central" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> ZZtoAnything_central.log &
-sample="DoubleMu" analysisMode="central" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> DoubleMu_central.log &
-sample="DoubleElectron" analysisMode="central" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> DoubleElectron_central.log &
-sample="MuEG" analysisMode="central" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> MuEG_central.log &
+# sample="TTGamma_2-to-7" analysisMode="central" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> TTGamma_2-to-7_central.log &
+# ##sample="TTGamma" analysisMode="central" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> TTGamma_central.log &
+# sample="TTJet" analysisMode="central" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> TTJet_central.log &
+# sample="WJetsToLNu" analysisMode="central" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> WJetsToLNu_central.log &
+# sample="T_tW-channel" analysisMode="central" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> T_tW-channel_central.log &
+# sample="Tbar_tW-channel" analysisMode="central" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> Tbar_tW-channel_central.log &
+# sample="T_t-channel" analysisMode="central" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> T_t-channel_central.log &
+# sample="Tbar_t-channel" analysisMode="central" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> Tbar_t-channel_central.log & 
+# sample="T_s-channel" analysisMode="central" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> T_s-channel_central.log & 
+# sample="Tbar_s-channel" analysisMode="central" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> Tbar_s-channel_central.log & 
+# sample="DYJetsToLL_M-10To50" analysisMode="central" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> DYJetsToLL_M-10To50_central.log &
+# sample="DYJetsToLL_M-50" analysisMode="central" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> DYJetsToLL_M-50_central.log &
+# #sample="TTJets_SemiLept" analysisMode="central" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> TTJets_SemiLept_central.log &
+# #sample="TTJets_FullLept" analysisMode="central" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> TTJets_FullLept_central.log &
+# #sample="TTJets_Hadronic" analysisMode="central" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> TTJets_Hadronic_central.log &
+# # sample="QCD_Pt_20_MuEnrichedPt_15" analysisMode="central" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> QCD_Pt_20_MuEnrichedPt_15_central.log &
+# # sample="QCD_Pt_20_30_BCtoE" analysisMode="central" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> QCD_Pt_20_30_BCtoE_central.log &
+# # sample="QCD_Pt_30_80_BCtoE" analysisMode="central" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> QCD_Pt_30_80_BCtoE_central.log &
+# # sample="QCD_Pt_80_170_BCtoE" analysisMode="central" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> QCD_Pt_80_170_BCtoE_central.log &
+# # sample="QCD_Pt_20_30_EMEnriched" analysisMode="central" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> QCD_Pt_20_30_EMEnriched_central.log &
+# # sample="QCD_Pt_30_80_EMEnriched" analysisMode="central" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> QCD_Pt_30_80_EMEnriched_central.log &
+# # sample="QCD_Pt_80_170_EMEnriched" analysisMode="central" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> QCD_Pt_80_170_EMEnriched_central.log &
+# sample="WWToAnything" analysisMode="central" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> WWToAnything_central.log &
+# sample="WZToAnything" analysisMode="central" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> WZToAnything_central.log &
+# sample="ZZToAnything" analysisMode="central" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> ZZToAnything_central.log &
+# sample="DoubleMu" analysisMode="central" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> DoubleMu_central.log &
+# sample="DoubleElectron" analysisMode="central" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> DoubleElectron_central.log &
+# sample="MuEG" analysisMode="central" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> MuEG_central.log &
+
+sample="DoubleMu" analysisMode="JES_up" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> DoubleMu_JES_up.log &
+sample="DoubleElectron" analysisMode="JES_up" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> DoubleElectron_JES_up.log &
+sample="MuEG" analysisMode="JES_up" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> MuEG_JES_up.log &
+
+sample="DoubleMu" analysisMode="JES_down" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> DoubleMu_JES_down.log &
+sample="DoubleElectron" analysisMode="JES_down" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> DoubleElectron_JES_down.log &
+sample="MuEG" analysisMode="JES_down" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> MuEG_JES_down.log &
+
+sample="DoubleMu" analysisMode="BJet_up" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> DoubleMu_BJet_up.log &
+sample="DoubleElectron" analysisMode="BJet_up" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> DoubleElectron_BJet_up.log &
+sample="MuEG" analysisMode="BJet_up" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> MuEG_BJet_up.log &
+
+sample="DoubleMu" analysisMode="BJet_down" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> DoubleMu_BJet_down.log &
+sample="DoubleElectron" analysisMode="BJet_down" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> DoubleElectron_BJet_down.log &
+sample="MuEG" analysisMode="BJet_down" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> MuEG_BJet_down.log &
+
+sample="DoubleMu" analysisMode="LightJet_up" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> DoubleMu_LightJet_up.log &
+sample="DoubleElectron" analysisMode="LightJet_up" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> DoubleElectron_LightJet_up.log &
+sample="MuEG" analysisMode="LightJet_up" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> MuEG_LightJet_up.log &
+
+sample="DoubleMu" analysisMode="LightJet_down" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> DoubleMu_LightJet_down.log &
+sample="DoubleElectron" analysisMode="LightJet_down" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> DoubleElectron_LightJet_down.log &
+sample="MuEG" analysisMode="LightJet_down" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> MuEG_LightJet_down.log &
+
+sample="DoubleMu" analysisMode="PU_up" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> DoubleMu_PU_up.log &
+sample="DoubleElectron" analysisMode="PU_up" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> DoubleElectron_PU_up.log &
+sample="MuEG" analysisMode="PU_up" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> MuEG_PU_up.log &
+
+sample="DoubleMu" analysisMode="PU_down" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> DoubleMu_PU_down.log &
+sample="DoubleElectron" analysisMode="PU_down" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> DoubleElectron_PU_down.log &
+sample="MuEG" analysisMode="PU_down" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> MuEG_PU_down.log &
 
 
 #sample="QCD_20to30_BCtoE" analysisMode="central" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> QCD_20to30_BCtoE_central.log &
@@ -354,95 +391,135 @@ sample="MuEG" analysisMode="central" nohup ${exe} ${toolsFolder}python/master_20
 #sample="DY2JetsToLL" analysisMode="LightJet_down" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> DY2JetsToLL_LightJet_down.log &
 #sample="DY2JetsToLL" analysisMode="LightJet_up" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> DY2JetsToLL_LightJet_up.log &
 
-#sample="DY3JetsToLL" analysisMode="central" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> DY3JetsToLL_central.log &
-#sample="DY3JetsToLL" analysisMode="JES_up" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> DY3JetsToLL_JES_up.log &
-#sample="DY3JetsToLL" analysisMode="JES_down" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> DY3JetsToLL_JES_down.log &
-#sample="DY3JetsToLL" analysisMode="PU_down" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> DY3JetsToLL_PU_down.log &
-#sample="DY3JetsToLL" analysisMode="PU_up" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> DY3JetsToLL_PU_up.log &
-#sample="DY3JetsToLL" analysisMode="BJet_down" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> DY3JetsToLL_BJet_down.log &
-#sample="DY3JetsToLL" analysisMode="BJet_up" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> DY3JetsToLL_BJet_up.log &
-#sample="DY3JetsToLL" analysisMode="LightJet_down" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> DY3JetsToLL_LightJet_down.log &
-#sample="DY3JetsToLL" analysisMode="LightJet_up" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> DY3JetsToLL_LightJet_up.log &
+#***************************Start of Systematics**********************************
 
-#sample="DY4JetsToLL" analysisMode="central" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> DY4JetsToLL_central.log &
-#sample="DY4JetsToLL" analysisMode="JES_up" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> DY4JetsToLL_JES_up.log &
-#sample="DY4JetsToLL" analysisMode="JES_down" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> DY4JetsToLL_JES_down.log &
-#sample="DY4JetsToLL" analysisMode="PU_down" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> DY4JetsToLL_PU_down.log &
-#sample="DY4JetsToLL" analysisMode="PU_up" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> DY4JetsToLL_PU_up.log &
-#sample="DY4JetsToLL" analysisMode="BJet_down" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> DY4JetsToLL_BJet_down.log &
-#sample="DY4JetsToLL" analysisMode="BJet_up" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> DY4JetsToLL_BJet_up.log &
-#sample="DY4JetsToLL" analysisMode="LightJet_down" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> DY4JetsToLL_LightJet_down.log &
-#sample="DY4JetsToLL" analysisMode="LightJet_up" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> DY4JetsToLL_LightJet_up.log &
+# sample="TTGamma_2-to-7" analysisMode="JES_up" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> TTGamma_2-to-7_JES_up.log &
+# sample="TTGamma" analysisMode="JES_up" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> TTGamma_JES_up.log &
+# sample="TTJet" analysisMode="JES_up" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> TTJet_JES_up.log &
+# sample="Tbar_s-channel" analysisMode="JES_up" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> Tbar_s-channel_JES_up.log &
+# sample="Tbar_t-channel" analysisMode="JES_up" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> Tbar_t-channel_JES_up.log &
+# sample="Tbar_tW-channel" analysisMode="JES_up" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> Tbar_tW-channel_JES_up.log &
+# sample="T_s-channel" analysisMode="JES_up" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> T_s-channel_JES_up.log &
+# sample="T_t-channel" analysisMode="JES_up" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> T_t-channel_JES_up.log &
+# sample="T_tW-channel" analysisMode="JES_up" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> T_tW-channel_JES_up.log &
+# sample="DYJetsToLL_M-10To50" analysisMode="JES_up" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> DYJetsToLL_M-10To50_JES_up.log &
+# sample="DYJetsToLL_M-50" analysisMode="JES_up" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> DYJetsToLL_M-50_JES_up.log &
+# sample="WJetsToLNu" analysisMode="JES_up" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> WJetsToLNu_JES_up.log &
+# sample="ZZToAnything" analysisMode="JES_up" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> ZZToAnything_JES_up.log &
+# sample="WZToAnything" analysisMode="JES_up" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> WZToAnything_JES_up.log &
+# sample="WWToAnything" analysisMode="JES_up" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> WWToAnything_JES_up.log &
 
-#sample="T_tW" analysisMode="central" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> T_tW_central.log &
-#sample="T_tW" analysisMode="JES_up" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> T_tW_JES_up.log &
-#sample="T_tW" analysisMode="JES_down" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> T_tW_JES_down.log &
-#sample="T_tW" analysisMode="PU_down" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> T_tW_PU_down.log &
-#sample="T_tW" analysisMode="PU_up" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> T_tW_PU_up.log &
-#sample="T_tW" analysisMode="BJet_down" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> T_tW_BJet_down.log &
-#sample="T_tW" analysisMode="BJet_up" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> T_tW_BJet_up.log &
-#sample="T_tW" analysisMode="LightJet_down" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> T_tW_LightJet_down.log &
-#sample="T_tW" analysisMode="LightJet_up" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> T_tW_LightJet_up.log &
+# sample="TTGamma_2-to-7" analysisMode="JES_down" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> TTGamma_2-to-7_JES_down.log &
+# sample="TTGamma" analysisMode="JES_down" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> TTGamma_JES_down.log &
+# sample="TTJet" analysisMode="JES_down" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> TTJet_JES_down.log &
+# sample="Tbar_s-channel" analysisMode="JES_down" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> Tbar_s-channel_JES_down.log &
+# sample="Tbar_t-channel" analysisMode="JES_down" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> Tbar_t-channel_JES_down.log &
+# sample="Tbar_tW-channel" analysisMode="JES_down" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> Tbar_tW-channel_JES_down.log &
+# sample="T_s-channel" analysisMode="JES_down" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> T_s-channel_JES_down.log &
+# sample="T_t-channel" analysisMode="JES_down" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> T_t-channel_JES_down.log &
+# sample="T_tW-channel" analysisMode="JES_down" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> T_tW-channel_JES_down.log &
+# sample="DYJetsToLL_M-10To50" analysisMode="JES_down" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> DYJetsToLL_M-10To50_JES_down.log &
+# sample="DYJetsToLL_M-50" analysisMode="JES_down" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> DYJetsToLL_M-50_JES_down.log &
+# sample="WJetsToLNu" analysisMode="JES_down" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> WJetsToLNu_JES_down.log &
+# sample="ZZToAnything" analysisMode="JES_down" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> ZZToAnything_JES_down.log &
+# sample="WZToAnything" analysisMode="JES_down" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> WZToAnything_JES_down.log &
+# sample="WWToAnything" analysisMode="JES_down" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> WWToAnything_JES_down.log &
 
-#sample="T_t" analysisMode="central" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> T_t_central.log &
-#sample="T_t" analysisMode="JES_up" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> T_t_JES_up.log &
-#sample="T_t" analysisMode="JES_down" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> T_t_JES_down.log &
-#sample="T_t" analysisMode="PU_down" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> T_t_PU_down.log &
-#sample="T_t" analysisMode="PU_up" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> T_t_PU_up.log &
-#sample="T_t" analysisMode="BJet_down" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> T_t_BJet_down.log &
-#sample="T_t" analysisMode="BJet_up" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> T_t_BJet_up.log &
-#sample="T_t" analysisMode="LightJet_down" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> T_t_LightJet_down.log &
-#sample="T_t" analysisMode="LightJet_up" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> T_t_LightJet_up.log &
+# sample="TTGamma_2-to-7" analysisMode="BJet_up" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> TTGamma_2-to-7_BJet_up.log &
+# sample="TTGamma" analysisMode="BJet_up" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> TTGamma_BJet_up.log &
+# sample="TTJet" analysisMode="BJet_up" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> TTJet_BJet_up.log &
+# sample="Tbar_s-channel" analysisMode="BJet_up" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> Tbar_s-channel_BJet_up.log &
+# sample="Tbar_t-channel" analysisMode="BJet_up" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> Tbar_t-channel_BJet_up.log &
+# sample="Tbar_tW-channel" analysisMode="BJet_up" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> Tbar_tW-channel_BJet_up.log &
+# sample="T_s-channel" analysisMode="BJet_up" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> T_s-channel_BJet_up.log &
+# sample="T_t-channel" analysisMode="BJet_up" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> T_t-channel_BJet_up.log &
+# sample="T_tW-channel" analysisMode="BJet_up" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> T_tW-channel_BJet_up.log &
+# sample="DYJetsToLL_M-10To50" analysisMode="BJet_up" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> DYJetsToLL_M-10To50_BJet_up.log &
+# sample="DYJetsToLL_M-50" analysisMode="BJet_up" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> DYJetsToLL_M-50_BJet_up.log &
+# sample="WJetsToLNu" analysisMode="BJet_up" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> WJetsToLNu_BJet_up.log &
+# sample="ZZToAnything" analysisMode="BJet_up" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> ZZToAnything_BJet_up.log &
+# sample="WZToAnything" analysisMode="BJet_up" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> WZToAnything_BJet_up.log &
+# sample="WWToAnything" analysisMode="BJet_up" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> WWToAnything_BJet_up.log &
 
-#sample="T_s" analysisMode="central" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> T_s_central.log &
-#sample="T_s" analysisMode="JES_up" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> T_s_JES_up.log &
-#sample="T_s" analysisMode="JES_down" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> T_s_JES_down.log &
-#sample="T_s" analysisMode="PU_down" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> T_s_PU_down.log &
-#sample="T_s" analysisMode="PU_up" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> T_s_PU_up.log &
-#sample="T_s" analysisMode="BJet_down" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> T_s_BJet_down.log &
-#sample="T_s" analysisMode="BJet_up" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> T_s_BJet_up.log &
-#sample="T_s" analysisMode="LightJet_down" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> T_s_LightJet_down.log &
-#sample="T_s" analysisMode="LightJet_up" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> T_s_LightJet_up.log &
+# sample="TTGamma_2-to-7" analysisMode="BJet_down" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> TTGamma_2-to-7_BJet_down.log &
+# sample="TTGamma" analysisMode="BJet_down" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> TTGamma_BJet_down.log &
+# sample="TTJet" analysisMode="BJet_down" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> TTJet_BJet_down.log &
+# sample="Tbar_s-channel" analysisMode="BJet_down" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> Tbar_s-channel_BJet_down.log &
+# sample="Tbar_t-channel" analysisMode="BJet_down" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> Tbar_t-channel_BJet_down.log &
+# sample="Tbar_tW-channel" analysisMode="BJet_down" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> Tbar_tW-channel_BJet_down.log &
+# sample="T_s-channel" analysisMode="BJet_down" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> T_s-channel_BJet_down.log &
+# sample="T_t-channel" analysisMode="BJet_down" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> T_t-channel_BJet_down.log &
+# sample="T_tW-channel" analysisMode="BJet_down" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> T_tW-channel_BJet_down.log &
+# sample="DYJetsToLL_M-10To50" analysisMode="BJet_down" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> DYJetsToLL_M-10To50_BJet_down.log &
+# sample="DYJetsToLL_M-50" analysisMode="BJet_down" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> DYJetsToLL_M-50_BJet_down.log &
+# sample="WJetsToLNu" analysisMode="BJet_down" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> WJetsToLNu_BJet_down.log &
+# sample="ZZToAnything" analysisMode="BJet_down" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> ZZToAnything_BJet_down.log &
+# sample="WZToAnything" analysisMode="BJet_down" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> WZToAnything_BJet_down.log &
+# sample="WWToAnything" analysisMode="BJet_down" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> WWToAnything_BJet_down.log &
 
-#sample="Tbar_tW" analysisMode="central" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> Tbar_tW_central.log &
-#sample="Tbar_tW" analysisMode="JES_up" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> Tbar_tW_JES_up.log &
-#sample="Tbar_tW" analysisMode="JES_down" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> Tbar_tW_JES_down.log &
-#sample="Tbar_tW" analysisMode="PU_down" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> Tbar_tW_PU_down.log &
-#sample="Tbar_tW" analysisMode="PU_up" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> Tbar_tW_PU_up.log &
-#sample="Tbar_tW" analysisMode="BJet_down" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> Tbar_tW_BJet_down.log &
-#sample="Tbar_tW" analysisMode="BJet_up" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> Tbar_tW_BJet_up.log &
-#sample="Tbar_tW" analysisMode="LightJet_down" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> Tbar_tW_LightJet_down.log &
-#sample="Tbar_tW" analysisMode="LightJet_up" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> Tbar_tW_LightJet_up.log &
+# sample="TTGamma_2-to-7" analysisMode="PU_up" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> TTGamma_2-to-7_PU_up.log &
+# sample="TTGamma" analysisMode="PU_up" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> TTGamma_PU_up.log &
+# sample="TTJet" analysisMode="PU_up" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> TTJet_PU_up.log &
+# sample="Tbar_s-channel" analysisMode="PU_up" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> Tbar_s-channel_PU_up.log &
+# sample="Tbar_t-channel" analysisMode="PU_up" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> Tbar_t-channel_PU_up.log &
+# sample="Tbar_tW-channel" analysisMode="PU_up" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> Tbar_tW-channel_PU_up.log &
+# sample="T_s-channel" analysisMode="PU_up" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> T_s-channel_PU_up.log &
+# sample="T_t-channel" analysisMode="PU_up" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> T_t-channel_PU_up.log &
+# sample="T_tW-channel" analysisMode="PU_up" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> T_tW-channel_PU_up.log &
+# sample="DYJetsToLL_M-10To50" analysisMode="PU_up" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> DYJetsToLL_M-10To50_PU_up.log &
+# sample="DYJetsToLL_M-50" analysisMode="PU_up" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> DYJetsToLL_M-50_PU_up.log &
+# sample="WJetsToLNu" analysisMode="PU_up" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> WJetsToLNu_PU_up.log &
+# sample="ZZToAnything" analysisMode="PU_up" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> ZZToAnything_PU_up.log &
+# sample="WZToAnything" analysisMode="PU_up" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> WZToAnything_PU_up.log &
+# sample="WWToAnything" analysisMode="PU_up" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> WWToAnything_PU_up.log &
 
-#sample="Tbar_t" analysisMode="central" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> Tbar_t_central.log &
-#sample="Tbar_t" analysisMode="JES_up" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> Tbar_t_JES_up.log &
-#sample="Tbar_t" analysisMode="JES_down" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> Tbar_t_JES_down.log &
-#sample="Tbar_t" analysisMode="PU_down" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> Tbar_t_PU_down.log &
-#sample="Tbar_t" analysisMode="PU_up" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> Tbar_t_PU_up.log &
-#sample="Tbar_t" analysisMode="BJet_down" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> Tbar_t_BJet_down.log &
-#sample="Tbar_t" analysisMode="BJet_up" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> Tbar_t_BJet_up.log &
-#sample="Tbar_t" analysisMode="LightJet_down" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> Tbar_t_LightJet_down.log &
-#sample="Tbar_t" analysisMode="LightJet_up" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> Tbar_t_LightJet_up.log &
+# sample="TTGamma_2-to-7" analysisMode="PU_down" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> TTGamma_2-to-7_PU_down.log &
+# sample="TTGamma" analysisMode="PU_down" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> TTGamma_PU_down.log &
+# sample="TTJet" analysisMode="PU_down" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> TTJet_PU_down.log &
+# sample="Tbar_s-channel" analysisMode="PU_down" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> Tbar_s-channel_PU_down.log &
+# sample="Tbar_t-channel" analysisMode="PU_down" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> Tbar_t-channel_PU_down.log &
+# sample="Tbar_tW-channel" analysisMode="PU_down" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> Tbar_tW-channel_PU_down.log &
+# sample="T_s-channel" analysisMode="PU_down" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> T_s-channel_PU_down.log &
+# sample="T_t-channel" analysisMode="PU_down" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> T_t-channel_PU_down.log &
+# sample="T_tW-channel" analysisMode="PU_down" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> T_tW-channel_PU_down.log &
+# sample="DYJetsToLL_M-10To50" analysisMode="PU_down" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> DYJetsToLL_M-10To50_PU_down.log &
+# sample="DYJetsToLL_M-50" analysisMode="PU_down" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> DYJetsToLL_M-50_PU_down.log &
+# sample="WJetsToLNu" analysisMode="PU_down" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> WJetsToLNu_PU_down.log &
+# sample="ZZToAnything" analysisMode="PU_down" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> ZZToAnything_PU_down.log &
+# sample="WZToAnything" analysisMode="PU_down" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> WZToAnything_PU_down.log &
+# sample="WWToAnything" analysisMode="PU_down" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> WWToAnything_PU_down.log &
 
-#sample="Tbar_s" analysisMode="central" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> Tbar_s_central.log &
-#sample="Tbar_s" analysisMode="JES_up" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> Tbar_s_JES_up.log &
-#sample="Tbar_s" analysisMode="JES_down" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> Tbar_s_JES_down.log &
-#sample="Tbar_s" analysisMode="PU_down" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> Tbar_s_PU_down.log &
-#sample="Tbar_s" analysisMode="PU_up" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> Tbar_s_PU_up.log &
-#sample="Tbar_s" analysisMode="BJet_down" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> Tbar_s_BJet_down.log &
-#sample="Tbar_s" analysisMode="BJet_up" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> Tbar_s_BJet_up.log &
-#sample="Tbar_s" analysisMode="LightJet_down" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> Tbar_s_LightJet_down.log &
-#sample="Tbar_s" analysisMode="LightJet_up" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> Tbar_s_LightJet_up.log &
+# sample="TTGamma_2-to-7" analysisMode="LightJet_up" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> TTGamma_2-to-7_LightJet_up.log &
+# sample="TTGamma" analysisMode="LightJet_up" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> TTGamma_LightJet_up.log &
+# sample="TTJet" analysisMode="LightJet_up" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> TTJet_LightJet_up.log &
+# sample="Tbar_s-channel" analysisMode="LightJet_up" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> Tbar_s-channel_LightJet_up.log &
+# sample="Tbar_t-channel" analysisMode="LightJet_up" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> Tbar_t-channel_LightJet_up.log &
+# sample="Tbar_tW-channel" analysisMode="LightJet_up" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> Tbar_tW-channel_LightJet_up.log &
+# sample="T_s-channel" analysisMode="LightJet_up" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> T_s-channel_LightJet_up.log &
+# sample="T_t-channel" analysisMode="LightJet_up" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> T_t-channel_LightJet_up.log &
+# sample="T_tW-channel" analysisMode="LightJet_up" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> T_tW-channel_LightJet_up.log &
+# sample="DYJetsToLL_M-10To50" analysisMode="LightJet_up" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> DYJetsToLL_M-10To50_LightJet_up.log &
+# sample="DYJetsToLL_M-50" analysisMode="LightJet_up" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> DYJetsToLL_M-50_LightJet_up.log &
+# sample="WJetsToLNu" analysisMode="LightJet_up" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> WJetsToLNu_LightJet_up.log &
+# sample="ZZToAnything" analysisMode="LightJet_up" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> ZZToAnything_LightJet_up.log &
+# sample="WZToAnything" analysisMode="LightJet_up" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> WZToAnything_LightJet_up.log &
+# sample="WWToAnything" analysisMode="LightJet_up" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> WWToAnything_LightJet_up.log &
 
-#sample="TTJet" analysisMode="central" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> TTJet_central.log &
-#sample="TTJet" analysisMode="JES_up" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> TTJet_JES_up.log &
-#sample="TTJet" analysisMode="JES_down" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> TTJet_JES_down.log &
-#sample="TTJet" analysisMode="PU_down" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> TTJet_PU_down.log &
-#sample="TTJet" analysisMode="PU_up" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> TTJet_PU_up.log &
-#sample="TTJet" analysisMode="BJet_down" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> TTJet_BJet_down.log &
-#sample="TTJet" analysisMode="BJet_up" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> TTJet_BJet_up.log &
-#sample="TTJet" analysisMode="LightJet_down" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> TTJet_LightJet_down.log &
-#sample="TTJet" analysisMode="LightJet_up" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> TTJet_LightJet_up.log &
+# sample="TTGamma_2-to-7" analysisMode="LightJet_down" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> TTGamma_2-to-7_LightJet_down.log &
+# sample="TTGamma" analysisMode="LightJet_down" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> TTGamma_LightJet_down.log &
+# sample="TTJet" analysisMode="LightJet_down" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> TTJet_LightJet_down.log &
+# sample="Tbar_s-channel" analysisMode="LightJet_down" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> Tbar_s-channel_LightJet_down.log &
+# sample="Tbar_t-channel" analysisMode="LightJet_down" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> Tbar_t-channel_LightJet_down.log &
+# sample="Tbar_tW-channel" analysisMode="LightJet_down" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> Tbar_tW-channel_LightJet_down.log &
+# sample="T_s-channel" analysisMode="LightJet_down" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> T_s-channel_LightJet_down.log &
+# sample="T_t-channel" analysisMode="LightJet_down" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> T_t-channel_LightJet_down.log &
+# sample="T_tW-channel" analysisMode="LightJet_down" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> T_tW-channel_LightJet_down.log &
+# sample="DYJetsToLL_M-10To50" analysisMode="LightJet_down" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> DYJetsToLL_M-10To50_LightJet_down.log &
+# sample="DYJetsToLL_M-50" analysisMode="LightJet_down" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> DYJetsToLL_M-50_LightJet_down.log &
+# sample="WJetsToLNu" analysisMode="LightJet_down" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> WJetsToLNu_LightJet_down.log &
+# sample="ZZToAnything" analysisMode="LightJet_down" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> ZZToAnything_LightJet_down.log &
+# sample="WZToAnything" analysisMode="LightJet_down" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> WZToAnything_LightJet_down.log &
+# sample="WWToAnything" analysisMode="LightJet_down" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> WWToAnything_LightJet_down.log &
 
 #sample="SingleElectron" analysisMode="central" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> SingleElectron_central.log &
 #sample="SingleElectron" analysisMode="JES_up" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> SingleElectron_JES_up.log &
@@ -498,21 +575,26 @@ sample="MuEG" analysisMode="central" nohup ${exe} ${toolsFolder}python/master_20
 #sample="TTJets-mcatnlo" analysisMode="central" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> TTJets-mcatnlo_central.log &
 #sample="TTJets-powheg" analysisMode="central" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> TTJets-powheg_central.log &
 
-#systematics
+#***********************************systematics****************************************
 #sample="TTJets-matchingdown" analysisMode="central" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> TTJets-matchingdown_central.log &
 #sample="TTJets-matchingup" analysisMode="central" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> TTJets-matchingup_central.log &
 #sample="TTJets-scaledown" analysisMode="central" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> TTJets-scaledown_central.log &
 #sample="TTJets-scaleup" analysisMode="central" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> TTJets-scaleup_central.log &
 
-#sample="WJets-matchingdown" analysisMode="central" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> WJets-matchingdown_central.log &
-#sample="WJets-matchingup" analysisMode="central" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> WJets-matchingup_central.log &
-#sample="WJets-scaledown" analysisMode="central" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> WJets-scaledown_central.log &
-#sample="WJets-scaleup" analysisMode="central" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> WJets-scaleup_central.log &
+#sample="WJetsToLNu-matchingdown" analysisMode="central" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> WJetsToLNu-matchingdown_central.log &
+#sample="WJetsToLNu-matchingup" analysisMode="central" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> WJetsToLNu-matchingup_central.log &
+#sample="WJetsToLNu-scaledown" analysisMode="central" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> WJetsToLNu-scaledown_central.log &
+#sample="WJetsToLNu-scaleup" analysisMode="central" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> WJetsToLNu-scaleup_central.log &
 
-#sample="ZJets-matchingdown" analysisMode="central" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> ZJets-matchingdown_central.log &
-#sample="ZJets-matchingup" analysisMode="central" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> ZJets-matchingup_central.log &
-#sample="ZJets-scaledown" analysisMode="central" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> ZJets-scaledown_central.log &
-#sample="ZJets-scaleup" analysisMode="central" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> ZJets-scaleup_central.log &
+#sample="DYJetsToLL_M-50-matchingdown" analysisMode="central" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> DYJetsToLL_M-50-matchingdown_central.log &
+#sample="DYJetsToLL_M-50-matchingup" analysisMode="central" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> DYJetsToLL_M-50-matchingup_central.log &
+#sample="DYJetsToLL_M-50-scaledown" analysisMode="central" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> DYJetsToLL_M-50-scaledown_central.log &
+#sample="DYJetsToLL_M-50-scaleup" analysisMode="central" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> DYJetsToLL_M-50-scaleup_central.log &
+
+#sample="T_tW-scaledown" analysisMode="central" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> T_tW-scaledown_central.log &
+#sample="T_tW-scaleup" analysisMode="central" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> T_tW-scaleup_central.log &
+#sample="Tbar_tW-scaledown" analysisMode="central" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> Tbar_tW-scaledown_central.log &
+#sample="Tbar_tW-scaleup" analysisMode="central" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> Tbar_tW-scaleup_central.log & 
 
 #systematics
 #sample="TTJets-matchingdown" analysisMode="PU_down" nohup ${exe} ${toolsFolder}python/master_2012_cfg.py ${TQAFPath} &> TTJets-matchingdown_PU_down.log &

@@ -80,7 +80,7 @@ bool TopPairMuMuLooseReferenceSelection::isNminusOnePhoton(const PhotonPointer p
 	const MuonCollection muons(goodMuons(event));
 	const JetCollection jets(event->Jets());
 
-	bool passesEtAndEta = photon->et() > 25 && fabs(photon->eta()) < 1.4442 && !photon->isInCrack(); // 2.5
+	bool passesEtAndEta = photon->et() > 25. && fabs(photon->eta()) < 1.4442 && !photon->isInCrack(); // 2.5
 	bool passesSafeElectronVeto = photon->ConversionSafeElectronVeto();
 	bool passesHOverE = photon->SingleTowerHoE() < 0.05; // same for EE and EB
 	
@@ -96,9 +96,9 @@ bool TopPairMuMuLooseReferenceSelection::isNminusOnePhoton(const PhotonPointer p
 	if (photon->isInBarrelRegion()) {
 		passesShowerShape = photon->sigmaIEtaIEta() < 0.012;
 //		passesPFChargedIso = photon->RhoCorrectedPFChargedHadronIso(event->rho()) < 2.6;
-		passesPFNeutralIso = photon->RhoCorrectedPFNeutralHadronIso(event->rho()) < 7 + 0.04 * photon->pt();
-		passesPFPhotonIso = photon->RhoCorrectedPFPhotonIso(event->rho()) < 5. + 0.005 * photon->pt();
-		passesphoSCChIso = photon->RhoCorrectedSCChIso(event->rho()) < 20;
+		passesPFNeutralIso = photon->RhoCorrectedPFNeutralHadronIso(event->rho()) < 12. + 0.04 * photon->pt();
+		passesPFPhotonIso = photon->RhoCorrectedPFPhotonIso(event->rho()) < 12. + 0.005 * photon->pt();
+		passesphoSCChIso = photon->RhoCorrectedSCChIso(event->rho()) < 20.;
 
 		backgroundShape = photon->sigmaIEtaIEta() >= 0.012 && photon->sigmaIEtaIEta() <= 0.020;
 	
@@ -108,7 +108,7 @@ bool TopPairMuMuLooseReferenceSelection::isNminusOnePhoton(const PhotonPointer p
 //		passesPFChargedIso = photon->RhoCorrectedPFChargedHadronIso(event->rho()) < 2.3;
 		passesPFNeutralIso = photon->RhoCorrectedPFNeutralHadronIso(event->rho()) < 2.9 + 0.04 * photon->pt();
 		passesPFPhotonIso = photon->RhoCorrectedPFPhotonIso(event->rho()) < 1.5 + 0.005 * photon->pt();
-		passesphoSCChIso = photon->RhoCorrectedSCChIso(event->rho()) < 20;
+		passesphoSCChIso = photon->RhoCorrectedSCChIso(event->rho()) < 2.3;
 
 	}
 
@@ -184,7 +184,7 @@ bool TopPairMuMuLooseReferenceSelection::isGoodPhoton(const PhotonPointer photon
 	const MuonCollection muons(goodMuons(event));
 	const JetCollection jets(event->Jets());
 
-	bool passesEtAndEta = photon->et() > 25 && fabs(photon->eta()) < 1.4442 && !photon->isInCrack();
+	bool passesEtAndEta = photon->et() > 25. && fabs(photon->eta()) < 1.4442 && !photon->isInCrack();
 	bool passesSafeElectronVeto = photon->ConversionSafeElectronVeto();
 	bool passesHOverE = photon->SingleTowerHoE() < 0.05; // same for EE and EB
 	
@@ -199,9 +199,9 @@ bool TopPairMuMuLooseReferenceSelection::isGoodPhoton(const PhotonPointer photon
 	if (photon->isInBarrelRegion()) {
 		passesShowerShape = photon->sigmaIEtaIEta() < 0.012;
 //		passesPFChargedIso = photon->RhoCorrectedPFChargedHadronIso(event->rho()) < 2.6;
-		passesPFNeutralIso = photon->RhoCorrectedPFNeutralHadronIso(event->rho()) < 7.5 + 0.04 * photon->pt(); //3.5
-		passesPFPhotonIso = photon->RhoCorrectedPFPhotonIso(event->rho()) < 5 + 0.005 * photon->pt(); //1.3
-		passesphoSCChIso = photon->RhoCorrectedSCChIso(event->rho()) < 20;
+		passesPFNeutralIso = photon->RhoCorrectedPFNeutralHadronIso(event->rho()) < 3.5 + 0.04 * photon->pt(); //3.5
+		passesPFPhotonIso = photon->RhoCorrectedPFPhotonIso(event->rho()) < 1.3 + 0.005 * photon->pt(); //1.3
+		passesphoSCChIso = photon->RhoCorrectedSCChIso(event->rho()) < 20.;
 //		passesphoSCNuIso = photon->RhoCorrectedSCNuIso(event->rho()) < 3.5 + 0.04 * photon->pt();
 //		passesphoSCPhIso = photon->RhoCorrectedSCPhIso(event->rho()) < 1.3 + 0.005 * photon->pt();
 	} else if (photon->isInEndCapRegion()) {
@@ -209,7 +209,7 @@ bool TopPairMuMuLooseReferenceSelection::isGoodPhoton(const PhotonPointer photon
 //		passesPFChargedIso = photon->RhoCorrectedPFChargedHadronIso(event->rho()) < 2.3;
 		passesPFNeutralIso = photon->RhoCorrectedPFNeutralHadronIso(event->rho()) < 2.9 + 0.04 * photon->pt();
 		passesPFPhotonIso = photon->RhoCorrectedPFPhotonIso(event->rho()) < 1.5 + 0.005 * photon->pt();
-		passesphoSCChIso = photon->RhoCorrectedSCChIso(event->rho()) < 20;
+		passesphoSCChIso = photon->RhoCorrectedSCChIso(event->rho()) < 2.3;
 //		passesphoSCNuIso = photon->RhoCorrectedSCNuIso(event->rho()) < 2.9 + 0.04 * photon->pt();
 //		passesphoSCPhIso = photon->RhoCorrectedSCPhIso(event->rho()) < 1.5 + 0.005 * photon->pt();
 	}
@@ -218,9 +218,9 @@ bool TopPairMuMuLooseReferenceSelection::isGoodPhoton(const PhotonPointer photon
 
 	 	for (unsigned int index = 0; index < muons.size(); ++index) {
 	 			const MuonPointer muon(muons.at(index));
-	 			passesDeltaRgammaMuons = photon->deltaR(muon) > 0.3;
+	 			passesDeltaRgammaMuons = photon->deltaR(muon) > 0.4;
 				
-				if(photon->deltaR(muon) < 0.3)
+				if(photon->deltaR(muon) < 0.4)
 				break;
 	}
 
@@ -228,7 +228,7 @@ bool TopPairMuMuLooseReferenceSelection::isGoodPhoton(const PhotonPointer photon
 	
 	for (unsigned int index = 0; index < jets.size(); ++index) { 
 			const JetPointer jet(jets.at(index));
-			passesDeltaRgammaJets = photon->deltaR(jet) > 0.3;
+			passesDeltaRgammaJets = photon->deltaR(jet) > 0.4;
 	}
 	
 	bool passesDeltaRjetsMuons = false;
@@ -237,7 +237,7 @@ bool TopPairMuMuLooseReferenceSelection::isGoodPhoton(const PhotonPointer photon
 	 		const MuonPointer muon(muons.at(index));
 			for(unsigned int jindex = 0; jindex<jets.size(); ++jindex){
 				const JetPointer jet(jets[jindex]);
-	 			passesDeltaRjetsMuons = muon->deltaR(jet) > 0.3;
+	 			passesDeltaRjetsMuons = muon->deltaR(jet) > 0.4;
 			}	
 
 	}
@@ -248,7 +248,7 @@ bool TopPairMuMuLooseReferenceSelection::isGoodPhoton(const PhotonPointer photon
 
 //adapted for dilepton channel
 bool TopPairMuMuLooseReferenceSelection::isGoodMuon(const MuonPointer muon) const {
-	bool passesEtAndEta = muon->pt() > 20 && fabs(muon->eta()) < 2.4;
+	bool passesEtAndEta = muon->pt() > 20. && fabs(muon->eta()) < 2.4;
 	bool passesID = (muon->isGlobal() || muon->isTracker()) && muon->isPFMuon();
     bool passesIsolation  = isIsolated(muon);
 
@@ -346,15 +346,15 @@ bool TopPairMuMuLooseReferenceSelection::passesZmassVeto(const EventPtr event) c
 		mass = dilepton->mass();
 	}
 
-	return mass < 76 || mass > 106;
-
+//	return mass < 76 || mass > 106;
+        return mass < 84. || mass > 98.;
 }
 
 bool TopPairMuMuLooseReferenceSelection::passesMetCut(const EventPtr event) const {
 
 	const METPointer met(event->MET());
 
-	return met->pt() > 40;
+	return met->pt() > 20.;
 
 }
 
@@ -576,7 +576,7 @@ const JetCollection TopPairMuMuLooseReferenceSelection::cleanedJets(const EventP
 						minDR_pho = jet->deltaR(photon);
 		}
 
-		if (minDR > 0.5 && minDR_pho > 0.3 && isGoodJet(jet))
+		if (minDR > 0.5 && minDR_pho > 0.5 && isGoodJet(jet))
 			cleanedJets.push_back(jet);
 	}
 
@@ -598,7 +598,7 @@ const JetCollection TopPairMuMuLooseReferenceSelection::cleanedBJets(const Event
 }
 
 bool TopPairMuMuLooseReferenceSelection::isLooseMuon(const MuonPointer muon) const {
-	bool passesPt = muon->pt() > 10;
+	bool passesPt = muon->pt() > 10.;
 	bool passesEta = fabs(muon->eta()) < 2.5;
 	bool isPFMuon = muon->isPFMuon();
 	bool isGlobalOrTracker = muon->isGlobal() || muon->isTracker();
@@ -609,14 +609,14 @@ bool TopPairMuMuLooseReferenceSelection::isLooseMuon(const MuonPointer muon) con
 
 bool TopPairMuMuLooseReferenceSelection::isLooseElectron(const ElectronPointer electron) const {
 
-	bool passesEtAndEta = electron->et() > 20. && fabs(electron->eta()) < 2.5;
-	bool passesID(electron->passesElectronID(ElectronID::MVAIDTrigger));
+	bool passesEtAndEta = electron->et() > 10. && fabs(electron->eta()) < 2.5;
+	bool passesID(electron->passesElectronID(ElectronID::MVAIDNonTrigger));
 	bool passesIso = electron->pfRelativeIsolationRhoCorrected() < 0.15;
 	return passesEtAndEta && passesIso && passesID;
 }
 
 bool TopPairMuMuLooseReferenceSelection::isGoodElectron(const ElectronPointer electron) const {
-	bool passesEtAndEta = electron->et() > 30 && fabs(electron->eta()) < 2.5 && !electron->isInCrack();
+	bool passesEtAndEta = electron->et() > 30. && fabs(electron->eta()) < 2.5 && !electron->isInCrack();
 	bool passesD0 = fabs(electron->d0()) < 0.02; //cm
 	bool passesHOverE = electron->HadOverEm() < 0.05; // same for EE and EB
 	bool passesID(electron->passesElectronID(ElectronID::MVAIDTrigger));

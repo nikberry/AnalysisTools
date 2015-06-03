@@ -68,12 +68,12 @@ void TTbarPhotonAnalyser::muMuSignalAnalysis(const EventPtr event) {
 			    	photonAnalyserMuMuPhotonSelection_->setScale(bjetWeight);
 			    	photonAnalyserMuMuPhotonSelection_->analyse(event, photons, jets, electrons, muons);
 				
-				if(event->getDataType() == DataType::TTGamma || event->getDataType() == DataType::TTJets || event->getDataType() == DataType::TTGamma2to7){
-					//signal photons
- 			    		ttphotonAnalyserMuMuPhotonSelection_->setScale(bjetWeight);
- 			    		ttphotonAnalyserMuMuPhotonSelection_->analyse(event, photons, jets, electrons, muons);
-					ttphotonAnalyserMuMuPhotonSelection_->analyse_signalPhotons(event, photons, jets, electrons, muons);
-				}	
+// 				if(event->getDataType() == DataType::TTGamma || event->getDataType() == DataType::TTJets || event->getDataType() == DataType::TTGamma2to7){
+// 					//signal photons
+//  			    		ttphotonAnalyserMuMuPhotonSelection_->setScale(bjetWeight);
+//  			    		ttphotonAnalyserMuMuPhotonSelection_->analyse(event, photons, jets, electrons, muons);
+// 					ttphotonAnalyserMuMuPhotonSelection_->analyse_signalPhotons(event, photons, jets, electrons, muons);
+// 				}	
 				
 				//Vertices
 				//vertexAnalyserMuMuPhotonSelection_->setScale(bjetWeight);
@@ -94,6 +94,10 @@ void TTbarPhotonAnalyser::muMuSignalAnalysis(const EventPtr event) {
 			    //n-passesShowerShape photons
 			    const PhotonCollection photonsMinuspassesShowerShape = topMuMuPhotonSelection_->nMinusOnePhotons(event, "passesShowerShape");
 			    photonAnalyserMuMuPhotonSelection_->analyse_NminusOnePhotons(event, photonsMinuspassesShowerShape, jets, electrons, muons, "passesShowerShape");
+			    
+			    //n-passesSafeElectronVeto photons
+			    const PhotonCollection photonsMinuspassesConvSafeEleVeto = topMuMuPhotonSelection_->nMinusOnePhotons(event, "passesSafeElectronVeto");
+			    photonAnalyserMuMuPhotonSelection_->analyse_NminusOnePhotons(event, photonsMinuspassesConvSafeEleVeto, jets, electrons, muons, "passesSafeElectronVeto");
 
 			    //n-passesPFChargedIso photons
 //			    const PhotonCollection photonsMinuspassesPFChargedIso = topMuMuPhotonSelection_->nMinusOnePhotons(event, "passesPFChargedIso");
@@ -111,14 +115,6 @@ void TTbarPhotonAnalyser::muMuSignalAnalysis(const EventPtr event) {
 			    const PhotonCollection photonsMinuspassesphoSCChIso = topMuMuPhotonSelection_->nMinusOnePhotons(event, "passesphoSCChIso");
 			    photonAnalyserMuMuPhotonSelection_->analyse_NminusOnePhotons(event, photonsMinuspassesphoSCChIso, jets, electrons, muons, "passesphoSCChIso");
 
-			    //n-passesphoSCNuIso photons
-			    const PhotonCollection photonsMinuspassesphoSCNuIso = topMuMuPhotonSelection_->nMinusOnePhotons(event, "passesphoSCNuIso");
-			    photonAnalyserMuMuPhotonSelection_->analyse_NminusOnePhotons(event, photonsMinuspassesphoSCNuIso, jets, electrons, muons, "passesphoSCNuIso");
-
-			    //n-passesphoSCPhIso photons
-			    const PhotonCollection photonsMinuspassesphoSCPhIso = topMuMuPhotonSelection_->nMinusOnePhotons(event, "passesphoSCPhIso");
-			    photonAnalyserMuMuPhotonSelection_->analyse_NminusOnePhotons(event, photonsMinuspassesphoSCPhIso, jets, electrons, muons, "passesphoSCPhIso");			    
-			    
 			    //n-passesDeltaRgammaMuons photons
 			    const PhotonCollection photonsMinuspassesDeltaRgammaMuons = topMuMuPhotonSelection_->nMinusOnePhotons(event, "passesDeltaRgammaMuons");
 			    photonAnalyserMuMuPhotonSelection_->analyse_NminusOnePhotons(event, photonsMinuspassesDeltaRgammaMuons, jets, electrons, muons, "passesDeltaRgammaMuons");
@@ -131,8 +127,6 @@ void TTbarPhotonAnalyser::muMuSignalAnalysis(const EventPtr event) {
                             const PhotonCollection photonsMinuspassesDeltaRjetsMuons = topMuMuPhotonSelection_->nMinusOnePhotons(event, "passesDeltaRjetsMuons");
                             photonAnalyserMuMuPhotonSelection_->analyse_NminusOnePhotons(event, photonsMinuspassesDeltaRjetsMuons, jets, electrons, muons, "passesDeltaRjetsMuons");
 
-//			    const PhotonCollection photonsBackgroundRegion = topMuMuPhotonSelection_->nMinusOnePhotons(event, "backgroundShape");
-//			    photonAnalyserMuMuPhotonSelection_->analyse_NminusOnePhotons(event, photonsBackgroundRegion, jets, electrons, muons, "backgroundShape");
 
 			}
 	}
@@ -189,12 +183,12 @@ void TTbarPhotonAnalyser::eESignalAnalysis(const EventPtr event) {
 			    	photonAnalyserEEPhotonSelection_->setScale(bjetWeight);
 			    	photonAnalyserEEPhotonSelection_->analyse(event, photons, jets, electrons, muons);
 				
-				if(event->getDataType() == DataType::TTGamma || event->getDataType() == DataType::TTJets || event->getDataType() == DataType::TTGamma2to7){
-					//signal photons
-			    		ttphotonAnalyserEEPhotonSelection_->setScale(bjetWeight);
-			    		ttphotonAnalyserEEPhotonSelection_->analyse(event, photons, jets, electrons, muons);
-					ttphotonAnalyserEEPhotonSelection_->analyse_signalPhotons(event, photons, jets, electrons, muons);
-				}	
+// 				if(event->getDataType() == DataType::TTGamma || event->getDataType() == DataType::TTJets || event->getDataType() == DataType::TTGamma2to7){
+// 					//signal photons
+// 			    		ttphotonAnalyserEEPhotonSelection_->setScale(bjetWeight);
+// 			    		ttphotonAnalyserEEPhotonSelection_->analyse(event, photons, jets, electrons, muons);
+// 					ttphotonAnalyserEEPhotonSelection_->analyse_signalPhotons(event, photons, jets, electrons, muons);
+// 				}	
 				
 				//Vertices
 				//vertexAnalyserEEPhotonSelection_->setScale(bjetWeight);
@@ -210,6 +204,10 @@ void TTbarPhotonAnalyser::eESignalAnalysis(const EventPtr event) {
 			    //n-passesHOverE photons
 			    const PhotonCollection photonsMinusHOverE = topEEPhotonSelection_->nMinusOnePhotons(event, "passesHOverE");
 			    photonAnalyserEEPhotonSelection_->analyse_NminusOnePhotons(event, photonsMinusHOverE, jets, electrons, muons, "passesHOverE");
+			    
+			    //n-passesSafeElectronVeto photons
+			    const PhotonCollection photonsMinuspassesConvSafeEleVeto = topEEPhotonSelection_->nMinusOnePhotons(event, "passesSafeElectronVeto");
+			    photonAnalyserEEPhotonSelection_->analyse_NminusOnePhotons(event, photonsMinuspassesConvSafeEleVeto, jets, electrons, muons, "passesSafeElectronVeto");
 
 			    //n-passesShowerShape photons
 			    const PhotonCollection photonsMinuspassesShowerShape = topEEPhotonSelection_->nMinusOnePhotons(event, "passesShowerShape");
@@ -230,14 +228,6 @@ void TTbarPhotonAnalyser::eESignalAnalysis(const EventPtr event) {
 			    //n-passesphoSCChIso photons
 			    const PhotonCollection photonsMinuspassesphoSCChIso = topEEPhotonSelection_->nMinusOnePhotons(event, "passesphoSCChIso");
 			    photonAnalyserEEPhotonSelection_->analyse_NminusOnePhotons(event, photonsMinuspassesphoSCChIso, jets, electrons, muons, "passesphoSCChIso");
-
-			    //n-passesphoSCNuIso photons
-			    const PhotonCollection photonsMinuspassesphoSCNuIso = topEEPhotonSelection_->nMinusOnePhotons(event, "passesphoSCNuIso");
-			    photonAnalyserEEPhotonSelection_->analyse_NminusOnePhotons(event, photonsMinuspassesphoSCNuIso, jets, electrons, muons, "passesphoSCNuIso");
-
-			    //n-passesphoSCPhIso photons
-			    const PhotonCollection photonsMinuspassesphoSCPhIso = topEEPhotonSelection_->nMinusOnePhotons(event, "passesphoSCPhIso");
-			    photonAnalyserEEPhotonSelection_->analyse_NminusOnePhotons(event, photonsMinuspassesphoSCPhIso, jets, electrons, muons, "passesphoSCPhIso");
 			    
 			    //n-passesDeltaRgammaMuons photons
 //			    const PhotonCollection photonsMinuspassesDeltaRgammaMuons = topEEPhotonSelection_->nMinusOnePhotons(event, "passesDeltaRgammaMuons");
@@ -251,12 +241,10 @@ void TTbarPhotonAnalyser::eESignalAnalysis(const EventPtr event) {
                             const PhotonCollection photonsMinuspassesDeltaRgammaJets = topMuMuPhotonSelection_->nMinusOnePhotons(event, "passesDeltaRgammaJets");
                             photonAnalyserMuMuPhotonSelection_->analyse_NminusOnePhotons(event, photonsMinuspassesDeltaRgammaJets, jets, electrons, muons, "passesDeltaRgammaJets");
 
-                            //n-passesDeltaRjetsMuons photons
-                            const PhotonCollection photonsMinuspassesDeltaRjetsElectrons = topMuMuPhotonSelection_->nMinusOnePhotons(event, "passesDeltaRjetsElectrons");
-                            photonAnalyserMuMuPhotonSelection_->analyse_NminusOnePhotons(event, photonsMinuspassesDeltaRjetsElectrons, jets, electrons, muons, "passesDeltaRjetsElectrons");
-			
-   //                         const PhotonCollection photonsBackgroundRegion = topEEPhotonSelection_->nMinusOnePhotons(event, "backgroundShape");
- //                           photonAnalyserEEPhotonSelection_->analyse_NminusOnePhotons(event, photonsBackgroundRegion, jets, electrons, muons, "backgroundShape");                    
+//                             //n-passesDeltaRjetsMuons photons
+//                             const PhotonCollection photonsMinuspassesDeltaRjetsElectrons = topMuMuPhotonSelection_->nMinusOnePhotons(event, "passesDeltaRjetsElectrons");
+//                             photonAnalyserMuMuPhotonSelection_->analyse_NminusOnePhotons(event, photonsMinuspassesDeltaRjetsElectrons, jets, electrons, muons, "passesDeltaRjetsElectrons");
+                   
 		}
 	}
 }
@@ -318,16 +306,16 @@ void TTbarPhotonAnalyser::eMuSignalAnalysis(const EventPtr event) {
 			    photonAnalyserEMuPhotonSelection_->setScale(bjetWeight);
 			    photonAnalyserEMuPhotonSelection_->analyse(event, photons, jets, electrons, muons);
 			    
-			    if(event->getDataType() == DataType::TTGamma || event->getDataType() == DataType::TTJets || event->getDataType() == DataType::TTGamma2to7){
-			    	//signal photon
-			    	ttphotonAnalyserEMuPhotonSelection_->setScale(bjetWeight);
-			    	ttphotonAnalyserEMuPhotonSelection_->analyse(event, photons, jets, electrons, muons);
-			    	ttphotonAnalyserEMuPhotonSelection_->analyse_signalPhotons(event, photons, jets, electrons, muons);
-			    }	
+// 			    if(event->getDataType() == DataType::TTGamma || event->getDataType() == DataType::TTJets || event->getDataType() == DataType::TTGamma2to7){
+// 			    	//signal photon
+// 			    	ttphotonAnalyserEMuPhotonSelection_->setScale(bjetWeight);
+// 			    	ttphotonAnalyserEMuPhotonSelection_->analyse(event, photons, jets, electrons, muons);
+// 			    	ttphotonAnalyserEMuPhotonSelection_->analyse_signalPhotons(event, photons, jets, electrons, muons);
+// 			    }	
 			    
 			    
 			    
-			    			    //n-EtAndEta photons
+			    //n-EtAndEta photons
 			    const PhotonCollection photonsMinusEtAndEta = topEMuPhotonSelection_->nMinusOnePhotons(event, "passesEtAndEta");
 			    photonAnalyserEMuPhotonSelection_->analyse_NminusOnePhotons(event, photonsMinusEtAndEta, jets, electrons, muons, "passesEtAndEta");
 
@@ -339,6 +327,10 @@ void TTbarPhotonAnalyser::eMuSignalAnalysis(const EventPtr event) {
 			    //n-passesShowerShape photons
 			    const PhotonCollection photonsMinuspassesShowerShape = topEMuPhotonSelection_->nMinusOnePhotons(event, "passesShowerShape");
 			    photonAnalyserEMuPhotonSelection_->analyse_NminusOnePhotons(event, photonsMinuspassesShowerShape, jets, electrons, muons, "passesShowerShape");
+
+			    //n-passesSafeElectronVeto photons
+			    const PhotonCollection photonsMinuspassesConvSafeEleVeto = topEMuPhotonSelection_->nMinusOnePhotons(event, "passesSafeElectronVeto");
+			    photonAnalyserEMuPhotonSelection_->analyse_NminusOnePhotons(event, photonsMinuspassesConvSafeEleVeto, jets, electrons, muons, "passesSafeElectronVeto");
 
 			    //n-passesPFChargedIso photons
 //			    const PhotonCollection photonsMinuspassesPFChargedIso = topEMuPhotonSelection_->nMinusOnePhotons(event, "passesPFChargedIso");
@@ -356,14 +348,6 @@ void TTbarPhotonAnalyser::eMuSignalAnalysis(const EventPtr event) {
 			    const PhotonCollection photonsMinuspassesphoSCChIso = topEMuPhotonSelection_->nMinusOnePhotons(event, "passesphoSCChIso");
 			    photonAnalyserEMuPhotonSelection_->analyse_NminusOnePhotons(event, photonsMinuspassesphoSCChIso, jets, electrons, muons, "passesphoSCChIso");
 
-			    //n-passesphoSCNuIso photons
-			    const PhotonCollection photonsMinuspassesphoSCNuIso = topEMuPhotonSelection_->nMinusOnePhotons(event, "passesphoSCNuIso");
-			    photonAnalyserEMuPhotonSelection_->analyse_NminusOnePhotons(event, photonsMinuspassesphoSCNuIso, jets, electrons, muons, "passesphoSCNuIso");
-
-			    //n-passesphoSCPhIso photons
-			    const PhotonCollection photonsMinuspassesphoSCPhIso = topEMuPhotonSelection_->nMinusOnePhotons(event, "passesphoSCPhIso");
-			    photonAnalyserEMuPhotonSelection_->analyse_NminusOnePhotons(event, photonsMinuspassesphoSCPhIso, jets, electrons, muons, "passesphoSCPhIso");
-		    
 			    //n-passesDeltaRgammaMuons photons
 			    const PhotonCollection photonsMinuspassesDeltaRgammaMuons = topEMuPhotonSelection_->nMinusOnePhotons(event, "passesDeltaRgammaMuons");
 			    photonAnalyserEMuPhotonSelection_->analyse_NminusOnePhotons(event, photonsMinuspassesDeltaRgammaMuons, jets, electrons, muons, "passesDeltaRgammaMuons");
@@ -383,9 +367,7 @@ void TTbarPhotonAnalyser::eMuSignalAnalysis(const EventPtr event) {
                             //n-passesDeltaRjetsElectrons photons
                             const PhotonCollection photonsMinuspassesDeltaRjetsElectrons = topEMuPhotonSelection_->nMinusOnePhotons(event, "passesDeltaRjetsElectrons");
                             photonAnalyserEMuPhotonSelection_->analyse_NminusOnePhotons(event, photonsMinuspassesDeltaRjetsElectrons, jets, electrons, muons, "passesDeltaRjetsElectrons");
-			
-//                            const PhotonCollection photonsBackgroundRegion = topEMuPhotonSelection_->nMinusOnePhotons(event, "backgroundShape");
-  //                          photonAnalyserEMuPhotonSelection_->analyse_NminusOnePhotons(event, photonsBackgroundRegion, jets, electrons, muons, "backgroundShape");                    
+                   
 		}
 	}
 }
@@ -410,15 +392,15 @@ TTbarPhotonAnalyser::TTbarPhotonAnalyser(HistogramManagerPtr histMan, std::strin
 		//signal regions Photons
 		photonAnalyserMuMuPhotonSelection_(new PhotonAnalyser(histMan, histogramFolder + "/MuMu/Ref selection/Photons")), //
 		photonAnalyserEEPhotonSelection_(new PhotonAnalyser(histMan, histogramFolder + "/EE/Ref selection/Photons")), //
-		photonAnalyserEMuPhotonSelection_(new PhotonAnalyser(histMan, histogramFolder + "/EMu/Ref selection/Photons")),//
+		photonAnalyserEMuPhotonSelection_(new PhotonAnalyser(histMan, histogramFolder + "/EMu/Ref selection/Photons"))//
 		//vertices
 		//vertexAnalyserMuMuPhotonSelection_(new VertexAnalyser(histMan, histogramFolder + "/MuMu/Ref selection/Vertex")), //
 		//vertexAnalyserEEPhotonSelection_(new VertexAnalyser(histMan, histogramFolder + "/EE/Ref selection/Vertex")), //
 		//vertexAnalyserEMuPhotonSelection_(new VertexAnalyser(histMan, histogramFolder + "/EMu/Ref selection/Vertex")),//
 		//tt photon analyser
-		ttphotonAnalyserMuMuPhotonSelection_(new SignalPhotonAnalyser(histMan, histogramFolder + "/MuMu/Ref selection/Photons")), //
-		ttphotonAnalyserEEPhotonSelection_(new SignalPhotonAnalyser(histMan, histogramFolder + "/EE/Ref selection/Photons")), //
-		ttphotonAnalyserEMuPhotonSelection_(new SignalPhotonAnalyser(histMan, histogramFolder + "/EMu/Ref selection/Photons")) //
+// 		ttphotonAnalyserMuMuPhotonSelection_(new SignalPhotonAnalyser(histMan, histogramFolder + "/MuMu/Ref selection/Photons")), //
+// 		ttphotonAnalyserEEPhotonSelection_(new SignalPhotonAnalyser(histMan, histogramFolder + "/EE/Ref selection/Photons")), //
+// 		ttphotonAnalyserEMuPhotonSelection_(new SignalPhotonAnalyser(histMan, histogramFolder + "/EMu/Ref selection/Photons")) //
 		//ABCD
 		//abcdAnalyserMuMuPhotonSelection_(new ABCDAnalyser(histMan, histogramFolder + "/MuMu/Ref selection/Photons")), //
 		//abcdAnalyserEEPhotonSelection_(new ABCDAnalyser(histMan, histogramFolder + "/EE/Ref selection/Photons")), //
@@ -453,9 +435,9 @@ void TTbarPhotonAnalyser::createHistograms() {
 //	vertexAnalyserEEPhotonSelection_->createHistograms();
 //	vertexAnalyserEMuPhotonSelection_->createHistograms();
 	//for ttbar
-	ttphotonAnalyserMuMuPhotonSelection_->createHistograms();
-	ttphotonAnalyserEEPhotonSelection_->createHistograms();
-	ttphotonAnalyserEMuPhotonSelection_->createHistograms();
+// 	ttphotonAnalyserMuMuPhotonSelection_->createHistograms();
+// 	ttphotonAnalyserEEPhotonSelection_->createHistograms();
+// 	ttphotonAnalyserEMuPhotonSelection_->createHistograms();
 	//ABCD
 	//abcdAnalyserEEPhotonSelection_->createHistograms();
 	//abcdAnalyserMuMuPhotonSelection_->createHistograms();

@@ -77,7 +77,7 @@ bool TopPairEELooseReferenceSelection::isNminusOnePhoton(const PhotonPointer pho
 	const ElectronCollection electrons(goodElectrons(event));
 	const JetCollection jets(event->Jets());
 
-	bool passesEtAndEta = photon->et() > 25 && fabs(photon->eta()) < 2.5 && !photon->isInCrack();
+	bool passesEtAndEta = photon->et() > 25. && fabs(photon->eta()) < 2.5 && !photon->isInCrack();
 	bool passesSafeElectronVeto = photon->ConversionSafeElectronVeto();
 	bool passesHOverE = photon->SingleTowerHoE() < 0.05; // same for EE and EB
 	
@@ -93,18 +93,18 @@ bool TopPairEELooseReferenceSelection::isNminusOnePhoton(const PhotonPointer pho
 
 		passesShowerShape = photon->sigmaIEtaIEta() < 0.012;
 //		passesPFChargedIso = photon->RhoCorrectedPFChargedHadronIso(event->rho()) < 2.6;
-		passesPFNeutralIso = photon->RhoCorrectedPFNeutralHadronIso(event->rho()) < 7.5 + 0.04 * photon->pt();
-		passesPFPhotonIso = photon->RhoCorrectedPFPhotonIso(event->rho()) < 5. + 0.005 * photon->pt();
-		passesphoSCChIso = photon->RhoCorrectedSCChIso(event->rho()) < 20;
+		passesPFNeutralIso = photon->RhoCorrectedPFNeutralHadronIso(event->rho()) < 12. + 0.04 * photon->pt();
+		passesPFPhotonIso = photon->RhoCorrectedPFPhotonIso(event->rho()) < 12. + 0.005 * photon->pt();
+		passesphoSCChIso = photon->RhoCorrectedSCChIso(event->rho()) < 20.;
 
-		backgroundShape = photon->sigmaIEtaIEta() >= 0.012 && photon->sigmaIEtaIEta() <= 0.020;
+		backgroundShape = photon->sigmaIEtaIEta() >= 0.012;// && photon->sigmaIEtaIEta() <= 0.016;
 	
 	} else if (photon->isInEndCapRegion()) {
 		passesShowerShape = photon->sigmaIEtaIEta() < 0.034;
 //		passesPFChargedIso = photon->RhoCorrectedPFChargedHadronIso(event->rho()) < 2.3;
 		passesPFNeutralIso = photon->RhoCorrectedPFNeutralHadronIso(event->rho()) < 2.9 + 0.04 * photon->pt();
 		passesPFPhotonIso = photon->RhoCorrectedPFPhotonIso(event->rho()) < 1.5 + 0.005 * photon->pt();
-		passesphoSCChIso = photon->RhoCorrectedSCChIso(event->rho()) < 20;
+		passesphoSCChIso = photon->RhoCorrectedSCChIso(event->rho()) < 2.3;
 
 	}
 	
@@ -181,7 +181,7 @@ bool TopPairEELooseReferenceSelection::isGoodPhoton(const PhotonPointer photon, 
 	const ElectronCollection electrons(goodElectrons(event));
 	const JetCollection jets(event->Jets());
 
-	bool passesEtAndEta = photon->et() > 25 && fabs(photon->eta()) < 1.4442 && !photon->isInCrack();
+	bool passesEtAndEta = photon->et() > 25. && fabs(photon->eta()) < 1.4442 && !photon->isInCrack();
 	bool passesSafeElectronVeto = photon->ConversionSafeElectronVeto();
 	bool passesHOverE = photon->SingleTowerHoE() < 0.05; // same for EE and EB
 	
@@ -196,9 +196,9 @@ bool TopPairEELooseReferenceSelection::isGoodPhoton(const PhotonPointer photon, 
 	if (photon->isInBarrelRegion()) {
 		passesShowerShape = photon->sigmaIEtaIEta() < 0.012;
 //		passesPFChargedIso = photon->RhoCorrectedPFChargedHadronIso(event->rho()) < 2.6;
-		passesPFNeutralIso = photon->RhoCorrectedPFNeutralHadronIso(event->rho()) < 7.5 + 0.04 * photon->pt(); // 3.5
-		passesPFPhotonIso = photon->RhoCorrectedPFPhotonIso(event->rho()) < 5 + 0.005 * photon->pt(); //1.3
-		passesphoSCChIso = photon->RhoCorrectedSCChIso(event->rho()) < 20;
+		passesPFNeutralIso = photon->RhoCorrectedPFNeutralHadronIso(event->rho()) < 3.5 + 0.04 * photon->pt(); // 3.5
+		passesPFPhotonIso = photon->RhoCorrectedPFPhotonIso(event->rho()) < 1.3 + 0.005 * photon->pt(); //1.3
+		passesphoSCChIso = photon->RhoCorrectedSCChIso(event->rho()) < 20.;
 //		passesphoSCNuIso = photon->RhoCorrectedSCNuIso(event->rho()) < 3.5 + 0.04 * photon->pt();
 //		passesphoSCPhIso = photon->RhoCorrectedSCPhIso(event->rho()) < 1.3 + 0.005 * photon->pt();
 	} else if (photon->isInEndCapRegion()) {
@@ -206,7 +206,7 @@ bool TopPairEELooseReferenceSelection::isGoodPhoton(const PhotonPointer photon, 
 //		passesPFChargedIso = photon->RhoCorrectedPFChargedHadronIso(event->rho()) < 2.3;
 		passesPFNeutralIso = photon->RhoCorrectedPFNeutralHadronIso(event->rho()) < 2.9 + 0.04 * photon->pt();
 		passesPFPhotonIso = photon->RhoCorrectedPFPhotonIso(event->rho()) < 1.5 + 0.005 * photon->pt();
-		passesphoSCChIso = photon->RhoCorrectedSCChIso(event->rho()) < 20;
+		passesphoSCChIso = photon->RhoCorrectedSCChIso(event->rho()) < 2.3;
 //		passesphoSCNuIso = photon->RhoCorrectedSCNuIso(event->rho()) < 2.9 + 0.04 * photon->pt();
 //		passesphoSCPhIso = photon->RhoCorrectedSCPhIso(event->rho()) < 1.5 + 0.005 * photon->pt();
 	}
@@ -215,9 +215,9 @@ bool TopPairEELooseReferenceSelection::isGoodPhoton(const PhotonPointer photon, 
 
 	 for (unsigned int index = 0; index < electrons.size(); ++index) {
 	 			const ElectronPointer electron(electrons.at(index));
-	 			passesDeltaRgammaElectrons = photon->deltaR(electron) > 0.3;
+	 			passesDeltaRgammaElectrons = photon->deltaR(electron) > 0.4;
 				
-				if(photon->deltaR(electron) < 0.3)
+				if(photon->deltaR(electron) < 0.4)
 				break;
 	}
 
@@ -225,7 +225,7 @@ bool TopPairEELooseReferenceSelection::isGoodPhoton(const PhotonPointer photon, 
 	
 	for (unsigned int index = 0; index < jets.size(); ++index) { 
 			const JetPointer jet(jets.at(index));
-			passesDeltaRgammaJets = photon->deltaR(jet) > 0.3;
+			passesDeltaRgammaJets = photon->deltaR(jet) > 0.4;
 	}
 	
 	bool passesDeltaRjetsElectrons = false;
@@ -234,7 +234,7 @@ bool TopPairEELooseReferenceSelection::isGoodPhoton(const PhotonPointer photon, 
 	 		const ElectronPointer electron(electrons.at(index));
 			for(unsigned int jindex = 0; jindex<jets.size(); ++jindex){
 				const JetPointer jet(jets[jindex]);
-	 			passesDeltaRjetsElectrons = electron->deltaR(jet) > 0.3;
+	 			passesDeltaRjetsElectrons = electron->deltaR(jet) > 0.4;
 			}	
 
 	}
@@ -245,7 +245,7 @@ bool TopPairEELooseReferenceSelection::isGoodPhoton(const PhotonPointer photon, 
 
 
 bool TopPairEELooseReferenceSelection::isGoodMuon(const MuonPointer muon) const {
-	bool passesEtAndEta = muon->pt() > 20 && fabs(muon->eta()) < 2.4;
+	bool passesEtAndEta = muon->pt() > 20. && fabs(muon->eta()) < 2.4;
 	bool passesID = (muon->isGlobal() || muon->isTracker()) && muon->isPFMuon();
         bool passesIsolation  = muon->pfRelativeIsolation(0.4, true) < 0.2;
 
@@ -344,15 +344,15 @@ bool TopPairEELooseReferenceSelection::passesZmassVeto(const EventPtr event) con
 		mass = dilepton->mass();
 	}
 
-	return mass < 76 || mass > 106;
-
+//	return mass < 76 || mass > 106;
+        return mass < 84 || mass > 98;
 }
 
 bool TopPairEELooseReferenceSelection::passesMetCut(const EventPtr event) const {
 
 	const METPointer met(event->MET());
 
-	return met->pt() > 40;
+	return met->pt() > 20;
 
 }
 
@@ -587,7 +587,7 @@ const JetCollection TopPairEELooseReferenceSelection::cleanedBJets(const EventPt
 }
 
 bool TopPairEELooseReferenceSelection::isLooseMuon(const MuonPointer muon) const {
-	bool passesPt = muon->pt() > 10;
+	bool passesPt = muon->pt() > 10.;
 	bool passesEta = fabs(muon->eta()) < 2.5;
 	bool isPFMuon = muon->isPFMuon();
 	bool isGlobalOrTracker = muon->isGlobal() || muon->isTracker();
@@ -598,8 +598,8 @@ bool TopPairEELooseReferenceSelection::isLooseMuon(const MuonPointer muon) const
 
 bool TopPairEELooseReferenceSelection::isLooseElectron(const ElectronPointer electron) const {
 
-	bool passesEtAndEta = electron->et() > 20. && fabs(electron->eta()) < 2.5;
-	bool passesID(electron->passesElectronID(ElectronID::MVAIDTrigger));
+	bool passesEtAndEta = electron->et() > 10. && fabs(electron->eta()) < 2.5;
+	bool passesID(electron->passesElectronID(ElectronID::MVAIDNonTrigger));
 	bool passesIso = electron->pfRelativeIsolationRhoCorrected() < 0.15;
 	return passesEtAndEta && passesIso && passesID;
 }
@@ -607,7 +607,7 @@ bool TopPairEELooseReferenceSelection::isLooseElectron(const ElectronPointer ele
 
 bool TopPairEELooseReferenceSelection::isGoodElectron(const ElectronPointer electron) const {
 
-	bool passesEtAndEta = electron->et() > 20 && fabs(electron->eta()) < 2.5;
+	bool passesEtAndEta = electron->et() > 20. && fabs(electron->eta()) < 2.5;
 	bool passesD0 = fabs(electron->d0()) < 0.04; //cm
 	bool passesID(electron->passesElectronID(ElectronID::MVAIDTrigger));
 	bool passesIsolation  = isIsolated(electron);

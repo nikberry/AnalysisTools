@@ -2,8 +2,11 @@
  * Electron.cpp
  *
  *  Created on: Jun 25, 2010
- *      Author: lkreczko
+ *      Author: N.Berry
  */
+ 
+//Scale Factors come from https://twiki.cern.ch/twiki/bin/viewauth/CMS/KoPFAElectronTagAndProbe
+ 
 
 #include "../../interface/RecoObjects/Electron.h"
 #include "../../interface/GlobalVariables.h"
@@ -564,7 +567,7 @@ if(Globals::ElectronIDSFUp == true){
 
 } else {
 	
-	if( pt > 20. && pt < 30. ){
+	 if( pt > 20. && pt < 30. ){
 	
         	if(abs(eta)<0.8)
                		correction = 0.969;
@@ -610,13 +613,100 @@ if(Globals::ElectronIDSFUp == true){
                 	correction = 0.877;
         	else if(abs(eta)>=1.5660 && abs(eta)<2.5)
                 	correction = 0.950;
-	}
+	} 
 
 }
 
 	return correction;
+//Kelly electron twiki
+/* if( pt > 20. && pt < 30. ){
+	
+        	if(abs(eta)<0.8)
+               		correction = 0.969;
+        	else if(abs(eta)>=0.8 && abs(eta)<1.4442)                                                                                                                                   
+                	correction = 0.935;
+        	else if(abs(eta)>=1.4442 && abs(eta)<1.5660)
+                	correction = 1.032;
+        	else if(abs(eta)>=1.5660 && abs(eta)<2.5)
+                	correction = 0.9190;
+	}
+	
+	if( pt > 30. && pt < 40. ){
+	
+        	if(abs(eta)<0.8)
+               		correction = 0.926;
+        	else if(abs(eta)>=0.8 && abs(eta)<1.4442)                                                                                                                                   
+                	correction = 0.945;
+        	else if(abs(eta)>=1.4442 && abs(eta)<1.5660)
+                	correction = 0.907;
+        	else if(abs(eta)>=1.5660 && abs(eta)<2.5)
+                	correction = 0.926;
+	}
+	
+	if( pt > 40. && pt < 50. ){
+	
+        	if(abs(eta)<0.8)
+               		correction = 0.969;
+        	else if(abs(eta)>=0.8 && abs(eta)<1.4442)                                                                                                                                   
+                	correction = 0.964;
+        	else if(abs(eta)>=1.4442 && abs(eta)<1.5660)
+                	correction = 0.957;
+        	else if(abs(eta)>=1.5660 && abs(eta)<2.5)
+                	correction = 0.952;
+	}
+	
+	if( pt >= 50. ){
+	
+        	if(abs(eta)<0.8)
+               		correction = 0.975;
+        	else if(abs(eta)>=0.8 && abs(eta)<1.4442)                                                                                                                                   
+                	correction = 0.974;
+        	else if(abs(eta)>=1.4442 && abs(eta)<1.5660)
+                	correction = 0.877;
+        	else if(abs(eta)>=1.5660 && abs(eta)<2.5)
+                	correction = 0.950;
+	} */
+//Paper/presentation SFs
+/* 	if( pt > 20. && pt < 30. ){
+	
+        	if(abs(eta)<0.8)
+               		correction = 0.975;
+        	else if(abs(eta)>=0.8 && abs(eta)<1.48)                                                                                                                                   
+                	correction = 0.953;
+        	else if(abs(eta)>=1.48 && abs(eta)<2.50)
+                	correction = 0.930;
 
-
+	}
+	
+	if( pt > 30. && pt < 40. ){
+	
+        	if(abs(eta)<0.8)
+               		correction = 0.978;
+         	else if(abs(eta)>=0.8 && abs(eta)<1.48)                                                                                                                                   
+                	correction = 0.974;
+        	else if(abs(eta)>=1.48 && abs(eta)<2.50)
+                	correction = 0.950;
+	}
+	
+	if( pt > 40. && pt < 50. ){
+	
+        	if(abs(eta)<0.8)
+               		correction = 0.979;
+        	else if(abs(eta)>=0.8 && abs(eta)<1.48)                                                                                                                                   
+                	correction = 0.979;
+        	else if(abs(eta)>=1.48 && abs(eta)<2.50)
+                	correction = 0.974;
+	}
+	
+	if( pt > 50. && pt < 150.){
+	
+        	if(abs(eta)<0.8)
+               		correction = 0.968;
+        	else if(abs(eta)>=0.8 && abs(eta)<1.48)                                                                                                                                   
+                	correction = 0.977;
+        	else if(abs(eta)>=1.48 && abs(eta)<2.50)
+                	correction = 0.974;
+	} */
 
 }
 }
